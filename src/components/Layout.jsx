@@ -25,8 +25,8 @@ export function Layout({ children, sections = [], showFeedbackForm = true }) {
                   height={35}
                 />
               </Link>
-              <div class="ml-2 mt-1.5 align-middle text-sm font-semibold text-white">
-                Arguflow
+              <div class="ml-2 mt-1.5 align-middle text-sm font-semibold text-zinc-900 dark:text-white">
+                Arguflow Vault
               </div>
             </div>
             <Header />
