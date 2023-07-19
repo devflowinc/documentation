@@ -196,11 +196,13 @@ export const navigation = [
   {
     title: 'Resources',
     links: [
-      { title: 'Contacts', href: '/contacts' },
-      { title: 'Conversations', href: '/conversations' },
-      { title: 'Messages', href: '/messages' },
-      { title: 'Groups', href: '/groups' },
-      { title: 'Attachments', href: '/attachments' },
+      { title: 'Search Cards', href: '/search' },
+      { title: 'Edit Cards', href: '/edit' },
+      { title: 'Collections', href: '/collections' },
+      { title: 'Auth', href: '/auth' },
+      { title: 'Files', href: '/file' },
+      { title: 'Notification', href: '/notification' },
+      { title: 'Verification', href: '/verification' },
     ],
   },
 ]
