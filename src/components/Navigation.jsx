@@ -196,8 +196,7 @@ export const navigation = [
   {
     title: 'Resources',
     links: [
-      { title: 'Search Cards', href: '/search' },
-      { title: 'Edit Cards', href: '/edit' },
+      { title: 'Card', href: '/card' },
       { title: 'Collections', href: '/collections' },
       { title: 'Auth', href: '/auth' },
       { title: 'Files', href: '/file' },
