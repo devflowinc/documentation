@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <>
       <Head>
-        <title>Page not found - Protocol API Reference</title>
+        <title>Page not found - Arguflow API Reference</title>
       </Head>
       <HeroPattern />
       <div className="mx-auto flex h-full max-w-xl flex-col items-center justify-center text-center">

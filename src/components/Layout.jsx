@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-
+import Image from 'next/image'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Logo } from '@/components/Logo'
@@ -16,10 +16,18 @@ export function Layout({ children, sections = [], showFeedbackForm = true }) {
           className="contents lg:pointer-events-none lg:fixed lg:inset-0 lg:z-40 lg:flex"
         >
           <div className="contents lg:pointer-events-auto lg:block lg:w-72 lg:overflow-y-auto lg:border-r lg:border-zinc-900/10 lg:px-6 lg:pb-8 lg:pt-4 lg:dark:border-white/10 xl:w-80">
-            <div className="hidden lg:flex">
+            <div className="hidden align-middle lg:flex">
               <Link href="/" aria-label="Home">
-                <Logo className="h-6" />
+                <Image
+                  src="/logo_transparent.png"
+                  alt="logo"
+                  width={35}
+                  height={35}
+                />
               </Link>
+              <div class="ml-2 mt-1.5 align-middle text-sm font-semibold text-white">
+                Arguflow
+              </div>
             </div>
             <Header />
             <Navigation className="hidden lg:mt-10 lg:block" />

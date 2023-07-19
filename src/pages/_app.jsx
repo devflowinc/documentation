@@ -21,9 +21,9 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         {pageProps.title ? (
-          <title>{`${pageProps.title} - Protocol API Reference`}</title>
+          <title>{`${pageProps.title} - Arguflow API Reference`}</title>
         ) : (
-          <title>Protocol API Reference</title>
+          <title>Arguflow API Reference</title>
         )}
         <meta name="description" content={pageProps.description} />
       </Head>
