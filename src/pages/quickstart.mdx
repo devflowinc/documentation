@@ -12,7 +12,7 @@ This guide will get you all set up and ready to use the Protocol API. We'll cove
 
 ## Choose your client
 
-Before making your first API request, you need to pick which API client you will use. In addition to good ol' cURL HTTP requests, Protocol offers clients for JavaScript, Python, and PHP. In the following example, you can see how to install each client.
+Before making your first API request, you need to pick which API client you will use. In addition to good ol' cURL HTTP requests, Protocol offers clients for JavaScript.
 
 <CodeGroup>
 
@@ -22,30 +22,11 @@ curl --version
 ```
 
 ```bash {{ language: 'js' }}
-# Install the Protocol JavaScript SDK
-npm install @example/protocol-api --save
-```
-
-```bash {{ language: 'python' }}
-# Install the Protocol Python SDK
-pip install protocol_api
-```
-
-```bash {{ language: 'php' }}
-# Install the Protocol PHP SDK
-composer require protocol/sdk
+# Docs will simply provide examples for using fetch0
+fetch(https://api.arguflow.com/foo)
 ```
 
 </CodeGroup>
-
-<div className="not-prose">
-  <Button
-    href="/sdks"
-    variant="text"
-    arrow="right"
-    children="Check out our list of first-party SDKs"
-  />
-</div>
 
 ## Making your first API request
 
