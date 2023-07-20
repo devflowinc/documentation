@@ -1,226 +1,147 @@
 export const description =
   'On this page, we’ll dive into the different message endpoints you can use to manage messages programmatically.'
 
-# Messages
+# Auth
 
-Messages are what conversations are made of in Protocol — they are the basic building blocks of your conversations with your Protocol contacts. On this page, we'll dive into the different message endpoints you can use to manage messages programmatically. We'll look at how to query, send, update, and delete messages. {{ className: 'lead' }}
-
-## The message model
-
-The message model contains all the information about the messages and attachments you send to your contacts and groups, including how your contacts have reacted to them.
-
-### Properties
-
-<Properties>
-  <Property name="id" type="string">
-    Unique identifier for the message.
-  </Property>
-  <Property name="conversation_id" type="string">
-    Unique identifier for the conversation the message belongs to.
-  </Property>
-  <Property name="contact" type="object">
-    The contact object for the contact who sent the message.
-  </Property>
-  <Property name="message" type="string">
-    The message content.
-  </Property>
-  <Property name="reactions" type="array">
-    An array of reaction objects associated with the message.
-  </Property>
-  <Property name="attachments" type="array">
-    An array of attachment objects associated with the message.
-  </Property>
-  <Property name="read_at" type="timestamp">
-    Timestamp of when the message was read.
-  </Property>
-  <Property name="created_at" type="timestamp">
-    Timestamp of when the message was created.
-  </Property>
-  <Property name="updated_at" type="timestamp">
-    Timestamp of when the message was last updated.
-  </Property>
-</Properties>
+Auth routes are used to invite, register, manage, and authenticate users.
 
 ---
 
-## List all messages {{ tag: 'GET', label: '/v1/messages' }}
+## Send an invitation to register {{ tag: 'POST', label: '/invitation' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a paginated list of all your messages (in a conversation if a conversation id is provided). By default, a maximum of ten messages are shown per page.
+    This endpoint allows you to invite a user to register for Arguflow vault. The user will receive an email with a link to set their password.
 
-    ### Optional attributes
+    ### Required request body attributes
 
     <Properties>
-      <Property name="conversation_id" type="string">
-        Limit to messages from a given conversation.
+      <Property name="email" type="string">
+        The email address of the user you want to invite.
       </Property>
-      <Property name="limit" type="integer">
-        Limit the number of messages returned.
+      <Property name="referral_tokens" type="string array">
+        The referral tokens you want to associate with the user.
       </Property>
     </Properties>
+
+    ### Response
+
+    If the invitation is successfully sent, the response will be a 200 OK with no body.
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/v1/messages">
+    <CodeGroup title="Request" tag="POST" label="/invitation">
 
     ```bash {{ title: 'cURL' }}
-    curl -G https://api.protocol.chat/v1/messages \
-      -H "Authorization: Bearer {token}" \
-      -d conversation_id=xgQQXg3hrtjh7AvZ \
-      -d limit=10
+    curl -X POST \
+      https://api.arguflow.com/invitation \
+      -H 'Content-Type: application/json' \
+      -H 'Cookie: ai-editor=your_cookie_value_here' \
+      -d '{
+          "email": "example@example.com",
+          "referral_tokens": ["token1", "token2", "token3"]
+        }'
     ```
-
     ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.messages.list()
+    fetch('https://api.arguflow.com/invitation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': 'ai-editor=your_cookie_value_here'
+      },
+      body: JSON.stringify({
+        email: 'example@example.com',
+        referral_tokens: ['token1', 'token2', 'token3']
+      })
+    });
     ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.messages.list()
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->messages->list();
-    ```
-
     </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "has_more": false,
-      "data": [
-        {
-          "id": "SIuAFUNKdSYHZF2w",
-          "conversation_id": "xgQQXg3hrtjh7AvZ",
-          "contact": {
-            "id": "WAz8eIbvDR60rouK",
-            "username": "KevinMcCallister",
-            "phone_number": "1-800-759-3000",
-            "avatar_url": "https://assets.protocol.chat/avatars/buzzboy.jpg",
-            "last_active_at": 705103200,
-            "created_at": 692233200
-          },
-          "message": "It’s a nice night for a neck injury.",
-          "reactions": [],
-          "attachments": [],
-          "read_at": 705103200,
-          "created_at": 692233200,
-          "updated_at": 692233200
-        },
-        {
-          "id": "hSIhXBhNe8X1d8Et",
-          // ..
-        }
-      ]
-    }
-    ```
 
   </Col>
 </Row>
 
 ---
 
-## Send a message {{ tag: 'POST', label: '/v1/messages' }}
+## Register a user {{ tag: 'POST', label: '/register/{invitation_id}' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to send a new message to one of your conversations.
+    This endpoint allows a user to set their password after receiving an invitation email.
 
-    ### Required attributes
+    ### Required request body attributes
 
     <Properties>
-      <Property name="conversation_id" type="string">
-        Unique identifier for the conversation the message belongs to.
+      <Property name="password" type="string">
+        The password the user wants to set. Must be at least 8 characters.
       </Property>
-      <Property name="message" type="string">
-        The message content.
+      <Property name="password_confirmation" type="string">
+        The password confirmation. Must match the password.
       </Property>
     </Properties>
 
-    ### Optional attributes
+     ### Response
+
+    If the user is successfully registered, a **SlimUser** type will be returned with the following properties:
 
     <Properties>
-      <Property name="attachments" type="array">
-        An array of attachment objects associated with the message.
+      <Property name="id" type="string">
+        The user id (UUID).
+      </Property>
+      <Property name="email" type="string">
+        The user email.
+      </Property>
+      <Property name="username" type="string | null">
+        The user's username.
+      </Property>
+      <Property name="website" type="string | null">
+        The user's website.
+      </Property>
+      <Property name="visible_email" type="boolean">
+        Whether the user's email is visible to other users. Must be true if username is null.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/v1/messages">
+    <CodeGroup title="Request" tag="POST" label="/register/{invitation_id}">
 
     ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/messages \
-      -H "Authorization: Bearer {token}" \
-      -d conversation_id="xgQQXg3hrtjh7AvZ" \
-      -d message="You’re what the French call ‘les incompetents.’"
+    curl -X POST \
+      https://api.arguflow.com/register/{invitation_id} \
+      -H 'Content-Type: application/json' \
+      -H 'Cookie: ai-editor=your_cookie_value_here' \
+      -d '{
+          "password": "password",
+          "password_confirmation": "password"
+        }'
     ```
-
     ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.messages.send({
-      conversation_id: 'xgQQXg3hrtjh7AvZ',
-      message: 'You’re what the French call ‘les incompetents.’',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.messages.send(
-      conversation_id="xgQQXg3hrtjh7AvZ",
-      message="You’re what the French call ‘les incompetents.’",
-    )
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->messages->send([
-      'conversation_id' => 'xgQQXg3hrtjh7AvZ',
-      'message' => 'You’re what the French call ‘les incompetents.’',
-    ]);
+    fetch('https://api.arguflow.com/register/{invitation_id}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': 'ai-editor=your_cookie_value_here'
+      },
+      body: JSON.stringify({
+        password: 'password',
+        password_confirmation: 'password'
+      })
+    });
     ```
 
     </CodeGroup>
 
     ```json {{ title: 'Response' }}
     {
-      "id": "gWqY86BMFRiH5o11",
-      "conversation_id": "xgQQXg3hrtjh7AvZ",
-      "contact": {
-        "id": "inEIRvzjC6YLMX3o",
-        "username": "LinnieMcCallister",
-        "phone_number": "1-800-759-3000",
-        "avatar_url": "https://assets.protocol.chat/avatars/linnie.jpg",
-        "last_active_at": 705103200,
-        "created_at": 692233200
-      },
-      "message": "You’re what the French call ‘les incompetents.’",
-      "reactions": [],
-      "attachments": [],
-      "read_at": null,
-      "created_at": 692233200,
-      "updated_at": null
+      "id": "00000000-0000-0000-0000-000000000000",
+      "email": "test@test.com",
+      "username": null,
+      "website": null,
+      "visible_email": true
     }
     ```
 
