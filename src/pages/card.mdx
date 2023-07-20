@@ -62,6 +62,30 @@ The attachment model contains all the information about a card, including the au
   </Property>
 </Properties>
 
+# Types
+
+## Author
+
+<Properties>
+  <Property name="id" type="string">
+    Unique identifier for the author.
+  </Property>
+  <Property name="email" type="string">
+    The email of the author.
+  </Property>
+  <Property name="username" type="string">
+    The username of the author.
+  </Property>
+  <Property name="website" type="string">
+    The website of the author.
+  </Property>
+  <Property name="visible_email" type="string">
+    Whether the author's email is visible to other users.
+  </Property>
+  <Property name="created_at" type="timestamp">
+    When the user signed up.
+  </Property>
+</Properties>
 ---
 
 ## Create a Card {{ tag: 'POST', label: '/card' }}
@@ -145,7 +169,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a card from the database with using its id. (Must be authenticated and must be your card if private)
+    This endpoint allows you to retrieve a card from the database with using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with collection objects.
 
   </Col>
   <Col sticky>
@@ -509,30 +533,8 @@ The attachment model contains all the information about a card, including the au
   </Col>
 </Row>
 
-# Types
 
-## Author
 
-<Properties>
-  <Property name="id" type="string">
-    Unique identifier for the author.
-  </Property>
-  <Property name="email" type="string">
-    The email of the author.
-  </Property>
-  <Property name="username" type="string">
-    The username of the author.
-  </Property>
-  <Property name="website" type="string">
-    The website of the author.
-  </Property>
-  <Property name="visible_email" type="string">
-    Whether the author's email is visible to other users.
-  </Property>
-  <Property name="created_at" type="timestamp">
-    When the user signed up.
-  </Property>
-</Properties>
 
 ```
 
