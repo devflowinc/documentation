@@ -7,13 +7,19 @@ import { ChatBubbleIcon } from '@/components/icons/ChatBubbleIcon'
 import { EnvelopeIcon } from '@/components/icons/EnvelopeIcon'
 import { UserIcon } from '@/components/icons/UserIcon'
 import { UsersIcon } from '@/components/icons/UsersIcon'
+import { BookIcon } from './icons/BookIcon'
+import { DocumentIcon } from './icons/DocumentIcon'
+import { PaperClipIcon } from './icons/PaperClipIcon'
+import { BellIcon } from './icons/BellIcon'
+import { CheckIcon } from './icons/CheckIcon'
+import { SquaresPlusIcon } from './icons/SquaresPlusIcon'
 
 const resources = [
   {
-    href: '/contacts',
-    name: 'Contacts',
+    href: '/auth',
+    name: 'Auth',
     description:
-      'Learn about the contact model and how to create, retrieve, update, delete, and list contacts.',
+      'Learn about how to authenticate with the Arguflow API and how to use the access cookie to make requests.',
     icon: UserIcon,
     pattern: {
       y: 16,
@@ -24,11 +30,11 @@ const resources = [
     },
   },
   {
-    href: '/conversations',
-    name: 'Conversations',
+    href: '/card',
+    name: 'Card',
     description:
-      'Learn about the conversation model and how to create, retrieve, update, delete, and list conversations.',
-    icon: ChatBubbleIcon,
+      'Learn about the card model and how to create, retrieve, update, delete, and query cards.',
+    icon: DocumentIcon,
     pattern: {
       y: -6,
       squares: [
@@ -38,10 +44,10 @@ const resources = [
     },
   },
   {
-    href: '/messages',
-    name: 'Messages',
+    href: '/card_collecion',
+    name: 'Collections',
     description:
-      'Learn about the message model and how to create, retrieve, update, delete, and list messages.',
+      'Learn about the collection model and how to create, retrieve, update, delete, and list collections.',
     icon: EnvelopeIcon,
     pattern: {
       y: 32,
@@ -52,13 +58,57 @@ const resources = [
     },
   },
   {
-    href: '/groups',
-    name: 'Groups',
+    href: '/user',
+    name: 'User',
     description:
-      'Learn about the group model and how to create, retrieve, update, delete, and list groups.',
+      'Learn about the user model and how to create, retrieve, update, and delete users and their associated info.',
     icon: UsersIcon,
     pattern: {
       y: 22,
+      squares: [[0, 1]],
+    },
+  },
+  {
+    href: '/vote',
+    name: 'Votes',
+    description:
+      'Learn about the vote model and how to upvote, downvote, and unvote cards.',
+    icon: SquaresPlusIcon,
+    pattern: {
+      y: 45,
+      squares: [[0, 1]],
+    },
+  },
+  {
+    href: '/file',
+    name: 'File',
+    description:
+      'Learn about the file model and how to create, retrieve, update, delete, and list files.',
+    icon: PaperClipIcon,
+    pattern: {
+      y: -18,
+      squares: [[0, 1]],
+    },
+  },
+  {
+    href: '/notification',
+    name: 'Notifications',
+    description:
+      'Learn about the notification model and how to retrieve, delete, and mark notifications as read.',
+    icon: BellIcon,
+    pattern: {
+      y: 2,
+      squares: [[0, 1]],
+    },
+  },
+  {
+    href: '/verification',
+    name: 'Verifications',
+    description:
+      'Learn about the verification model and how to create verifications.',
+    icon: CheckIcon,
+    pattern: {
+      y: 60,
       squares: [[0, 1]],
     },
   },
