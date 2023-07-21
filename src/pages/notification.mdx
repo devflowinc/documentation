@@ -1,136 +1,108 @@
 export const description =
   'On this page, we’ll dive into the different conversation endpoints you can use to manage conversations programmatically.'
 
-# Conversations
+# Notifications
 
-Conversations are an essential part of Protocol — they are the containers for the messages between you, your contacts, and groups. On this page, we’ll dive into the different conversation endpoints you can use to manage conversations programmatically. We'll look at how to query, create, update, and delete conversations. {{ className: 'lead' }}
+Notifications are messages sent from the server after certain events have finished running, such as verification and file creation. On this page, we’ll dive into the different conversation endpoints you can use to manage notifications programmatically. We'll look at how to query and mark notifications as read. {{ className: 'lead' }}
 
-## The conversation model
+## The notification model
 
-The conversation model contains all the information about the conversations between you and your contacts. In addition, conversations can also be group-based with more than one contact, they can have a pinned message, and they can be muted.
+The notification model contains all the information about each notification. There are two types of notification: Content Verification and Collection Created. 
 
-### Properties
+### Content Verification
 
 <Properties>
   <Property name="id" type="string">
-    Unique identifier for the conversation.
+    Unique identifier for the notification.
   </Property>
-  <Property name="contact_id" type="string">
-    Unique identifier for the other contact in the conversation.
+  <Property name="user_uuid" type="string">
+    Unique identifier for the user that the notification belongs to.
   </Property>
-  <Property name="group_id" type="string">
-    Unique identifier for the group that the conversation belongs to.
+  <Property name="card_uuid" type="string">
+    Unique identifier for the card that the notification belongs to.
   </Property>
-  <Property name="pinned_message_id" type="string">
-    Unique identifier for the pinned message.
+  <Property name="verification_uuid" type="string">
+    Unique identifier for the verification that the notification belongs to.
   </Property>
-  <Property name="is_pinned" type="boolean">
-    Whether or not the conversation has been pinned.
+  <Property name="similarity_score" type="integer">
+    The similarity score of the verification.
   </Property>
-  <Property name="is_muted" type="boolean">
-    Whether or not the conversation has been muted.
-  </Property>
-  <Property name="last_active_at" type="timestamp">
-    Timestamp of when the conversation was last active.
-  </Property>
-  <Property name="last_opened_at" type="timestamp">
-    Timestamp of when the conversation was last opened by the authenticated
-    user.
+  <Property name="user_read" type="boolean">
+    Whether or not the user has read the notification.
   </Property>
   <Property name="created_at" type="timestamp">
-    Timestamp of when the conversation was created.
+    Timestamp of when the notification was created.
   </Property>
-  <Property name="archived_at" type="timestamp">
-    Timestamp of when the conversation was archived.
+  <Property name="updated_at" type="timestamp">
+    Timestamp of when the notification was last updated.
   </Property>
 </Properties>
 
+
+### Collection Created
+<Properties>
+  <Property name="id" type="string">
+    Unique identifier for the notification.
+  </Property>
+  <Property name="user_uuid" type="string">
+    Unique identifier for the user that the notification belongs to.
+  </Property>
+  <Property name="collection_uuid" type="string">
+    Unique identifier for the collection that the notification belongs to.
+  </Property>
+  <Property name="user_read" type="boolean">
+    Whether or not the user has read the notification.
+  </Property>
+  <Property name="created_at" type="timestamp">
+    Timestamp of when the notification was created.
+  </Property>
+  <Property name="updated_at" type="timestamp">
+    Timestamp of when the notification was last updated.
+  </Property>
+</Properties>
 ---
 
-## List all conversations {{ tag: 'GET', label: '/v1/conversations' }}
+## Get all notifications for a user {{ tag: 'GET', label: '/api/notifications' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a paginated list of all your conversations. By default, a maximum of ten conversations are shown per page.
+    This endpoint allows you to retrieve all notifications for a user. Refer to [the list](#the-notification-model) at the top of this page to see which properties are included with notification objects. (Must be authenticated to use)
 
-    ### Optional attributes
-
-    <Properties>
-      <Property name="limit" type="integer">
-        Limit the number of conversations returned.
-      </Property>
-      <Property name="muted" type="boolean">
-        Only show conversations that are muted when set to `true`.
-      </Property>
-      <Property name="archived" type="boolean">
-        Only show conversations that are archived when set to `true`.
-      </Property>
-      <Property name="pinned" type="boolean">
-        Only show conversations that are pinned when set to `true`.
-      </Property>
-      <Property name="group_id" type="string">
-        Only show conversations for the specified group.
-      </Property>
-    </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/v1/conversations">
+    <CodeGroup title="Request" tag="GET" label="/api/notifications">
 
     ```bash {{ title: 'cURL' }}
-    curl -G https://api.protocol.chat/v1/conversations \
-      -H "Authorization: Bearer {token}" \
-      -d limit=10
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.list()
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.list()
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->list();
+      curl -L 'https://api.arguflow.com/api/notifications' \
+        -H 'Cookie: ai-editor=your_cookie_value_here'
     ```
 
     </CodeGroup>
 
     ```json {{ title: 'Response' }}
-    {
-      "has_more": false,
-      "data": [
-        {
-          "id": "xgQQXg3hrtjh7AvZ",
-          "contact_id": "WAz8eIbvDR60rouK",
-          "group_id": null,
-          "pinned_message_id": null,
-          "is_pinned": false,
-          "is_muted": false,
-          "last_active_at": 705103200,
-          "last_opened_at": 705103200,
-          "created_at": 692233200,
-          "archived_at": null
-        },
-        {
-          "id": "hSIhXBhNe8X1d8Et"
-          // ...
-        }
+      [
+            {
+              "id": "47814970-030b-42cb-b194-26779e41e981",
+              "user_uuid": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+              "card_uuid": "6aa69c6b-61a3-4ef8-804d-8ed08e4608bd",
+              "verification_uuid": "fe2a18c1-9000-4c67-a1f5-db5e572f6886",
+              "similarity_score": 100,
+              "user_read": false,
+              "created_at": "2023-07-20T11:57:01.496469",
+              "updated_at": "2023-07-20T11:57:01.496520"
+          },
+          {
+              "id": "240bf745-2f6b-4ff2-811a-8bb192e705f6",
+              "user_uuid": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+              "collection_uuid": "2cdf94d5-9be3-4280-81c8-2c1cb7eb8f36",
+              "user_read": false,
+              "created_at": "2023-07-20T11:55:21.452637",
+              "updated_at": "2023-07-20T11:55:21.452638"
+          },
       ]
-    }
     ```
 
   </Col>
@@ -138,267 +110,62 @@ The conversation model contains all the information about the conversations betw
 
 ---
 
-## Create a conversation {{ tag: 'POST', label: '/v1/conversations' }}
+## Mark a notification as read {{ tag: 'PUT', label: '/api/notifications' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to add a new conversation between you and a contact or group. A contact or group id is required to create a conversation.
+    This endpoint allows you to mark a notification as read. (Must be authenticated to use)
 
     ### Required attributes
 
     <Properties>
-      <Property name="contact_id" type="string">
-        Unique identifier for the other contact in the conversation.
-      </Property>
-      <Property name="group_id" type="string">
-        Unique identifier for the group that the conversation belongs to.
+      <Property name="notification_id" type="string">
+        Unique identifier for the notification you want to mark as read.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/v1/conversations">
+    <CodeGroup title="Request" tag="POST" label="/api/notifications">
 
     ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/conversations \
-      -H "Authorization: Bearer {token}" \
-      -d 'contact_id'="WAz8eIbvDR60rouK"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.create({
-      contact_id: 'WAz8eIbvDR60rouK',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.create(contact_id="WAz8eIbvDR60rouK")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->create([
-      'contact_id' => 'WAz8eIbvDR60rouK',
-    ]);
+    curl https://api.arguflow.com/api/notifications \
+      -H 'Cookie: ai-editor=your_cookie_value_here' \
+      -H 'Content-Type: application/json' \
+      -d "{
+        "notification_id": "240bf745-2f6b-4ff2-811a-8bb192e705f6"
+      }"
     ```
 
     </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "xgQQXg3hrtjh7AvZ",
-      "contact_id": "WAz8eIbvDR60rouK",
-      "group_id": null,
-      "pinned_message_id": null,
-      "is_pinned": false,
-      "is_muted": false,
-      "last_active_at": null,
-      "last_opened_at": null,
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
 
   </Col>
 </Row>
 
 ---
 
-## Retrieve a conversation {{ tag: 'GET', label: '/v1/conversations/:id' }}
+## Mark all notifications as read {{ tag: 'PUT', label: '/api/notifications/all' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a conversation by providing the conversation id. Refer to [the list](#the-conversation-model) at the top of this page to see which properties are included with conversation objects.
+    This endpoint allows you to mark all notifications as read. (Must be authenticated to use)
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/v1/conversations/xgQQXg3hrtjh7AvZ">
+    <CodeGroup title="Request" tag="GET" label="/api/notifications/a;;">
 
     ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/conversations/xgQQXg3hrtjh7AvZ \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.get('xgQQXg3hrtjh7AvZ')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.get("xgQQXg3hrtjh7AvZ")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->get('xgQQXg3hrtjh7AvZ');
+    curl https://api.arguflow.com/api/notifications/all \
+      -H 'Cookie: ai-editor=your_cookie_value_here' 
     ```
 
     </CodeGroup>
 
-    ```json {{ title: 'Response' }}
-    {
-      "id": "xgQQXg3hrtjh7AvZ",
-      "contact_id": "WAz8eIbvDR60rouK",
-      "group_id": null,
-      "pinned_message_id": null,
-      "is_pinned": false,
-      "is_muted": false,
-      "last_active_at": 705103200,
-      "last_opened_at": 705103200,
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Update a conversation {{ tag: 'PUT', label: '/v1/conversations/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to perform an update on a conversation. Examples of updates are pinning a message, muting or archiving the conversation, or pinning the conversation itself.
-
-    ### Optional attributes
-
-    <Properties>
-      <Property name="pinned_message_id" type="string">
-        Unique identifier for the pinned message.
-      </Property>
-      <Property name="is_pinned" type="boolean">
-        Whether or not the conversation has been pinned.
-      </Property>
-      <Property name="is_muted" type="boolean">
-        Whether or not the conversation has been muted.
-      </Property>
-      <Property name="archived_at" type="timestamp">
-        Timestamp of when the conversation was archived.
-      </Property>
-    </Properties>
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="PUT" label="/v1/conversations/xgQQXg3hrtjh7AvZ">
-
-    ```bash {{ title: 'cURL' }}
-    curl -X PUT https://api.protocol.chat/v1/conversations/xgQQXg3hrtjh7AvZ \
-      -H "Authorization: Bearer {token}" \
-      -d 'is_muted'=true
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.update('xgQQXg3hrtjh7AvZ', {
-        is_muted: true,
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.update("xgQQXg3hrtjh7AvZ", is_muted=True)
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->update('xgQQXg3hrtjh7AvZ', [
-      'is_muted' => true,
-    ]);
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "xgQQXg3hrtjh7AvZ",
-      "contact_id": "WAz8eIbvDR60rouK",
-      "group_id": null,
-      "pinned_message_id": null,
-      "is_pinned": false,
-      "is_muted": true,
-      "last_active_at": 705103200,
-      "last_opened_at": 705103200,
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Delete a conversation {{ tag: 'DELETE', label: '/v1/conversations/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to delete your conversations in Protocol. Note: This will permanently delete the conversation and all its messages — archive it instead if you want to be able to restore it later.
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="DELETE" label="/v1/conversations/xgQQXg3hrtjh7AvZ">
-
-    ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.protocol.chat/v1/conversations/xgQQXg3hrtjh7AvZ \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.delete('xgQQXg3hrtjh7AvZ')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.delete("xgQQXg3hrtjh7AvZ")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->delete('xgQQXg3hrtjh7AvZ');
-    ```
-
-    </CodeGroup>
+   
 
   </Col>
 </Row>

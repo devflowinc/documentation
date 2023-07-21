@@ -3,7 +3,7 @@ export const description =
 
 # Cards
 
-Cards are the fundemental unit of information in Vault. They represent a single piece of information, such as an article, with an author, file, and formatted card content. On this page we will dive into the different card endpoints you can use to manage and search through cards programmatically. {{ className: 'lead' }}
+Cards are the fundamental unit of information in Vault. They represent a single piece of information, such as an article, with an author, file, and formatted card content. On this page, we will dive into the different card endpoints you can use to manage and search through cards programmatically. {{ className: 'lead' }}
 
 ## The card model
 
@@ -22,7 +22,7 @@ The attachment model contains all the information about a card, including the au
     Card content in plain text without html formatting.
   </Property>
   <Property name="card_html" type="string">
-    Card content with html formatting.
+    Card content with HTML formatting.
   </Property>
   <Property name="link" type="string">
     The link to the article the card is from.
@@ -55,7 +55,7 @@ The attachment model contains all the information about a card, including the au
     The name of the file the card was uploaded from.
   </Property>
   <Property name="private" type="boolean">
-    Whether the card is visible by other users.
+    Whether the card is visible to other users.
   </Property>
   <Property name="verification_score" type="null | number">
     The similarity score of the card to the webpage it is linked to.
@@ -102,10 +102,10 @@ The attachment model contains all the information about a card, including the au
         The card content with html formatting. (Must be > 70 words)
       </Property>
       <Property name="link" type="string">
-        The link of the article the card is from.
+        The link to the article the card is from.
       </Property>
       <Property name="private" type="boolean">
-        Whether the card is visible by other users.
+        Whether the card is visible to other users.
       </Property>
     </Properties>
 
@@ -169,7 +169,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a card from the database with using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with card objects.
+    This endpoint allows you to retrieve a card from the database using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with card objects.
 
   </Col>
   <Col sticky>
@@ -223,7 +223,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to delete a card from the database with using its id. (Must be authenticated and must be your card)
+    This endpoint allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
 
   </Col>
   <Col sticky>
@@ -246,7 +246,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to update a card from the database with using its id.
+    This endpoint allows you to update a card from the database using its id.
 
     ### Required attributes
     <Properties>
@@ -296,7 +296,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to search the database by converting your query into a vector and searching for the most similar vectors in the database, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request url.
+    This endpoint allows you to search the database by converting your query into a vector and searching for the most similar vectors in the database, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
 
     ### Required attributes
     <Properties>
@@ -382,7 +382,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to search the database using trigrams, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request url.
+    This endpoint allows you to search the database using trigrams, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
 
     ### Required attributes
 
