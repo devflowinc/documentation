@@ -3,11 +3,11 @@ export const description =
 
 # Card Collections
 
-Collections are groups of cards that are either user created, or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections progrmatically. {{ className: 'lead' }}
+Collections are groups of cards that are either user-created, or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
 
 ## The collection model
 
-The collection model contains all the information about your collections, including what card are in the collection and the collection's name, description, and author.
+The collection model contains all the information about your collections, including what cards are in the collection and the collection's name, description, and author.
 
 ### Properties
 
@@ -19,7 +19,7 @@ The collection model contains all the information about your collections, includ
     The author id of the user who created the collection.
   </Property>
   <Property name="description" type="string">
-    The description for the collection.
+    The description of the collection.
   </Property>
   <Property name="name" type="string">
     The name of the collection.
@@ -107,7 +107,7 @@ The collection model contains all the information about your collections, includ
 
     <Properties>
       <Property name="name" type="string">
-        The name for the collection.
+        The name of the collection.
       </Property>
       <Property name="is_public" type="boolean">
         Whether the collection is visible to other users or not.
@@ -118,7 +118,7 @@ The collection model contains all the information about your collections, includ
 
     <Properties>
       <Property name="description" type="string">
-        The description for the collection.
+        The description of the collection.
       </Property>
     </Properties>
 
@@ -170,28 +170,6 @@ The collection model contains all the information about your collections, includ
       -d '{
           "collection_id": "1890301f-0e2f-4298-836c-19d74a9a778b"
       }'
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.collections.delete('L7cGNIBKZiNJ6wqF')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.collections.delete("L7cGNIBKZiNJ6wqF")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->collections->delete('L7cGNIBKZiNJ6wqF');
     ```
 
     </CodeGroup>
@@ -255,7 +233,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a the cards from a collection by providing the collection id. Refer to [the card model](/card#the-card-model) at the top of this page to see which properties are included with card objects. (Must be authenticated if collection is private)
+    This endpoint allows you to retrieve the cards from a collection by providing the collection id. Refer to [the card model](/card#the-card-model) at the top of this page to see which properties are included with card objects. (Must be authenticated if the collection is private)
 
   </Col>
   <Col sticky>
@@ -391,7 +369,7 @@ The collection model contains all the information about your collections, includ
 
     <Properties>
       <Property name="collection_ids" type="string">
-        A comma seperated list of card ids you want to retrieve the collections for.
+        A comma separated list of card ids you want to retrieve the collections for.
       </Property>
     </Properties>
 
@@ -432,7 +410,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request url.
+    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
 
     ### Required attributes
 
@@ -452,7 +430,7 @@ The collection model contains all the information about your collections, includ
         The file path you wish to filter by.
       </Property>
       <Property name="filter_link_url" type="string">
-        The link url you wish to filter by.
+        The link URL you wish to filter by.
       </Property>
     </Properties>
 
@@ -531,7 +509,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search a collection using full-text.
+    This endpoint allows you to search a collection using full-text trigram search.
 
     ### Required attributes
 
@@ -551,7 +529,7 @@ The collection model contains all the information about your collections, includ
         The file path you wish to filter by.
       </Property>
       <Property name="filter_link_url" type="string">
-        The link url you wish to filter by.
+        The link URL you wish to filter by.
       </Property>
     </Properties>
 
