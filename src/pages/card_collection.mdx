@@ -1,46 +1,43 @@
 export const description =
-  'On this page, we’ll dive into the different group endpoints you can use to manage groups programmatically.'
+  'On this page, we’ll dive into the different collection endpoints you can use to manage collections programmatically.'
 
-# Groups
+# Card Collections
 
-Groups are where communities live in Protocol — they are a collection of contacts you're talking to all at once. On this page, we'll dive into the different group endpoints you can use to manage groups programmatically. We'll look at how to query, create, update, and delete groups. {{ className: 'lead' }}
+Collections are groups of cards that are either user created, or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections progrmatically. {{ className: 'lead' }}
 
-## The group model
+## The collection model
 
-The group model contains all the information about your groups, including what contacts are in the group and the group's name, description, and avatar.
+The collection model contains all the information about your collections, including what card are in the collection and the collection's name, description, and author.
 
 ### Properties
 
 <Properties>
   <Property name="id" type="string">
-    Unique identifier for the group.
+    Unique identifier for the collection.
   </Property>
-  <Property name="name" type="string">
-    The name for the group.
+  <Property name="author_id" type="string">
+    The author id of the user who created the collection.
   </Property>
   <Property name="description" type="string">
-    The description for the group.
+    The description for the collection.
   </Property>
-  <Property name="avatar_url" type="string">
-    The avatar image URL for the group.
+  <Property name="name" type="string">
+    The name of the collection.
   </Property>
-  <Property name="conversation_id" type="string">
-    Unique identifier for the conversation that belongs to the group.
-  </Property>
-  <Property name="contacts" type="array">
-    An array of contact objects that are members of the group.
+  <Property name="is_public" type="boolean">
+    Whether the collection is visible to other users or not.
   </Property>
   <Property name="created_at" type="timestamp">
-    Timestamp of when the group was created.
+    Timestamp of when the collection was created.
   </Property>
-  <Property name="archived_at" type="timestamp">
-    Timestamp of when the group was archived.
+  <Property name="updated_at" type="timestamp">
+    Timestamp of when the collection was updated.
   </Property>
 </Properties>
 
 ---
 
-## List all groups {{ tag: 'GET', label: '/v1/groups' }}
+## List collections for a user {{ tag: 'GET', label: '/api/user/collections/:user_id' }}
 
 <Row>
   <Col>
@@ -120,23 +117,59 @@ The group model contains all the information about your groups, including what c
     ### Optional attributes
 
     <Properties>
-      <Property name="limit" type="integer">
-        Limit the number of groups returned.
-      </Property>
-      <Property name="archived" type="boolean">
-        Only show groups that are archived when set to `true`.
+      <Property name="description" type="string">
+        The description for the collection.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/v1/groups">
+    <CodeGroup title="Request" tag="POST" label="/api/card_collection">
 
     ```bash {{ title: 'cURL' }}
-    curl -G https://api.protocol.chat/v1/groups \
-      -H "Authorization: Bearer {token}" \
-      -d limit=10
+      curl -L -g 'https://api.arguflow.com/api/card_collection' \
+        --header 'Cookie: ai-editor=your_cookie_value_here' \
+        -d '{
+            "name": "Debating for these guys",
+            "is_public": false,
+            "description": "More data about this collection of cards"
+        }'
+    ```
+
+    </CodeGroup>
+
+  </Col>
+</Row>
+
+---
+
+## Delete a collection {{ tag: 'DELETE', label: '/api/card_collection' }}
+
+<Row>
+  <Col>
+
+    This endpoint allows you to delete collections. Note: This will delete the collection, but not the cards inside of it.
+
+    ### Required attributes
+
+    <Properties>
+      <Property name="collection_id" type="string">
+        The id of the collection you wish to delete.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="DELETE" label="/api/card_collection">
+
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE https://api.arguflow.com/api/card_collection \
+      --header 'Cookie: ai-editor=your_cookie_value_here'\
+      -d '{
+          "collection_id": "1890301f-0e2f-4298-836c-19d74a9a778b"
+      }'
     ```
 
     ```js
@@ -144,7 +177,7 @@ The group model contains all the information about your groups, including what c
 
     const client = new ApiClient(token)
 
-    await client.groups.list()
+    await client.collections.delete('L7cGNIBKZiNJ6wqF')
     ```
 
     ```python
@@ -152,13 +185,13 @@ The group model contains all the information about your groups, including what c
 
     client = ApiClient(token)
 
-    client.groups.list()
+    client.collections.delete("L7cGNIBKZiNJ6wqF")
     ```
 
     ```php
     $client = new \Protocol\ApiClient($token);
 
-    $client->groups->list();
+    $client->collections->delete('L7cGNIBKZiNJ6wqF');
     ```
 
     </CodeGroup>
@@ -238,46 +271,43 @@ The group model contains all the information about your groups, including what c
 
     ```json {{ title: 'Response' }}
     {
-      "has_more": false,
-      "data": [
+    "bookmarks": [
         {
-          "id": "l7cGNIBKZiNJ6wqF",
-          "name": "Plaza Hotel",
-          "description": "World-renowned.",
-          "avatar_url": "https://assets.protocol.chat/avatars/plazahotel.jpg",
-          "conversation_id": "ZYjVAbCE9g5XRlra",
-          "contacts": [
-            {
-              "username": "Hector"
-              // ...
-            },
-            {
-              "username": "Cedric"
-              // ...
-            },
-            {
-              "username": "Hester"
-              // ...
-            },
-            {
-              "username": "Cliff"
-              // ...
-            }
-          ],
-          "created_at": 692233200,
-          "archived_at": null
+            "metadata": [
+                {
+                    "id": "12fd7e04-7261-4b89-8776-d331d29003b0",
+                    "author": {
+                        "id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+                        "email": "dens.sumesh79@gmail.com",
+                        "username": null,
+                        "website": null,
+                        "visible_email": true,
+                        "created_at": "2023-07-20T11:54:39.303730"
+                    },
+                    "content": "Though by itself, the Canadian Indian free passage right issue is interesting as yet another chapter...",
+                    "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font face=\"Calibri, serif\">Though\nby itself, the Canadian Indian free...",
+                    "link": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1267977",
+                    "qdrant_point_id": "ce80424d-6202-4612-bdaa-1c7e7001b088",
+                    "total_upvotes": 0,
+                    "total_downvotes": 0,
+                    "vote_by_current_user": null,
+                    "created_at": "2023-07-20T11:57:13.157339",
+                    "updated_at": "2023-07-20T11:57:13.157340",
+                    "oc_file_path": "/Blood Quantum Affirmative and Neg - Wake 2018.docx",
+                    "file_id": "39f22d72-08d4-459b-9d68-8550187b976e",
+                    "file_name": "Blood Quantum Affirmative and Neg - Wake 2018.docx",
+                    "private": false,
+                    "verification_score": null
+                }
+            ]
         },
-        {
-          "id": "hSIhXBhNe8X1d8Et"
-          // ...
-        }
+        //...
       ]
     }
     ```
 
   </Col>
 </Row>
-
 ---
 
 ## Add a card to a collection {{ tag: 'POST', label: '/api/card_collection/:collection_id' }}
@@ -285,14 +315,11 @@ The group model contains all the information about your groups, including what c
 <Row>
   <Col>
 
-    This endpoint allows you to create a new group conversation between you and a group of your Protocol contacts.
+    This endpoint allows you to add a card to a collection. (Must be authenticated and your collection)
 
     ### Required attributes
 
     <Properties>
-      <Property name="name" type="string">
-        The name for the group.
-</Property>
       <Property name="card_metadata_id" type="string">
         The id of the card you wish to add to the collection.
       </Property>
@@ -421,14 +448,11 @@ The group model contains all the information about your groups, including what c
     ### Optional attributes
 
     <Properties>
-      <Property name="description" type="string">
-        The description for the group.
+      <Property name="filter_oc_file_path" type="string">
+        The file path you wish to filter by.
       </Property>
-      <Property name="avatar_url" type="string">
-        The avatar image URL for the group.
-      </Property>
-      <Property name="contacts" type="array">
-        An array of contact objects that are members of the group.
+      <Property name="filter_link_url" type="string">
+        The link url you wish to filter by.
       </Property>
     </Properties>
 
@@ -438,274 +462,164 @@ The group model contains all the information about your groups, including what c
     <CodeGroup title="Request" tag="GET" label="/api/card_collection/search/:page">
 
     ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/groups \
-      -H "Authorization: Bearer {token}" \
-      -d name="Plaza Hotel"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.create({
-      name: 'Plaza Hotel',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.create(name="Plaza Hotel")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->create([
-      'name' => 'Plaza Hotel',
-    ]);
+      curl -L 'https://api.arguflow.com/api/card_collection/search/1' \
+        --header 'Content-Type: application/json' \
+        --header 'Cookie: ai-editor=your_cookie_value_here' \
+        --data '{
+            "content": "test",
+            "collection_id": "50f94186-9659-42c4-8a95-ae7b450cf3f9"
+        }'
     ```
 
     </CodeGroup>
 
     ```json {{ title: 'Response' }}
-    {
-      "id": "l7cGNIBKZiNJ6wqF",
-      "name": "Plaza Hotel",
-      "description": null,
-      "avatar_url": null,
-      "conversation_id": "ZYjVAbCE9g5XRlra",
-      "contacts": [],
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
+
+      {
+        "bookmarks": [
+          {
+            "metadata": [
+              {
+              "id": "4546e8b0-d6e9-4334-9de9-14ffa002183f",
+              "author": {
+                "id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+                "email": "dens.sumesh79@gmail.com",
+                "username": null,
+                "website": null,
+                "visible_email": true,
+                "created_at": "2023-07-20T11:54:39.303730"
+              },
+              "content": "(CNN) The first polling reactions to last week's summit between President Donald Trump and Russian President Vladimir Putin in Helsinki, Finland, ...",
+              "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font size=\"1\" style=\"font-size: 8pt\">(CNN)\n</font><font size=\"2\" ...",
+              "link": "https://www.cnn.com/2018/07/24/politics/voters-democrats-republicans-economy-culture-divide-president-trump/index.html",
+              "qdrant_point_id": "d7955192-c194-4c97-b957-ff93f49d8575",
+              "total_upvotes": 0,
+              "total_downvotes": 0,
+              "vote_by_current_user": null,
+              "created_at": "2023-07-20T11:56:46.475045",
+              "updated_at": "2023-07-20T11:56:46.475047",
+              "oc_file_path": "/Base DA Uniqueness Updates - Berkeley 2018.docx",
+              "file_id": "476aace7-832e-487c-b791-b759cf1ecc84",
+              "file_name": "Base DA Uniqueness Updates - Berkeley 2018.docx",
+              "private": false,
+              "verification_score": null
+              }
+            ],
+          "score": 0.7443217039108276
+          },
+        //...
+        ],
+        "collection": {
+          "id": "50f94186-9659-42c4-8a95-ae7b450cf3f9",
+          "author_id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+          "name": "Collection for file Base DA Uniqueness Updates - Berkeley 2018.docx",
+          "is_public": true,
+          "description": "",
+          "created_at": "2023-07-20T11:56:46.486384",
+          "updated_at": "2023-07-20T11:56:46.486386"
+        },
+        "total_pages": 1
+      }
+```
 
   </Col>
 </Row>
-
 ---
 
-## Retrieve a group {{ tag: 'GET', label: '/v1/groups/:id' }}
+## Search a collection using full-text {{ tag: 'POST', label: '/api/card_collection/fulltextsearch/:page' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a group by providing the group id. Refer to [the list](#the-group-model) at the top of this page to see which properties are included with group objects.
+    This endpoint allows you to search a collection using full-text.
 
-  </Col>
-  <Col sticky>
+    ### Required attributes
 
-    <CodeGroup title="Request" tag="GET" label="/api/card_collection/fulltextsearch/:page">
-
-    ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/groups/L7cGNIBKZiNJ6wqF \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.get('L7cGNIBKZiNJ6wqF')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.get("L7cGNIBKZiNJ6wqF")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->get('L7cGNIBKZiNJ6wqF');
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "l7cGNIBKZiNJ6wqF",
-      "name": "Plaza Hotel",
-      "description": "World-renowned.",
-      "avatar_url": "https://assets.protocol.chat/avatars/plazahotel.jpg",
-      "conversation_id": "ZYjVAbCE9g5XRlra",
-      "contacts": [
-        {
-          "username": "Hector"
-          // ...
-        },
-        {
-          "username": "Cedric"
-          // ...
-        },
-        {
-          "username": "Hester"
-          // ...
-        },
-        {
-          "username": "Cliff"
-          // ...
-        }
-      ],
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Update a group {{ tag: 'PUT', label: '/v1/groups/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to perform an update on a group. Examples of updates are changing the name, description, and avatar or adding and removing contacts from the group.
+    <Properties>
+      <Property name="content" type="string">
+        The content you wish to search for.
+      </Property>
+      <Property name="collection_id" type="string">
+        The id of the collection you wish to search within.
+      </Property>
+    </Properties>
 
     ### Optional attributes
 
     <Properties>
-      <Property name="name" type="string">
-        The new name for the group.
+      <Property name="filter_oc_file_path" type="string">
+        The file path you wish to filter by.
       </Property>
-      <Property name="description" type="string">
-        The new description for the group.
-      </Property>
-      <Property name="avatar_url" type="string">
-        The new avatar image URL for the group.
-      </Property>
-      <Property name="contacts" type="array">
-        An array of contact objects that are members of the group.
-      </Property>
-      <Property name="archived_at" type="timestamp">
-        Timestamp of when the group was archived.
+      <Property name="filter_link_url" type="string">
+        The link url you wish to filter by.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="PUT" label="/v1/groups/L7cGNIBKZiNJ6wqF">
+    <CodeGroup title="Request" tag="GET" label="/v1/collections/L7cGNIBKZiNJ6wqF">
 
     ```bash {{ title: 'cURL' }}
-    curl -X PUT https://api.protocol.chat/v1/groups/L7cGNIBKZiNJ6wqF \
-      -H "Authorization: Bearer {token}" \
-      -d description="The finest in New York."
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.update('L7cGNIBKZiNJ6wqF', {
-        description: 'The finest in New York.',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.update("L7cGNIBKZiNJ6wqF", description="The finest in New York.")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->update('L7cGNIBKZiNJ6wqF', [
-      'description' => 'The finest in New York.',
-    ]);
+      curl -L 'https://api.arguflow.com/api/card_collection/fulltextsearch/1' \
+        --header 'Content-Type: application/json' \
+        --header 'Cookie: ai-editor=your_cookie_value_here' \
+        --data '{
+            "content": "test",
+            "collection_id": "50f94186-9659-42c4-8a95-ae7b450cf3f9"
+        }'
     ```
 
     </CodeGroup>
 
     ```json {{ title: 'Response' }}
-    {
-      "id": "l7cGNIBKZiNJ6wqF",
-      "name": "Plaza Hotel",
-      "description": "The finest in New York.",
-      "avatar_url": "https://assets.protocol.chat/avatars/plazahotel.jpg",
-      "conversation_id": "ZYjVAbCE9g5XRlra",
-      "contacts": [
         {
-          "username": "Hector"
-          // ...
+        "bookmarks": [
+          {
+            "metadata": [
+              {
+              "id": "4546e8b0-d6e9-4334-9de9-14ffa002183f",
+              "author": {
+                "id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+                "email": "dens.sumesh79@gmail.com",
+                "username": null,
+                "website": null,
+                "visible_email": true,
+                "created_at": "2023-07-20T11:54:39.303730"
+              },
+              "content": "(CNN) The first polling reactions to last week's summit between President Donald Trump and Russian President Vladimir Putin in Helsinki, Finland, ...",
+              "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font size=\"1\" style=\"font-size: 8pt\">(CNN)\n</font><font size=\"2\" ...",
+              "link": "https://www.cnn.com/2018/07/24/politics/voters-democrats-republicans-economy-culture-divide-president-trump/index.html",
+              "qdrant_point_id": "d7955192-c194-4c97-b957-ff93f49d8575",
+              "total_upvotes": 0,
+              "total_downvotes": 0,
+              "vote_by_current_user": null,
+              "created_at": "2023-07-20T11:56:46.475045",
+              "updated_at": "2023-07-20T11:56:46.475047",
+              "oc_file_path": "/Base DA Uniqueness Updates - Berkeley 2018.docx",
+              "file_id": "476aace7-832e-487c-b791-b759cf1ecc84",
+              "file_name": "Base DA Uniqueness Updates - Berkeley 2018.docx",
+              "private": false,
+              "verification_score": null
+              }
+            ],
+          "score": 0.7443217039108276
+          },
+        //...
+        ],
+        "collection": {
+          "id": "50f94186-9659-42c4-8a95-ae7b450cf3f9",
+          "author_id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+          "name": "Collection for file Base DA Uniqueness Updates - Berkeley 2018.docx",
+          "is_public": true,
+          "description": "",
+          "created_at": "2023-07-20T11:56:46.486384",
+          "updated_at": "2023-07-20T11:56:46.486386"
         },
-        {
-          "username": "Cedric"
-          // ...
-        },
-        {
-          "username": "Hester"
-          // ...
-        },
-        {
-          "username": "Cliff"
-          // ...
-        }
-      ],
-      "created_at": 692233200,
-      "archived_at": null
-    },
+        "total_pages": 1
+      }
     ```
 
   </Col>
 </Row>
-
----
-
-## Delete a group {{ tag: 'DELETE', label: '/v1/groups/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to delete groups. Note: This will permanently delete the group, including the messages — archive it instead if you want to be able to restore it later.
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="DELETE" label="/v1/groups/L7cGNIBKZiNJ6wqF">
-
-    ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.protocol.chat/v1/groups/L7cGNIBKZiNJ6wqF \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.groups.delete('L7cGNIBKZiNJ6wqF')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.groups.delete("L7cGNIBKZiNJ6wqF")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->groups->delete('L7cGNIBKZiNJ6wqF');
-    ```
-
-    </CodeGroup>
-
-  </Col>
-</Row>
+````
