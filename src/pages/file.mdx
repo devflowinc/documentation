@@ -1,13 +1,13 @@
 export const description =
   'On this page, we’ll dive into the different conversation endpoints you can use to manage conversations programmatically.'
 
-# Conversations
+# Files
 
-Conversations are an essential part of Protocol — they are the containers for the messages between you, your contacts, and groups. On this page, we’ll dive into the different conversation endpoints you can use to manage conversations programmatically. We'll look at how to query, create, update, and delete conversations. {{ className: 'lead' }}
+Files are where most of the cards on Vault come from. These are stored on the server in an s3 bucket. On this page, we’ll dive into the different conversation endpoints you can use to manage files programmatically. We'll look at how to create, update, and delete files. {{ className: 'lead' }}
 
-## The conversation model
+## The file model
 
-The conversation model contains all the information about the conversations between you and your contacts. In addition, conversations can also be group-based with more than one contact, they can have a pinned message, and they can be muted.
+The conversation model contains all the information about the files you upload. They can be linked to a specifc collection and you can access the file itself from each card in it. 
 
 ### Properties
 
@@ -15,121 +15,64 @@ The conversation model contains all the information about the conversations betw
   <Property name="id" type="string">
     Unique identifier for the conversation.
   </Property>
-  <Property name="contact_id" type="string">
-    Unique identifier for the other contact in the conversation.
+  <Property name="user_id" type="string">
+    Unique identifier for uploader of the file.
   </Property>
-  <Property name="group_id" type="string">
-    Unique identifier for the group that the conversation belongs to.
+  <Property name="file_name" type="string">
+    The name of the file.
   </Property>
-  <Property name="pinned_message_id" type="string">
-    Unique identifier for the pinned message.
+  <Property name="mime_type" type="string">
+    The mime_tyoe of the file. (Only accepts .docx, .doc, .odt, .pdf)
   </Property>
-  <Property name="is_pinned" type="boolean">
-    Whether or not the conversation has been pinned.
-  </Property>
-  <Property name="is_muted" type="boolean">
-    Whether or not the conversation has been muted.
-  </Property>
-  <Property name="last_active_at" type="timestamp">
-    Timestamp of when the conversation was last active.
-  </Property>
-  <Property name="last_opened_at" type="timestamp">
-    Timestamp of when the conversation was last opened by the authenticated
-    user.
+  <Property name="private" type="boolean">
+    Whether or not the file is visible to other users.
   </Property>
   <Property name="created_at" type="timestamp">
-    Timestamp of when the conversation was created.
+    Timestamp of when the file was created.
   </Property>
-  <Property name="archived_at" type="timestamp">
-    Timestamp of when the conversation was archived.
+  <Property name="updated_at" type="timestamp">
+    Timestamp of when the file was last updated.
+  </Property>
+  <Property name="size" type="integer">
+    The size of the file in bytes.
+  </Property>
+  <Property name="base64url_content" type="string">
+    The base64url encoded content of the file.
   </Property>
 </Properties>
 
+
 ---
 
-## List all conversations {{ tag: 'GET', label: '/v1/conversations' }}
+## Get a file {{ tag: 'GET', label: '/api/file/:file_id' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a paginated list of all your conversations. By default, a maximum of ten conversations are shown per page.
-
-    ### Optional attributes
-
-    <Properties>
-      <Property name="limit" type="integer">
-        Limit the number of conversations returned.
-      </Property>
-      <Property name="muted" type="boolean">
-        Only show conversations that are muted when set to `true`.
-      </Property>
-      <Property name="archived" type="boolean">
-        Only show conversations that are archived when set to `true`.
-      </Property>
-      <Property name="pinned" type="boolean">
-        Only show conversations that are pinned when set to `true`.
-      </Property>
-      <Property name="group_id" type="string">
-        Only show conversations for the specified group.
-      </Property>
-    </Properties>
-
+    This endpoint allows you to retrieve a file by providing the file id. Refer to [the list](#the-file-model) at the top of this page to see which properties are included with file objects. (Must be authenticated if private)
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/v1/conversations">
+    <CodeGroup title="Request" tag="GET" label="/api/file/:file_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -G https://api.protocol.chat/v1/conversations \
-      -H "Authorization: Bearer {token}" \
-      -d limit=10
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.list()
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.list()
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->list();
+      curl -L 'https://api.arguflow.com/api/file/9a981834-b12a-49cc-afec-4ce88a2b2456' \
+        -H 'Cookie: ai-editor=your_cookie_value_here'
     ```
 
     </CodeGroup>
 
     ```json {{ title: 'Response' }}
     {
-      "has_more": false,
-      "data": [
-        {
-          "id": "xgQQXg3hrtjh7AvZ",
-          "contact_id": "WAz8eIbvDR60rouK",
-          "group_id": null,
-          "pinned_message_id": null,
-          "is_pinned": false,
-          "is_muted": false,
-          "last_active_at": 705103200,
-          "last_opened_at": 705103200,
-          "created_at": 692233200,
-          "archived_at": null
-        },
-        {
-          "id": "hSIhXBhNe8X1d8Et"
-          // ...
-        }
-      ]
+      "id": "9a981834-b12a-49cc-afec-4ce88a2b2456",
+      "user_id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+      "file_name": "AI Affirmative - Northwestern 2018.docx",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "private": false,
+      "created_at": "2023-07-20T11:55:18.880672",
+      "updated_at": "2023-07-20T11:55:18.880739",
+      "size": 497097,
+      "base64url_content": "UEsDBBQABgAIAAAAIQDQWMtnkQEAAI8GAAATAAgCW0NvbnRlbnRfVHlwZXNdLnhtbCCiBAIooAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA..."
     }
     ```
 
@@ -138,219 +81,67 @@ The conversation model contains all the information about the conversations betw
 
 ---
 
-## Create a conversation {{ tag: 'POST', label: '/v1/conversations' }}
+## Create a file {{ tag: 'POST', label: '/api/file' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to add a new conversation between you and a contact or group. A contact or group id is required to create a conversation.
+    This endpoint allows you to add a file to your collection. The file must be a .docx, .doc, .odt, or .pdf. The file will be stored in an s3 bucket and the file object will be stored in the database. (Must be authenticated)
 
     ### Required attributes
 
     <Properties>
-      <Property name="contact_id" type="string">
-        Unique identifier for the other contact in the conversation.
+      <Property name="base64_docx_file" type="string">
+        The file you want to upload in base64url format.
       </Property>
-      <Property name="group_id" type="string">
-        Unique identifier for the group that the conversation belongs to.
+      <Property name="file_name" type="string">
+        The name of the file you want to upload.
+      </Property>
+      <Property name="file_mime_type" type="string">
+        The mime type of the file you want to upload.
+      </Property>
+      <Property name="private" type="boolean">
+        Whether or not the file is visible to other users.
       </Property>
     </Properties>
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="POST" label="/v1/conversations">
-
-    ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/conversations \
-      -H "Authorization: Bearer {token}" \
-      -d 'contact_id'="WAz8eIbvDR60rouK"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.create({
-      contact_id: 'WAz8eIbvDR60rouK',
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.create(contact_id="WAz8eIbvDR60rouK")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->create([
-      'contact_id' => 'WAz8eIbvDR60rouK',
-    ]);
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "xgQQXg3hrtjh7AvZ",
-      "contact_id": "WAz8eIbvDR60rouK",
-      "group_id": null,
-      "pinned_message_id": null,
-      "is_pinned": false,
-      "is_muted": false,
-      "last_active_at": null,
-      "last_opened_at": null,
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Retrieve a conversation {{ tag: 'GET', label: '/v1/conversations/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to retrieve a conversation by providing the conversation id. Refer to [the list](#the-conversation-model) at the top of this page to see which properties are included with conversation objects.
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="GET" label="/v1/conversations/xgQQXg3hrtjh7AvZ">
-
-    ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/conversations/xgQQXg3hrtjh7AvZ \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.get('xgQQXg3hrtjh7AvZ')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.get("xgQQXg3hrtjh7AvZ")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->get('xgQQXg3hrtjh7AvZ');
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "xgQQXg3hrtjh7AvZ",
-      "contact_id": "WAz8eIbvDR60rouK",
-      "group_id": null,
-      "pinned_message_id": null,
-      "is_pinned": false,
-      "is_muted": false,
-      "last_active_at": 705103200,
-      "last_opened_at": 705103200,
-      "created_at": 692233200,
-      "archived_at": null
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Update a conversation {{ tag: 'PUT', label: '/v1/conversations/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to perform an update on a conversation. Examples of updates are pinning a message, muting or archiving the conversation, or pinning the conversation itself.
 
     ### Optional attributes
 
     <Properties>
-      <Property name="pinned_message_id" type="string">
-        Unique identifier for the pinned message.
-      </Property>
-      <Property name="is_pinned" type="boolean">
-        Whether or not the conversation has been pinned.
-      </Property>
-      <Property name="is_muted" type="boolean">
-        Whether or not the conversation has been muted.
-      </Property>
-      <Property name="archived_at" type="timestamp">
-        Timestamp of when the conversation was archived.
+      <Property name="oc_file_path" type="string">
+        The path to the opencaselist file the file is linked to.
       </Property>
     </Properties>
-
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="PUT" label="/v1/conversations/xgQQXg3hrtjh7AvZ">
+    <CodeGroup title="Request" tag="POST" label="/api/file">
 
     ```bash {{ title: 'cURL' }}
-    curl -X PUT https://api.protocol.chat/v1/conversations/xgQQXg3hrtjh7AvZ \
-      -H "Authorization: Bearer {token}" \
-      -d 'is_muted'=true
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.conversations.update('xgQQXg3hrtjh7AvZ', {
-        is_muted: true,
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.conversations.update("xgQQXg3hrtjh7AvZ", is_muted=True)
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->conversations->update('xgQQXg3hrtjh7AvZ', [
-      'is_muted' => true,
-    ]);
+      curl -L 'http://api.arguflow.com/api/file' \
+        -H 'Content-Type: application/json' \
+        -H 'Cookie: ai-editor=your_cookie_value_here' \
+        --data '{
+          "base64_docx_file": UEsDBBQABgAIAAAAIQDQWMtnkQEAAI8GAAATAAgCW0NvbnRlbnRfVHlwZXNdLnhtbCCiBAIooAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA...,
+          "file_name": "AI Affirmative - Northwestern 2018.docx",
+          "file_mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "private": false"
+          }'
     ```
 
     </CodeGroup>
 
     ```json {{ title: 'Response' }}
     {
-      "id": "xgQQXg3hrtjh7AvZ",
-      "contact_id": "WAz8eIbvDR60rouK",
-      "group_id": null,
-      "pinned_message_id": null,
-      "is_pinned": false,
-      "is_muted": true,
-      "last_active_at": 705103200,
-      "last_opened_at": 705103200,
-      "created_at": 692233200,
-      "archived_at": null
+      "id": "9a981834-b12a-49cc-afec-4ce88a2b2456",
+      "user_id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
+      "file_name": "AI Affirmative - Northwestern 2018.docx",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "private": false,
+      "created_at": "2023-07-20T11:55:18.880672",
+      "updated_at": "2023-07-20T11:55:18.880739",
+      "size": 497097,
+      "base64url_content": "UEsDBBQABgAIAAAAIQDQWMtnkQEAAI8GAAATAAgCW0NvbnRlbnRfVHlwZXNdLnhtbCCiBAIooAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA..."
     }
     ```
 
@@ -359,43 +150,63 @@ The conversation model contains all the information about the conversations betw
 
 ---
 
-## Delete a conversation {{ tag: 'DELETE', label: '/v1/conversations/:id' }}
+## Delete a file {{ tag: 'DELETE', label: '/api/file/:file_id' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to delete your conversations in Protocol. Note: This will permanently delete the conversation and all its messages — archive it instead if you want to be able to restore it later.
+    This endpoint allows you to delete a file by providing the file id. (Must be authenticated)
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="DELETE" label="/v1/conversations/xgQQXg3hrtjh7AvZ">
+    <CodeGroup title="Request" tag="DELETE" label="/api/file/:file_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.protocol.chat/v1/conversations/xgQQXg3hrtjh7AvZ \
-      -H "Authorization: Bearer {token}"
+    curl http://api.arguflow.com/api/file/9a981834-b12a-49cc-afec-4ce88a2b2456 \
+      -H 'Cookie: ai-editor=your_cookie_value_here' \
     ```
 
-    ```js
-    import ApiClient from '@example/protocol-api'
 
-    const client = new ApiClient(token)
+    </CodeGroup>
 
-    await client.conversations.delete('xgQQXg3hrtjh7AvZ')
-    ```
 
-    ```python
-    from protocol_api import ApiClient
+  </Col>
+</Row>
 
-    client = ApiClient(token)
+---
 
-    client.conversations.delete("xgQQXg3hrtjh7AvZ")
-    ```
+## Update a file {{ tag: 'PUT', label: '/api/file' }}
 
-    ```php
-    $client = new \Protocol\ApiClient($token);
+<Row>
+  <Col>
 
-    $client->conversations->delete('xgQQXg3hrtjh7AvZ');
+    This endpoint allows you to update a file by providing the file id. (Must be authenticated)
+
+    ### Required attributes
+
+    <Properties>
+      <Property name="file_id" type="string">
+        The id of the file you want to edit.
+      </Property>
+      <Property name="private" type="boolean">
+        Whether or not the file is visible to other users.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="PUT" label="/api/file">
+
+    ```bash {{ title: 'cURL' }}
+    curl -X PUT https://api.protocol.chat/api/file \
+      -H 'Cookie: ai-editor=your_cookie_value_here' \
+      -H 'Content-Type: application/json' \
+      -d "{
+        "file_id": "9a981834-b12a-49cc-afec-4ce88a2b2456",
+        "private": true
+      }"
     ```
 
     </CodeGroup>
