@@ -21,6 +21,12 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  images: {
+    loader: 'akamai',
+    path: '',
+  },
 }
+
+
 
 export default withSearch(withMDX(nextConfig))
