@@ -199,6 +199,7 @@ export const navigation = [
       { title: 'Card', href: '/card' },
       { title: 'Collections', href: '/card_collection' },
       { title: 'Auth', href: '/auth' },
+      { title: 'User', href: '/user' },
       { title: 'Files', href: '/file' },
       { title: 'Notification', href: '/notification' },
       { title: 'Verification', href: '/verification' },

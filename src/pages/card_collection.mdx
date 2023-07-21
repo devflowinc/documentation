@@ -3,11 +3,11 @@ export const description =
 
 # Card Collections
 
-Collections are groups of cards that are either user-created, or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
+Collections are groups of card that are either user-created or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
 
 ## The collection model
 
-The collection model contains all the information about your collections, including what cards are in the collection and the collection's name, description, and author.
+The collection model contains all the information about your collections, including what card are in the collection and the collection's name, description, and author.
 
 ### Properties
 
@@ -67,26 +67,6 @@ The collection model contains all the information about your collections, includ
           "updated_at": "2023-07-20T11:55:21.445294",
           "file_id": "2cdf94d5-9be3-4280-81c8-2c1cb7eb8f36"
       },
-      {
-          "id": "233d2d42-7a59-429f-94d9-e130eb0f14f9",
-          "author_id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
-          "name": "Collection for file AI Negative - Northwestern 2018.docx",
-          "is_public": true,
-          "description": "",
-          "created_at": "2023-07-20T11:55:33.938962",
-          "updated_at": "2023-07-20T11:55:33.938980",
-          "file_id": "40eae10c-137f-4bac-82b2-457cce7add46"
-      },
-      {
-          "id": "e4850107-6ab1-4ca9-a1c8-7e1fe099fe34",
-          "author_id": "c9379ab0-389d-4204-8602-5ba1bf99d441",
-          "name": "Collection for file Bataille Ks - Wake 2018.docx",
-          "is_public": true,
-          "description": "",
-          "created_at": "2023-07-20T11:56:28.723929",
-          "updated_at": "2023-07-20T11:56:28.723929",
-          "file_id": "b23b56b3-2576-4976-b4f5-e970ef22cc70"
-      },
       //...
     ]
     ```
@@ -133,7 +113,7 @@ The collection model contains all the information about your collections, includ
         -d '{
             "name": "Debating for these guys",
             "is_public": false,
-            "description": "More data about this collection of cards"
+            "description": "More data about this collection of card"
         }'
     ```
 
@@ -149,7 +129,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to delete collections. Note: This will delete the collection, but not the cards inside of it.
+    This endpoint allows you to delete collections. Note: This will delete the collection, but not the card inside of it.
 
     ### Required attributes
 
@@ -228,12 +208,12 @@ The collection model contains all the information about your collections, includ
 
 ---
 
-## Retrieve the cards from a collection {{ tag: 'GET', label: '/api/card_collection/:collection_id/:page' }}
+## Retrieve the card from a collection {{ tag: 'GET', label: '/api/card_collection/:collection_id/:page' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve the cards from a collection by providing the collection id. Refer to [the card model](/card#the-card-model) at the top of this page to see which properties are included with card objects. (Must be authenticated if the collection is private)
+    This endpoint allows you to retrieve the card from a collection by providing the collection id. Refer to [the card model](/card#the-card-model) at the top of this page to see which properties are included with card objects. (Must be authenticated if the collection is private)
 
   </Col>
   <Col sticky>
@@ -410,7 +390,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
+    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 card. You go through all the pages of card by incrementing the page number in the request URL. Refer to the [Card](card#the-card-model) section for more information about the card object.
 
     ### Required attributes
 
@@ -509,7 +489,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search a collection using full-text trigram search.
+    This endpoint allows you to search a collection using full-text trigram search. Refer to the [Card](card#the-card-model) section for more information about the card object.
 
     ### Required attributes
 
