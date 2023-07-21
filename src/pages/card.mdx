@@ -223,7 +223,7 @@ The attachment model contains all the information about a card, including the au
   <Col>
 
     This route allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
-      
+
       ### Response
 
     If the response is successful it will return a 204 status code with no body.
@@ -393,6 +393,7 @@ The attachment model contains all the information about a card, including the au
 
   </Col>
 </Row>
+
 ---
 
 ## Search for a card using full-text {{ tag: 'POST', label: '/api/card/fulltextsearch/:page' }}
@@ -490,3 +491,44 @@ The attachment model contains all the information about a card, including the au
 
   </Col>
 </Row>
+
+---
+
+## Get count of cards currently in the db {{ tag: 'GET', label: '/api/card/count' }}
+
+<Row>
+  <Col>
+
+    This route allows you to get the total number of cards currently in the database, including collisions. It takes no attributes.
+
+    ### Response
+
+    If the response is successful, it will return a 200 status code with the card_count.
+
+    <Properties>
+      <Property name="total_count" type="number">
+        The total number of cards currently in the db.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/card/count">
+
+    ```bash {{ title: 'cURL' }}
+      curl --G 'https://api.arguflow.com/api/card/count/1' \
+        --header 'Content-Type: application/json'
+    ```
+
+    </CodeGroup>
+    ```json {{ title: 'Response' }}
+      { 
+        "total_count": total_count 
+      }
+    ```
+
+  </Col>
+</Row>
+
+---
