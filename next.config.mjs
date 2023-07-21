@@ -22,8 +22,7 @@ const nextConfig = {
     scrollRestoration: true,
   },
   images: {
-    loader: 'akamai',
-    path: '',
+    unoptimized: true
   },
 }
 
