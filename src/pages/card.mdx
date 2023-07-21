@@ -109,7 +109,6 @@ The attachment model contains all the information about a card, including the au
       </Property>
     </Properties>
 
-
   </Col>
   <Col sticky>
 
@@ -224,10 +223,11 @@ The attachment model contains all the information about a card, including the au
   <Col>
 
     This endpoint allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
-      
+
       ### Response
 
     If the response is successful it will return a 204 status code with no body.
+
   </Col>
   <Col sticky>
 
@@ -275,6 +275,7 @@ The attachment model contains all the information about a card, including the au
       ### Response
 
     If the response is successful it will return a 204 status code with no body.
+
   </Col>
   <Col sticky>
 
@@ -382,9 +383,10 @@ The attachment model contains all the information about a card, including the au
               "private": false,
               "verification_score": 17
             },
-            //...
-      ]
-        }
+            //... other collisions
+          ]
+        },
+        //... other cards
       ]
     }
     ```
@@ -488,4 +490,3 @@ The attachment model contains all the information about a card, including the au
 
   </Col>
 </Row>
-
