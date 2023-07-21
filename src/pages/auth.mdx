@@ -7,7 +7,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
 ---
 
-## Send an invitation to register {{ tag: 'POST', label: '/invitation' }}
+## Send an invitation to register {{ tag: 'POST', label: '/api/invitation' }}
 
 <Row>
   <Col>
@@ -44,19 +44,6 @@ Auth routes are used to invite, register, manage, and authenticate users.
           "referral_tokens": ["token1", "token2", "token3"]
         }'
     ```
-    ```js
-    fetch('https://api.arguflow.com/invitation', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': 'ai-editor=your_cookie_value_here'
-      },
-      body: JSON.stringify({
-        email: 'example@example.com',
-        referral_tokens: ['token1', 'token2', 'token3']
-      })
-    });
-    ```
     </CodeGroup>
 
   </Col>
@@ -64,7 +51,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
 ---
 
-## Register a user {{ tag: 'POST', label: '/register/{invitation_id}' }}
+## Register a user {{ tag: 'POST', label: '/api/register/:invitation_id' }}
 
 <Row>
   <Col>
@@ -107,7 +94,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/register/{invitation_id}">
+    <CodeGroup title="Request" tag="POST" label="/api/register/:invitation_id">
 
     ```bash {{ title: 'cURL' }}
     curl -X POST \
@@ -119,19 +106,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
           "password_confirmation": "password"
         }'
     ```
-    ```js
-    fetch('https://api.arguflow.com/register/{invitation_id}', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Cookie': 'ai-editor=your_cookie_value_here'
-      },
-      body: JSON.stringify({
-        password: 'password',
-        password_confirmation: 'password'
-      })
-    });
-    ```
+  
 
     </CodeGroup>
 
@@ -150,209 +125,183 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
 ---
 
-## Retrieve a message {{ tag: 'GET', label: '/v1/messages/:id' }}
+## Login  {{ tag: 'POST', label: '/api/auth' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a message by providing the message id. Refer to [the list](#the-message-model) at the top of this page to see which properties are included with message objects.
+    This endpoint allows you to authenticate a user and retrieve an access token.
 
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="GET" label="/v1/messages/SIuAFUNKdSYHZF2w">
-
-    ```bash {{ title: 'cURL' }}
-    curl https://api.protocol.chat/v1/messages/SIuAFUNKdSYHZF2w \
-      -H "Authorization: Bearer {token}"
-    ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.messages.get('SIuAFUNKdSYHZF2w')
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.messages.get("SIuAFUNKdSYHZF2w")
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->messages->get('SIuAFUNKdSYHZF2w');
-    ```
-
-    </CodeGroup>
-
-    ```json {{ title: 'Response' }}
-    {
-      "id": "SIuAFUNKdSYHZF2w",
-      "conversation_id": "xgQQXg3hrtjh7AvZ",
-      "contact": {
-        "id": "WAz8eIbvDR60rouK",
-        "username": "KevinMcCallister",
-        "phone_number": "1-800-759-3000",
-        "avatar_url": "https://assets.protocol.chat/avatars/kevin.jpg",
-        "last_active_at": 705103200,
-        "created_at": 692233200
-      },
-      "message": "I’m traveling with my dad. He’s at a meeting. I hate meetings.",
-      "reactions": [],
-      "attachments": [],
-      "read_at": 705103200,
-      "created_at": 692233200,
-      "updated_at": 692233200
-    }
-    ```
-
-  </Col>
-</Row>
-
----
-
-## Update a message {{ tag: 'PUT', label: '/v1/messages/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to perform an update on a message. Examples of updates are adding a reaction, editing the message, or adding an attachment.
-
-    ### Optional attributes
+    ### Required attributes
 
     <Properties>
-      <Property name="message" type="string">
-        The message content.
+      <Property name="email" type="string">
+        The user's email.
       </Property>
-      <Property name="reactions" type="array">
-        An array of reaction objects associated with the message.
-      </Property>
-      <Property name="attachments" type="array">
-        An array of attachment objects associated with the message.
+      <Property name="password" type="string">
+        The user's password.
       </Property>
     </Properties>
 
+    ### Response
+
+    If the user is successfully authenticated, the response will be a 204 OK with the auth cookie set.
+
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="PUT" label="/v1/messages/SIuAFUNKdSYHZF2w">
+    <CodeGroup title="Request" tag="POST" label="/api/auth">
 
     ```bash {{ title: 'cURL' }}
-    curl -X PUT https://api.protocol.chat/v1/messages/SIuAFUNKdSYHZF2w \
-      -H "Authorization: Bearer {token}" \
-      -d reactions[red_angry_face][]="KateMcCallister"
+      curl --request POST \
+        --url https://api.arguflow.com/api/auth \
+        --header 'Content-Type: application/json' \
+        --data '{
+          "email": "foobar@bar.com",
+          "password": "fooandbar"
+      }'
     ```
-
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.messages.update('SIuAFUNKdSYHZF2w', {
-        reactions: {
-            red_angry_face: ['KateMcCallister']
-        }
-    })
-    ```
-
-    ```python
-    from protocol_api import ApiClient
-
-    client = ApiClient(token)
-
-    client.messages.update("SIuAFUNKdSYHZF2w",
-        reactions={"red_angry_face": ["KateMcCallister"]})
-    ```
-
-    ```php
-    $client = new \Protocol\ApiClient($token);
-
-    $client->messages->update('SIuAFUNKdSYHZF2w', [
-      'reactions' => [
-        'red_angry_face' => ['KateMcCallister'],
-      ],
-    ]);
-    ```
-
     </CodeGroup>
 
-    ```json {{ title: 'Response' }}
-    {
-      "id": "SIuAFUNKdSYHZF2w",
-      "conversation_id": "xgQQXg3hrtjh7AvZ",
-      "contact": {
-        "id": "WAz8eIbvDR60rouK",
-        "username": "KevinMcCallister",
-        "phone_number": "1-800-759-3000",
-        "avatar_url": "https://assets.protocol.chat/avatars/buzzboy.jpg",
-        "last_active_at": 705103200,
-        "created_at": 692233200
-      },
-      "message": "I'm not apologizing. I'd rather kiss a toilet seat.",
-      "reactions": [
-        {
-          "red_angry_face": [
-            "KateMcCallister"
-          ]
-        }
-      ],
-      "attachments": [],
-      "read_at": 705103200,
-      "created_at": 692233200,
-      "updated_at": 692233200
-    }
-    ```
 
   </Col>
 </Row>
 
 ---
 
-## Delete a message {{ tag: 'DELETE', label: '/v1/messages/:id' }}
+## Logout {{ tag: 'DELETE', label: '/api/auth' }}
 
 <Row>
   <Col>
 
-    This endpoint allows you to delete messages from your conversations. Note: This will permanently delete the message.
+    This endpoint allows you to logout a user and invalidate their access token.
+
+    ### Response
+
+    If the user is successfully logged out, the response will be a 204 OK with the auth cookie removed.
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="DELETE" label="/v1/messages/SIuAFUNKdSYHZF2w">
+    <CodeGroup title="Request" tag="DELETE" label="/api/auth">
 
     ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.protocol.chat/v1/messages/SIuAFUNKdSYHZF2w \
-      -H "Authorization: Bearer {token}"
+      curl --request DELETE \
+        --url https://api.arguflow.com/api/auth \
+        --header 'Content-Type: application/json' 
+    ```
+    </CodeGroup>
+
+  </Col>
+</Row>
+
+---
+
+## Get your user info {{ tag: 'GET', label: '/api/auth' }}
+
+<Row>
+  <Col>
+
+    This endpoint allows you to get your user info.
+
+    ### Response
+
+    If the user is successfully authenticated, a **SlimUser** type will be returned with the following properties:
+
+    <Properties>
+      <Property name="id" type="string">
+        The user id (UUID).
+      </Property>
+      <Property name="email" type="string">
+        The user email.
+      </Property>
+      <Property name="username" type="string | null">
+        The user's username.
+      </Property>
+      <Property name="website" type="string | null">
+        The user's website.
+      </Property>
+      <Property name="visible_email" type="boolean">
+        Whether the user's email is visible to other users. Must be true if username is null.
+      </Property>
+    </Properties>
+    
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/api/auth">
+
+    ```bash {{ title: 'cURL' }}
+    curl --request GET \
+      --url https://api.arguflow.com/api/auth \
+      --cookie ai-editor=your_cookie_value_here
     ```
 
-    ```js
-    import ApiClient from '@example/protocol-api'
-
-    const client = new ApiClient(token)
-
-    await client.messages.delete('SIuAFUNKdSYHZF2w')
+    </CodeGroup>
+    ```json {{ title: 'Response' }}
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "email": "foobar@bar.com",
+      "username": null,
+      "website": null,
+      "visible_email": true
+    }
     ```
+  </Col>
+</Row>
+---
 
-    ```python
-    from protocol_api import ApiClient
+## Send a password reset email {{ tag: 'GET', label: '/api/password/:email' }}
 
-    client = ApiClient(token)
+<Row>
+  <Col>
 
-    client.messages.delete("SIuAFUNKdSYHZF2w")
+    This endpoint allows you to send a password reset email to a user.
+
+      ### Response
+
+    If the response is successful it will return a 204 status code with no body.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="GET" label="/password/foobar@bar.com">
+
+    ```bash {{ title: 'cURL' }}
+    curl --request GET \
+      --url https://api.arguflow.com/api/password/foobar@bar.com \
+      --cookie ai-editor=your_cookie_value_here
     ```
+    </CodeGroup>
 
-    ```php
-    $client = new \Protocol\ApiClient($token);
+  </Col>
+</Row>
+---
 
-    $client->messages->delete('SIuAFUNKdSYHZF2w');
+## Reset your password {{ tag: 'POST', label: '/api/password' }}
+
+<Row>
+  <Col>
+
+    This endpoint allows you to reset your password.
+
+      ### Response
+
+    If the response is successful it will return a 204 status code with no body.
+
+  </Col>
+  <Col sticky>
+
+    <CodeGroup title="Request" tag="POST" label="/api/password">
+
+    ```bash {{ title: 'cURL' }}
+      curl --request POST \
+        --url https://api.arguflow.com/api/password \
+        --header 'Content-Type: application/json' \
+        --data '{
+          "email": "foobar@bar.com",
+      }'
     ```
-
     </CodeGroup>
 
   </Col>

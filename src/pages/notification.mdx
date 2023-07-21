@@ -69,7 +69,14 @@ The notification model contains all the information about each notification. The
 
     This endpoint allows you to retrieve all notifications for a user. Refer to [the list](#the-notification-model) at the top of this page to see which properties are included with notification objects. (Must be authenticated to use)
 
+    ### Response
+    If the response is successful it will return a 200 status code with an array of notifications.
 
+    <Properties>
+      <Property name="notifications" type={<a href="#the-notification-model">Notification</a>}>
+          A notification object.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -125,6 +132,10 @@ The notification model contains all the information about each notification. The
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
+
   </Col>
   <Col sticky>
 
@@ -153,6 +164,9 @@ The notification model contains all the information about each notification. The
 
     This endpoint allows you to mark all notifications as read. (Must be authenticated to use)
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 

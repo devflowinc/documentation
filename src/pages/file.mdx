@@ -50,6 +50,15 @@ The conversation model contains all the information about the files you upload. 
   <Col>
 
     This endpoint allows you to retrieve a file by providing the file id. Refer to [the list](#the-file-model) at the top of this page to see which properties are included with file objects. (Must be authenticated if private)
+  
+    ### Response
+    If the response is successful it will return a 200 status code with the file.
+
+    <Properties>
+      <Property name="file" type={<a href="#the-file-model">File</a>}>
+          A file object.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -112,6 +121,15 @@ The conversation model contains all the information about the files you upload. 
         The path to the opencaselist file the file is linked to.
       </Property>
     </Properties>
+
+        ### Response
+    If the response is successful it will return a 200 status code with the created file.
+
+    <Properties>
+      <Property name="file" type={<a href="#the-file-model">File</a>}>
+          A file object.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -157,6 +175,9 @@ The conversation model contains all the information about the files you upload. 
 
     This endpoint allows you to delete a file by providing the file id. (Must be authenticated)
 
+      ### Response
+
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 
@@ -164,7 +185,7 @@ The conversation model contains all the information about the files you upload. 
 
     ```bash {{ title: 'cURL' }}
     curl http://api.arguflow.com/api/file/9a981834-b12a-49cc-afec-4ce88a2b2456 \
-      -H 'Cookie: ai-editor=your_cookie_value_here' \
+      -H 'Cookie: ai-editor=your_cookie_value_here' 
     ```
 
 
@@ -193,7 +214,10 @@ The conversation model contains all the information about the files you upload. 
         Whether or not the file is visible to other users.
       </Property>
     </Properties>
+    
+      ### Response
 
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 

@@ -53,6 +53,15 @@ The user model contains all the information about each user, including their ema
     </Property>
   </Properties>
 
+    ### Response
+    If the response is successful it will return a 200 status code with the updated user.
+
+    <Properties>
+      <Property name="user" type={<a href="#the-user-model">User</a>}>
+          A user object.
+      </Property>
+    </Properties>
+
 
   </Col>
   <Col sticky>
@@ -89,9 +98,38 @@ The user model contains all the information about each user, including their ema
 <Row>
   <Col>
 
-    This endpoint allows you to get the cards and votes for a user, as well as other metadata about the user. Refer to the [Cards](card#the-card-model) section for more information about the card object.
+    This endpoint allows you to get the cards and votes for a user, as well as other metadata about the user. 
 
+    ### Response
 
+    If the response is successful it will return a 200 status code with an array of cards and metadata about the user.
+
+    <Properties>
+      <Property name="id" type="string">
+        The id of the user.
+      </Property>
+      <Property name="email" type="string">
+        The email of the user.
+      </Property>
+      <Property name="username" type="string | null">
+        The username of the user.
+      </Property>
+      <Property name="website" type="string | null">
+        The website of the user.
+      </Property>
+      <Property name="visible_email" type="boolean">
+        Whether the email of the user is visible.
+      </Property>
+      <Property name="created_at" type="timestamp">
+        When the user was created.
+      </Property>
+      <Property name="total_cards_created" type="integer">
+        The number of cards a user has created
+      </Property>
+      <Property name="cards" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
+        An array of user-created cards.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -148,8 +186,18 @@ The user model contains all the information about each user, including their ema
 <Row>
   <Col>
 
-    This endpoint allows you to get the collections for a user. Refer to the [Collections](collection#the-collection-model) section for more information about the collection object.
+    This endpoint allows you to get the collections for a user.
 
+  ### Response
+
+  If the response is successful it will return a 200 status code with an array of collections.
+
+      <Properties>
+      <Property name="collections" type={<text>[<a href="collection#the-collection-model">Collection</a>]</text>}>
+          An array of collection objects.
+      </Property>
+    </Properties>
+  
 
   </Col>
   <Col sticky>
@@ -188,10 +236,18 @@ The user model contains all the information about each user, including their ema
 <Row>
   <Col>
 
-    This endpoint allows you to get the files for a user. Refer to the [Files](file#the-file-model) section for more information about the file object.
+    This endpoint allows you to get the files for a user.
 
 
+  ### Response
 
+  If the response is successful it will return a 200 status code with an array of files.
+
+      <Properties>
+      <Property name="files" type={<text>[<a href="file#the-file-model">File</a>]</text>}>
+          An array of file objects.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
