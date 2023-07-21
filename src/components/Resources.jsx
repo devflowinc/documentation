@@ -44,7 +44,7 @@ const resources = [
     },
   },
   {
-    href: '/card_collecion',
+    href: '/card_collection',
     name: 'Collections',
     description:
       'Learn about the collection model and how to create, retrieve, update, delete, and list collections.',
