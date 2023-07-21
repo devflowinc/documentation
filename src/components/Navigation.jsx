@@ -198,9 +198,10 @@ export const navigation = [
     links: [
       { title: 'Auth', href: '/auth' },
       { title: 'Card', href: '/card' },
-      { title: 'Collections', href: '/card_collection' },
+      { title: 'Collection', href: '/card_collection' },
       { title: 'User', href: '/user' },
-      { title: 'Files', href: '/file' },
+      { title: 'Vote', href: '/vote' },
+      { title: 'File', href: '/file' },
       { title: 'Notification', href: '/notification' },
       { title: 'Verification', href: '/verification' },
     ],

@@ -3,11 +3,11 @@ export const description =
 
 # Card Collections
 
-Collections are groups of card that are either user-created or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
+Collections are groups of cards that are either user-created or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
 
 ## The collection model
 
-The collection model contains all the information about your collections, including what card are in the collection and the collection's name, description, and author.
+The collection model contains all the information about your collections, including what cards are in the collection and the collection's name, description, and author.
 
 ### Properties
 
@@ -44,6 +44,35 @@ The collection model contains all the information about your collections, includ
 
     This endpoint allows you to retrieve a list of all of the collections for a user.
 
+    ### Response
+    
+    If the response is successful it will return a 200 status code and an array of collection objects with file ids appended.
+    <Properties>
+      <Property name="id" type="string">
+        Unique identifier for the collection.
+      </Property>
+      <Property name="author_id" type="string">
+        The author id of the user who created the collection.
+      </Property>
+      <Property name="description" type="string">
+        The description of the collection.
+      </Property>
+      <Property name="name" type="string">
+        The name of the collection.
+      </Property>
+      <Property name="is_public" type="boolean">
+        Whether the collection is visible to other users or not.
+      </Property>
+      <Property name="created_at" type="timestamp">
+        Timestamp of when the collection was created.
+      </Property>
+      <Property name="updated_at" type="timestamp">
+        Timestamp of when the collection was updated.
+      </Property>
+      <Property name="file_id" type="string">
+        File id of the file that the collection was created from.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -102,6 +131,10 @@ The collection model contains all the information about your collections, includ
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
+
   </Col>
   <Col sticky>
 
@@ -139,6 +172,9 @@ The collection model contains all the information about your collections, includ
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 
@@ -187,6 +223,9 @@ The collection model contains all the information about your collections, includ
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 
@@ -213,8 +252,17 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve the card from a collection by providing the collection id. Refer to [the card model](/card#the-card-model) at the top of this page to see which properties are included with card objects. (Must be authenticated if the collection is private)
+    This endpoint allows you to retrieve the card from a collection by providing the collection id. (Must be authenticated if the collection is private)
 
+    ### Response
+
+    If the response is successful it will return a 200 status code with an array of card objects. 
+
+    <Properties>
+      <Property name="bookmarks" type={<a href="card#the-card-model">Card</a>}>
+          An array of card objects which are contained in the collection.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -284,6 +332,10 @@ The collection model contains all the information about your collections, includ
 
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
+
   </Col>
   <Col sticky>
 
@@ -319,6 +371,9 @@ The collection model contains all the information about your collections, includ
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 
@@ -353,6 +408,18 @@ The collection model contains all the information about your collections, includ
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 200 status code and an array of objects with card_ids and their associated collection_ids.
+
+    <Properties>
+      <Property name="card_uuid" type="string">
+        The id of the card.
+      </Property>
+      <Property name="collection_ids" type="array">
+        An array of collection ids that the card is in.
+      </Property>
+    </Properties>
   </Col>
   <Col sticky>
 
@@ -390,7 +457,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 card. You go through all the pages of card by incrementing the page number in the request URL. Refer to the [Card](card#the-card-model) section for more information about the card object.
+    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 card. You go through all the pages of card by incrementing the page number in the request URL.
 
     ### Required attributes
 
@@ -413,6 +480,23 @@ The collection model contains all the information about your collections, includ
         The link URL you wish to filter by.
       </Property>
     </Properties>
+
+        ### Response
+
+
+        If the response is successful it will return a 200 status code with  2D array of card objects and its collisions, the collection, and the total pages of cards.
+
+        <Properties>
+          <Property name="bookmarks" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
+          A 2D array of card objects and their collisions.
+          </Property>
+          <Property name="collection" type={<a href="#the-collection-model">Collection</a>}>
+              The collection that the cards are from.
+          </Property>
+          <Property name="total_pages" type="integer">
+              The total number of pages of cards in the search result.
+          </Property>
+        </Properties>
 
   </Col>
   <Col sticky>
@@ -489,7 +573,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search a collection using full-text trigram search. Refer to the [Card](card#the-card-model) section for more information about the card object.
+    This endpoint allows you to search a collection using full-text trigram search.
 
     ### Required attributes
 
@@ -513,6 +597,22 @@ The collection model contains all the information about your collections, includ
       </Property>
     </Properties>
 
+        ### Response
+
+
+        If the response is successful it will return a 200 status code with  2D array of card objects and its collisions, the collection, and the total pages of cards.
+
+        <Properties>
+          <Property name="bookmarks" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
+          A 2D array of card objects and their collisions.
+          </Property>
+          <Property name="collection" type={<a href="#the-collection-model">Collection</a>}>
+              The collection that the cards are from.
+          </Property>
+          <Property name="total_pages" type="integer">
+              The total number of pages of cards in the search result.
+          </Property>
+        </Properties>
   </Col>
   <Col sticky>
 
@@ -580,4 +680,3 @@ The collection model contains all the information about your collections, includ
 
   </Col>
 </Row>
-````

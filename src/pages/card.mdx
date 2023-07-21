@@ -96,6 +96,20 @@ The attachment model contains all the information about a card, including the au
       </Property>
     </Properties>
 
+    ### Response
+
+    If the response is successful it will return a 200 status code with the created card and whether it is a duplicate or not.
+
+    <Properties>
+      <Property name="card_metadata" type={<a href="#the-card-model">Card</a>}>
+        The card object that was created.
+      </Property>
+      <Property name="duplicate" type="boolean">
+        Whether the card is a duplicate of another card.
+      </Property>
+    </Properties>
+
+
   </Col>
   <Col sticky>
 
@@ -146,6 +160,16 @@ The attachment model contains all the information about a card, including the au
   <Col>
 
     This endpoint allows you to retrieve a card from the database using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with card objects.
+
+    ### Response
+
+    If the response is successful it will return a 200 status code with the card.
+
+    <Properties>
+      <Property name="card_metadata" type={<a href="#the-card-model">Card</a>}>
+        The card object that was created.
+      </Property>
+    </Properties>
 
   </Col>
   <Col sticky>
@@ -200,7 +224,10 @@ The attachment model contains all the information about a card, including the au
   <Col>
 
     This endpoint allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
+      
+      ### Response
 
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 
@@ -245,6 +272,9 @@ The attachment model contains all the information about a card, including the au
       </Property>
     </Properties>
 
+      ### Response
+
+    If the response is successful it will return a 204 status code with no body.
   </Col>
   <Col sticky>
 
@@ -289,6 +319,19 @@ The attachment model contains all the information about a card, including the au
       </Property>
       <Property name="filter_link_url" type="string">
         Which links to include in the result.
+      </Property>
+    </Properties>
+
+    ### Response
+
+    If the response is successful it will return a 200 status code with an 2D array of card objects and the collisions and the total pages of cards.
+
+    <Properties>
+      <Property name="score_cards" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
+          A 2D array of card objects and their collisions.
+      </Property>
+      <Property name="total_pages" type="integer">
+          The total number of pages of cards.
       </Property>
     </Properties>
 
@@ -340,8 +383,7 @@ The attachment model contains all the information about a card, including the au
               "verification_score": 17
             },
             //...
-      ],
-        "total_card_pages": 7297
+      ]
         }
       ]
     }
@@ -374,6 +416,19 @@ The attachment model contains all the information about a card, including the au
       </Property>
       <Property name="filter_link_url" type="string">
         Which links to include in the result.
+      </Property>
+    </Properties>
+
+      ### Response
+
+    If the response is successful it will return a 200 status code with an 2D array of card objects and the collisions and the total pages of cards.
+
+    <Properties>
+      <Property name="score_cards" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
+          A 2D array of card objects and their collisions.
+      </Property>
+      <Property name="total_pages" type="integer">
+          The total number of pages of cards.
       </Property>
     </Properties>
 
@@ -422,92 +477,15 @@ The attachment model contains all the information about a card, including the au
               "private": false,
               "verification_score": 17
             },
-            //...
+            //... other collisions
+          ]
+        },
+        //... other cards
       ],
-        "total_card_pages": 7297
-        }
-      ]
+      "total_card_pages": 85
     }
     ```
 
   </Col>
 </Row>
----
 
-## Vote on a card {{ tag: 'POST', label: '/api/vote' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to add an upvote or downvote to a card. (Must be authenticated to use)
-
-        ### Required attributes
-    <Properties>
-      <Property name="card_metadata_id" type="string">
-        The card you want to vote on.
-      </Property>
-      <Property name="vote" type="string">
-        True to upvote, false to downvote.
-      </Property>
-    </Properties>
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="POST" label="/api/vote">
-
-    ```bash {{ title: 'cURL' }}
-      curl --location --request POST 'https://api.arguflow.com/api/vote/' \
-        --header 'Content-Type: application/json' \
-        --header 'Cookie: ai-editor=your_cookie_value_here' \
-        --data '{
-            "card_metadata_id": "115672bd-02e9-4f7d-986f-f462c95dcdbc",
-            "vote": true
-        }'
-    ```
-
-    </CodeGroup>
-
-```json {{ title: 'Response' }}
-{
-  "id": "e3cb3761-0812-4125-baa1-6527d84f39be",
-  "voted_user_id": "f5e17d3d-0f77-49af-ad21-0d42f9b2ed5e",
-  "card_metadata_id": "115672bd-02e9-4f7d-986f-f462c95dcdbc",
-  "vote": true,
-  "created_at": "2023-07-20T00:48:16.318202",
-  "updated_at": "2023-07-20T00:48:16.318252",
-  "deleted": false
-}
-```
-
-  </Col>
-</Row>
----
-
-## Delete a Vote on a card {{ tag: 'DELETE', label: '/vote/:id' }}
-
-<Row>
-  <Col>
-
-    This endpoint allows you to delete the upvote or downvote on a card that you made. (Must be authenticated to use)
-
-  </Col>
-  <Col sticky>
-
-    <CodeGroup title="Request" tag="DELETE" label="/api/vote/115672bd-02e9-4f7d-986f-f462c95dcdbc">
-
-    ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.arguflow.com/api/vote/115672bd-02e9-4f7d-986f-f462c95dcdbc \
-      --header 'Cookie: ai-editor=your_cookie_value_here'
-    ```
-    </CodeGroup>
-
-  </Col>
-</Row>
-
-
-
-
-```
-
-```
