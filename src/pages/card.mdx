@@ -1,9 +1,9 @@
 export const description =
-  'On this page, we’ll dive into the different attachment endpoints you can use to manage attachments programmatically.'
+  'On this page, we’ll dive into the different attachment routes you can use to manage attachments programmatically.'
 
 # Cards
 
-Cards are the fundamental unit of information in Vault. They represent a single piece of information, such as an article, with an author, file, and formatted card content. On this page, we will dive into the different card endpoints you can use to manage and search through cards programmatically. {{ className: 'lead' }}
+Cards are the fundamental unit of information in Vault. They represent a single piece of information, such as an article, with an author, file, and formatted card content. On this page, we will dive into the different card routes you can use to manage and search through cards programmatically. {{ className: 'lead' }}
 
 ## The card model
 
@@ -69,7 +69,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to create a new card. (Must be authenticated to use)
+    This route allows you to create a new card. (Must be authenticated to use)
 
     ### Required attributes
 
@@ -158,7 +158,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a card from the database using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with card objects.
+    This route allows you to retrieve a card from the database using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with card objects.
 
     ### Response
 
@@ -222,8 +222,8 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
-
+    This route allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
+      
       ### Response
 
     If the response is successful it will return a 204 status code with no body.
@@ -249,7 +249,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to update a card from the database using its id.
+    This route allows you to update a card from the database using its id.
 
     ### Required attributes
     <Properties>
@@ -303,7 +303,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to search the database by converting your query into a vector and searching for the most similar vectors in the database, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
+    This route allows you to search the database by converting your query into a vector and searching for the most similar vectors in the database, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
 
     ### Required attributes
     <Properties>
@@ -400,7 +400,7 @@ The attachment model contains all the information about a card, including the au
 <Row>
   <Col>
 
-    This endpoint allows you to search the database using trigrams, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
+    This route allows you to search the database using trigrams, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
 
     ### Required attributes
 
