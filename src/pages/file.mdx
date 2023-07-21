@@ -1,9 +1,9 @@
 export const description =
-  'On this page, we’ll dive into the different conversation endpoints you can use to manage conversations programmatically.'
+  'On this page, we’ll dive into the different conversation routes you can use to manage conversations programmatically.'
 
 # Files
 
-Files are where most of the cards on Vault come from. These are stored on the server in an s3 bucket. On this page, we’ll dive into the different conversation endpoints you can use to manage files programmatically. We'll look at how to create, update, and delete files. {{ className: 'lead' }}
+Files are where most of the cards on Vault come from. These are stored on the server in an s3 bucket. On this page, we’ll dive into the different conversation routes you can use to manage files programmatically. We'll look at how to create, update, and delete files. {{ className: 'lead' }}
 
 ## The file model
 
@@ -49,7 +49,7 @@ The conversation model contains all the information about the files you upload. 
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a file by providing the file id. Refer to [the list](#the-file-model) at the top of this page to see which properties are included with file objects. (Must be authenticated if private)
+    This route allows you to retrieve a file by providing the file id. Refer to [the list](#the-file-model) at the top of this page to see which properties are included with file objects. (Must be authenticated if private)
   
     ### Response
     If the response is successful it will return a 200 status code with the file.
@@ -95,7 +95,7 @@ The conversation model contains all the information about the files you upload. 
 <Row>
   <Col>
 
-    This endpoint allows you to add a file to your collection. The file must be a .docx, .doc, .odt, or .pdf. The file will be stored in an s3 bucket and the file object will be stored in the database. (Must be authenticated)
+    This route allows you to add a file to your collection. The file must be a .docx, .doc, .odt, or .pdf. The file will be stored in an s3 bucket and the file object will be stored in the database. (Must be authenticated)
 
     ### Required attributes
 
@@ -173,7 +173,7 @@ The conversation model contains all the information about the files you upload. 
 <Row>
   <Col>
 
-    This endpoint allows you to delete a file by providing the file id. (Must be authenticated)
+    This route allows you to delete a file by providing the file id. (Must be authenticated)
 
       ### Response
 
@@ -202,7 +202,7 @@ The conversation model contains all the information about the files you upload. 
 <Row>
   <Col>
 
-    This endpoint allows you to update a file by providing the file id. (Must be authenticated)
+    This route allows you to update a file by providing the file id. (Must be authenticated)
 
     ### Required attributes
 

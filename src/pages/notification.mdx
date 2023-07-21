@@ -1,9 +1,9 @@
 export const description =
-  'On this page, we’ll dive into the different conversation endpoints you can use to manage conversations programmatically.'
+  'On this page, we’ll dive into the different conversation routes you can use to manage conversations programmatically.'
 
 # Notifications
 
-Notifications are messages sent from the server after certain events have finished running, such as verification and file creation. On this page, we’ll dive into the different notification endpoints you can use to manage notifications programmatically. We'll look at how to query and mark notifications as read. {{ className: 'lead' }}
+Notifications are messages sent from the server after certain events have finished running, such as verification and file creation. On this page, we’ll dive into the different notification routes you can use to manage notifications programmatically. We'll look at how to query and mark notifications as read. {{ className: 'lead' }}
 
 ## The notification model
 
@@ -67,7 +67,7 @@ The notification model contains all the information about each notification. The
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve all notifications for a user. Refer to [the list](#the-notification-model) at the top of this page to see which properties are included with notification objects. (Must be authenticated to use)
+    This route allows you to retrieve all notifications for a user. Refer to [the list](#the-notification-model) at the top of this page to see which properties are included with notification objects. (Must be authenticated to use)
 
     ### Response
     If the response is successful it will return a 200 status code with an array of notifications.
@@ -122,7 +122,7 @@ The notification model contains all the information about each notification. The
 <Row>
   <Col>
 
-    This endpoint allows you to mark a notification as read. (Must be authenticated to use)
+    This route allows you to mark a notification as read. (Must be authenticated to use)
 
     ### Required attributes
 
@@ -162,7 +162,7 @@ The notification model contains all the information about each notification. The
 <Row>
   <Col>
 
-    This endpoint allows you to mark all notifications as read. (Must be authenticated to use)
+    This route allows you to mark all notifications as read. (Must be authenticated to use)
 
     ### Response
 

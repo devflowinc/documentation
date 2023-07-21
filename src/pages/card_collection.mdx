@@ -1,5 +1,5 @@
 export const description =
-  'On this page, we’ll dive into the different collection endpoints you can use to manage collections programmatically.'
+  'On this page, we’ll dive into the different collection routes you can use to manage collections programmatically.'
 
 # Card Collections
 
@@ -42,7 +42,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve a list of all of the collections for a user.
+    This route allows you to retrieve a list of all of the collections for a user.
 
     ### Response
     
@@ -110,7 +110,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to create a new collection. (Must be authenticated to use)
+    This route allows you to create a new collection. (Must be authenticated to use)
 
     ### Required attributes
 
@@ -162,7 +162,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to delete collections. Note: This will delete the collection, but not the card inside of it.
+    This route allows you to delete collections. Note: This will delete the collection, but not the card inside of it.
 
     ### Required attributes
 
@@ -199,7 +199,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to perform an update on a collection. Examples of updates are changing the name, description, or visibility status of the collection. (Must be authenticated and must be your collection)
+    This route allows you to perform an update on a collection. Examples of updates are changing the name, description, or visibility status of the collection. (Must be authenticated and must be your collection)
 
     ### Required attributes
 
@@ -252,7 +252,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve the card from a collection by providing the collection id. (Must be authenticated if the collection is private)
+    This route allows you to retrieve the card from a collection by providing the collection id. (Must be authenticated if the collection is private)
 
     ### Response
 
@@ -321,7 +321,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to add a card to a collection. (Must be authenticated and your collection)
+    This route allows you to add a card to a collection. (Must be authenticated and your collection)
 
     ### Required attributes
 
@@ -361,7 +361,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to remove a card from a collection. (Must be authenticated and your collection)
+    This route allows you to remove a card from a collection. (Must be authenticated and your collection)
 
     ### Required attributes
 
@@ -398,7 +398,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to retrieve the collections a card is in. (Must be authenticated)
+    This route allows you to retrieve the collections a card is in. (Must be authenticated)
 
     ### Required attributes
 
@@ -457,7 +457,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 card. You go through all the pages of card by incrementing the page number in the request URL.
+    This route allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 card. You go through all the pages of card by incrementing the page number in the request URL.
 
     ### Required attributes
 
@@ -573,7 +573,7 @@ The collection model contains all the information about your collections, includ
 <Row>
   <Col>
 
-    This endpoint allows you to search a collection using full-text trigram search.
+    This route allows you to search a collection using full-text trigram search.
 
     ### Required attributes
 
