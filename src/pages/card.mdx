@@ -15,7 +15,7 @@ The attachment model contains all the information about a card, including the au
   <Property name="id" type="string">
     Unique identifier for the card.
   </Property>
-  <Property name="author" type={<a href="#author">Author</a>}>
+  <Property name="author" type={<a href="user#the-user-model">Author</a>}>
     Author object containing the author's id and email.
   </Property>
   <Property name="content" type="string">
@@ -62,30 +62,6 @@ The attachment model contains all the information about a card, including the au
   </Property>
 </Properties>
 
-# Types
-
-## Author
-
-<Properties>
-  <Property name="id" type="string">
-    Unique identifier for the author.
-  </Property>
-  <Property name="email" type="string">
-    The email of the author.
-  </Property>
-  <Property name="username" type="string">
-    The username of the author.
-  </Property>
-  <Property name="website" type="string">
-    The website of the author.
-  </Property>
-  <Property name="visible_email" type="string">
-    Whether the author's email is visible to other users.
-  </Property>
-  <Property name="created_at" type="timestamp">
-    When the user signed up.
-  </Property>
-</Properties>
 ---
 
 ## Create a Card {{ tag: 'POST', label: '/card' }}
@@ -363,9 +339,7 @@ The attachment model contains all the information about a card, including the au
               "private": false,
               "verification_score": 17
             },
-            {
-              //... 24 more cards
-            }
+            //...
       ],
         "total_card_pages": 7297
         }
@@ -448,9 +422,7 @@ The attachment model contains all the information about a card, including the au
               "private": false,
               "verification_score": 17
             },
-            {
-              //... 24 more cards
-            }
+            //...
       ],
         "total_card_pages": 7297
         }
