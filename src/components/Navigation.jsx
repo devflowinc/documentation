@@ -190,6 +190,7 @@ export const navigation = [
       { title: 'Introduction', href: '/' },
       { title: 'Quickstart/Authentication', href: '/quickstart' },
       { title: 'Errors', href: '/errors' },
+      { title: 'Self Hosting', href: '/self_hosting' },
     ],
   },
   {
