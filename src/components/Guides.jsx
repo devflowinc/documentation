@@ -3,11 +3,6 @@ import { Heading } from '@/components/Heading'
 
 const guides = [
   {
-    href: '/authentication',
-    name: 'Authentication',
-    description: 'Learn how to authenticate your API requests.',
-  },
-  {
     href: '/errors',
     name: 'Errors',
     description:

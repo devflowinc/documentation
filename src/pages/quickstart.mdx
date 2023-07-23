@@ -1,82 +1,75 @@
 export const description =
-  'This guide will get you all set up and ready to use the Arguflow API. We’ll cover how to get started an API client and how to make your first API request.'
+  'This guide will get you all set up and ready to use the Arguflow API. We’ll cover how to get an authentication token and make API requests with javascript.'
 
-# Quickstart
+# Quickstart/Authentication
 
-This guide will get you all set up and ready to use the Arguflow API. We'll cover how to get started using one of our API clients and how to make your first API request. We'll also look at where to go next to find all the information you need to take full advantage of our powerful REST API. Here's a link to our <a href="https://www.postman.com/interstellar-escape-79389/workspace/arguflow-api-reference/collection/28637863-c7833c30-5c19-427f-9cab-e8a4f961511e?action=share&creator=28637873">Postman collection</a>.{{ className: 'lead' }}
+This guide will get you all set up and ready to use the Arguflow API. We'll cover how to get an authentication token and make your first API request with javascript. We'll also look at where to go next to find all the information you need to take full advantage of our powerful REST API. Here's a link to our <a href="https://www.postman.com/interstellar-escape-79389/workspace/arguflow-api-reference/collection/28637863-c7833c30-5c19-427f-9cab-e8a4f961511e?action=share&creator=28637873">Postman collection</a>.{{ className: 'lead' }}
 
 <Note>
-  Before you can make requests to the Protocol API, you will need to grab your
-  API key from your dashboard. You find it under [Settings &raquo; API](#).
+  Before you can make requests to the Vault API, you will need to grab your
+  authentication cookie.
 </Note>
 
-## Choose your client
+## Create an account
 
-Before making your first API request, you need to pick which API client you will use. In addition to good ol' cURL HTTP requests, Arguflow offers clients for JavaScript.
+1. Go to the Vault client at [https://vault.arguflow.com](https://vault.arguflow.com) and click the register button.
+2. Fill out the form and click the register button.
+3. Check your email for a confirmation link and click it.
+4. Set your password and click the confirm button.
+
+You now have an account that you can use to authenticate with the Vault API.
+
+## Get your authentication token from the Vault API
 
 <CodeGroup>
 
-```bash {{ title: 'cURL' }}
-# cURL is most likely already installed on your machine
-curl --version
-```
+```js {{ title: 'JavaScript' }}
+import fetch from "node-fetch";
 
-```bash {{ language: 'js' }}
-# Docs will simply provide examples for using fetch0
-fetch(https://api.arguflow.com/foo)
-```
+export const getAuthCookie = async () => {
+  const api_endpoint = process.env.API_ENDPOINT || "https://api.arguflow.com/api";
+  const email = process.env.TEST_USER_EMAIL;
+  const password = process.env.TEST_USER_PASSWORD;
 
-</CodeGroup>
+  const response = await fetch(`${api_endpoint}/auth`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify({ email, password }),
+  });
 
-## Making your first API request
+  const cookies = response.headers.raw()["set-cookie"];
+  const authCookie = cookies.map((cookie) => cookie.split(";")[0]).join(";");
 
-After picking your preferred client, you are ready to make your first call to the Protocol API. Below, you can see how to send a GET request to the Conversations route to get a list of all your conversations. In the cURL example, results are limited to ten conversations, the default page length for each client.
-
-<CodeGroup tag="GET" label="/v1/conversations">
-
-```bash {{ title: 'cURL' }}
-curl -G https://api.protocol.chat/v1/conversations \
-  -H "Authorization: Bearer {token}" \
-  -d limit=10
-```
-
-```js
-import ApiClient from '@example/protocol-api'
-
-const client = new ApiClient(token)
-
-await client.conversations.list()
-```
-
-```python
-from protocol_api import ApiClient
-
-client = ApiClient(token)
-
-client.conversations.list()
-```
-
-```php
-$client = new \Protocol\ApiClient($token);
-
-$client->conversations->list();
+  console.log(authCookie);
+};
 ```
 
 </CodeGroup>
 
-<div className="not-prose">
-  <Button
-    href="/conversations"
-    variant="text"
-    arrow="right"
-    children="Read the docs for the Conversations route"
-  />
-</div>
+## Include your authentication token in your future API requests as a cookie
+
+<CodeGroup>
+
+```js {{ title: 'JavaScript' }}
+const response = await fetch(`https://api.arguflow.com/api/auth`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    Cookie: "cookie_from_previous_script",
+  },
+});
+
+console.log(response);
+```
+
+</CodeGroup>
 
 ## What's next?
 
-Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further into the Protocol API:
+Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further into the Vault API:
 
-- [Grab your API key from the Protocol dashboard](#)
-- [Check out the Conversations route](/conversations)
-- [Learn about the different error messages in Protocol](/errors)
+- [Check out the Card resource](/card)
+- [Learn about the structure of error messages in the Vault API](/errors)
