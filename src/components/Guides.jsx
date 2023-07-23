@@ -8,6 +8,12 @@ const guides = [
     description:
       'Read about the different types of errors returned by the API.',
   },
+  {
+    href: '/self_hosting',
+    name: 'Self Hosting',
+    description:
+      'Learn how to self-host Arguflow on your own infrastructure.',
+  },
 ]
 
 export function Guides() {
