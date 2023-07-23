@@ -3,21 +3,21 @@ export const description =
 
 # Errors
 
-In this guide, we will talk about what happens when something goes wrong while you work with the API. Mistakes happen, and mostly they will be yours, not ours. Let's look at some status codes and error types you might encounter. {{ className: 'lead' }}
+In this guide, we will talk about what happens when something goes wrong while you work with the API. Mistakes happen, and are somewhat difficult to debug when you are working with an API. 
 
-You can tell if your request was successful by checking the status code when receiving an API response. If a response comes back unsuccessful, you can use the error type and error message to figure out what has gone wrong and do some rudimentary debugging (before contacting support).
+Unfortunately, the Vault API is still in alpha and does not yet have very descriptive error messages. However, we are working on improving this, if you are interested in helping please reach out on [Matrix](https://matrix.to/#/#arguflow-general:matrix.zerodao.gg) or [Github](https://github.com/arguflow/vault-server).
 
 <Note>
-  Before reaching out to support with an error, please be aware that 99% of all
-  reported errors are, in fact, user errors. Therefore, please carefully check
-  your code before contacting Protocol support.
+  If you cannot figure out how to address an error, please reach out on
+  [Matrix](https://matrix.to/#/#arguflow-general:matrix.zerodao.gg) or
+  [Github](https://github.com/arguflow/vault-server) and we will help you out.
 </Note>
 
 ---
 
 ## Status codes
 
-Here is a list of the different categories of status codes returned by the Protocol API. Use these to understand if a request was successful.
+Here is a list of the different categories of status codes returned by the Vault API. Use these to understand if a request was successful.
 
 <Properties>
   <Property name="2xx">
@@ -34,21 +34,16 @@ Here is a list of the different categories of status codes returned by the Proto
 
 ---
 
-## Error types
+## Error data structure
 
 <Row>
   <Col>
 
-    Whenever a request is unsuccessful, the Protocol API will return an error response with an error type and message. You can use this information to understand better what has gone wrong and how to fix it. Most of the error messages are pretty helpful and actionable.
-
-    Here is a list of the two error types supported by the Protocol API — use these to understand what you have done wrong.
+    More often than not, 4xx status codes will be returned with an error response. This is a JSON object with the following structure:
 
     <Properties>
-      <Property name="api_error">
-        This means that we made an error, which is highly speculative and unlikely.
-      </Property>
-      <Property name="invalid_request">
-        This means that you made an error, which is much more likely.
+      <Property name="message">
+        Some human-readable text describing the error.
       </Property>
     </Properties>
 
@@ -57,9 +52,7 @@ Here is a list of the different categories of status codes returned by the Proto
 
     ```bash {{ title: "Error response" }}
     {
-      "type": "api_error",
       "message": "No way this is happening!?",
-      "documentation_url": "https://protocol.chat/docs/errors/api_error"
     }
     ```
 
