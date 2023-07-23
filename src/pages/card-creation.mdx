@@ -3,7 +3,7 @@ export const description =
 
 # Card Creation
 
-Since vault is an abstraction above Qdrant, it has multiple preprocessing steps before a card has an embedding created for it and is added to the database. On this page, we will look at how Vault parses and processes cards.{{ className: 'lead' }}
+Since Vault is an abstraction above Qdrant, it has multiple preprocessing steps before a card has an embedding created for it and is added to the database. On this page, we will look at how Vault parses and processes cards.{{ className: 'lead' }}
 
 ## Step 1: Parsing
 
@@ -21,11 +21,11 @@ After parsing, Vault checks if the card already exists in the database. If it do
 
 ### Check 1: Text-based collision detection
 
-The first check is text-based collision detection using Postgres trigrams. If Postgres returns a similarity score above 0.9, the card is considered a duplicate. This is to ensure that we aren't wasting OpenAI credits on card that are almost exactly in the database. If it does, the content and HTML formatting of the card will be inserted into Postgres without creating a Qdrant record. {{ className: 'lead' }}
+The first check is text-based collision detection using Postgres trigrams. If Postgres returns a similarity score above 0.9, the card is considered a duplicate. This is to ensure that we aren't wasting OpenAI credits on cards that are almost exactly in the database. If it does, the content and HTML formatting of the card will be inserted into Postgres without creating a Qdrant record. {{ className: 'lead' }}
 
 ### Check 2: Embedding-based collision detection
 
-The second check is embedding-based collision detection. If the card passes the first check, we check if its meaning is in the database by generating an embedding for it. We then query Qdrant to check for similar vectors, and if a vector is found that has a similarity score above 0.9, the card is considered a duplicate. If it does, the content and HTML formatting of the card will be inserted into Postgres without creating a Qdrant record. {{ className: 'lead' }}
+The second check is embedding-based collision detection. If the card passes the first check, we check if its meaning is in the database by generating an embedding for it. We then query Qdrant to check for similar vectors, and if a vector is found that has a similarity score above 0.95 or 0.92 if the content is less than 200 words, the card is considered a duplicate. If it is a duplicate, the content and HTML formatting of the card will be inserted into Postgres without creating a Qdrant record. {{ className: 'lead' }}
 
 ## Step 3: Insertion into Qdrant
 
