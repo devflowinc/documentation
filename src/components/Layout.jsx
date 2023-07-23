@@ -25,7 +25,7 @@ export function Layout({ children, sections = [], showFeedbackForm = true }) {
                   height={35}
                 />
               </Link>
-              <Link href="/" className="ml-2 mt-1.5 align-middle text-xl font-semibold dark:text-white text-zinc-500">
+              <Link href="/" className="ml-2 mt-1.5 align-middle text-xl font-semibold dark:text-white text-zinc-900">
                 Arguflow
               </Link>
             </div>
