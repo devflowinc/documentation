@@ -212,9 +212,13 @@ export function Navigation(props) {
   return (
     <nav {...props}>
       <ul role="list">
-        <TopLevelNavItem href="/">API</TopLevelNavItem>
-        <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
-        <TopLevelNavItem href="#">Support</TopLevelNavItem>
+        <TopLevelNavItem href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg">
+          Support
+        </TopLevelNavItem>
+        <TopLevelNavItem href="https://github.com/arguflow/vault-server">
+          Github
+        </TopLevelNavItem>
+
         {navigation.map((group, groupIndex) => (
           <NavigationGroup
             key={group.title}
