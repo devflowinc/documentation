@@ -189,7 +189,7 @@ export const navigation = [
     links: [
       { title: 'Introduction', href: '/' },
       { title: 'Quickstart/Authentication', href: '/quickstart' },
-      { title: 'Card Creation', href: '/card-creation' },
+      { title: 'Card Creation', href: '/card_creation' },
       { title: 'Errors', href: '/errors' },
       { title: 'Self Hosting', href: '/self_hosting' },
     ],
