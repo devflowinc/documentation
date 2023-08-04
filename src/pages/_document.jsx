@@ -40,6 +40,11 @@ export default function Document() {
     <Html lang="en" className="h-full">
       <Head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
+        <script
+          defer
+          data-domain="docs.arguflow.ai"
+          src="https://perhaps.arguflow.com/js/script.js"
+        ></script>
       </Head>
       <body className="flex min-h-full bg-white antialiased dark:bg-zinc-900 [&>#\_\_next]:w-full">
         <Main />

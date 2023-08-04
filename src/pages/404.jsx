@@ -8,6 +8,11 @@ export default function NotFound() {
     <>
       <Head>
         <title>Page not found - Arguflow API Reference</title>
+        <script
+          defer
+          data-domain="docs.arguflow.ai"
+          src="https://perhaps.arguflow.com/js/script.js"
+        ></script>
       </Head>
       <HeroPattern />
       <div className="mx-auto flex h-full max-w-xl flex-col items-center justify-center text-center">
