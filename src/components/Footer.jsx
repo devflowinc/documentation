@@ -8,7 +8,7 @@ import { navigation } from '@/components/Navigation'
 
 function CheckIcon(props) {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <circle cx="10" cy="10" r="10" strokeWidth="0" />
       <path
         fill="none"
@@ -159,7 +159,7 @@ function PageNavigation() {
 
 function TwitterIcon(props) {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path d="M16.712 6.652c.01.146.01.29.01.436 0 4.449-3.267 9.579-9.242 9.579v-.003a8.963 8.963 0 0 1-4.98-1.509 6.379 6.379 0 0 0 4.807-1.396c-1.39-.027-2.608-.966-3.035-2.337.487.097.99.077 1.467-.059-1.514-.316-2.606-1.696-2.606-3.3v-.041c.45.26.956.404 1.475.42C3.18 7.454 2.74 5.486 3.602 3.947c1.65 2.104 4.083 3.382 6.695 3.517a3.446 3.446 0 0 1 .94-3.217 3.172 3.172 0 0 1 4.596.148 6.38 6.38 0 0 0 2.063-.817 3.357 3.357 0 0 1-1.428 1.861 6.283 6.283 0 0 0 1.865-.53 6.735 6.735 0 0 1-1.62 1.744Z" />
     </svg>
   )
@@ -167,7 +167,7 @@ function TwitterIcon(props) {
 
 function GitHubIcon(props) {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -179,8 +179,24 @@ function GitHubIcon(props) {
 
 function DiscordIcon(props) {
   return (
-    <svg viewBox="0 0 20 20" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path d="M16.238 4.515a14.842 14.842 0 0 0-3.664-1.136.055.055 0 0 0-.059.027 10.35 10.35 0 0 0-.456.938 13.702 13.702 0 0 0-4.115 0 9.479 9.479 0 0 0-.464-.938.058.058 0 0 0-.058-.027c-1.266.218-2.497.6-3.664 1.136a.052.052 0 0 0-.024.02C1.4 8.023.76 11.424 1.074 14.782a.062.062 0 0 0 .024.042 14.923 14.923 0 0 0 4.494 2.272.058.058 0 0 0 .064-.02c.346-.473.654-.972.92-1.496a.057.057 0 0 0-.032-.08 9.83 9.83 0 0 1-1.404-.669.058.058 0 0 1-.029-.046.058.058 0 0 1 .023-.05c.094-.07.189-.144.279-.218a.056.056 0 0 1 .058-.008c2.946 1.345 6.135 1.345 9.046 0a.056.056 0 0 1 .059.007c.09.074.184.149.28.22a.058.058 0 0 1 .023.049.059.059 0 0 1-.028.046 9.224 9.224 0 0 1-1.405.669.058.058 0 0 0-.033.033.056.056 0 0 0 .002.047c.27.523.58 1.022.92 1.495a.056.056 0 0 0 .062.021 14.878 14.878 0 0 0 4.502-2.272.055.055 0 0 0 .016-.018.056.056 0 0 0 .008-.023c.375-3.883-.63-7.256-2.662-10.246a.046.046 0 0 0-.023-.021Zm-9.223 8.221c-.887 0-1.618-.814-1.618-1.814s.717-1.814 1.618-1.814c.908 0 1.632.821 1.618 1.814 0 1-.717 1.814-1.618 1.814Zm5.981 0c-.887 0-1.618-.814-1.618-1.814s.717-1.814 1.618-1.814c.908 0 1.632.821 1.618 1.814 0 1-.71 1.814-1.618 1.814Z" />
+    </svg>
+  )
+}
+
+function MatrixIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="M.632.55v22.9H2.28V24H0V0h2.28v.55zm7.043 7.26v1.157h.033a3.312 3.312 0 0 1 1.117-1.024c.433-.245.936-.365 1.5-.365.54 0 1.033.107 1.481.314.448.208.785.582 1.02 1.108.254-.374.6-.706 1.034-.992.434-.287.95-.43 1.546-.43.453 0 .872.056 1.26.167.388.11.716.286.993.53.276.245.489.559.646.951.152.392.23.863.23 1.417v5.728h-2.349V11.52c0-.286-.01-.559-.032-.812a1.755 1.755 0 0 0-.18-.66 1.106 1.106 0 0 0-.438-.448c-.194-.11-.457-.166-.785-.166-.332 0-.6.064-.803.189a1.38 1.38 0 0 0-.48.499 1.946 1.946 0 0 0-.231.696 5.56 5.56 0 0 0-.06.785v4.768h-2.35v-4.8c0-.254-.004-.503-.018-.752a2.074 2.074 0 0 0-.143-.688 1.052 1.052 0 0 0-.415-.503c-.194-.125-.476-.19-.854-.19-.111 0-.259.024-.439.074-.18.051-.36.143-.53.282a1.637 1.637 0 0 0-.439.595c-.12.259-.18.6-.18 1.02v4.966H5.46V7.81zm15.693 15.64V.55H21.72V0H24v24h-2.28v-.55z"></path>
+    </svg>
+  )
+}
+
+function TelegramIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"></path>
     </svg>
   )
 }
@@ -200,15 +216,24 @@ function SmallPrint() {
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
         &copy; Copyright {new Date().getFullYear()}. All rights reserved.
       </p>
-      <div className="flex gap-4">
-        <SocialLink href="#" icon={TwitterIcon}>
+      <div className="flex space-x-4">
+        <SocialLink href="https://twitter.com/arguflow" icon={TwitterIcon}>
           Follow us on Twitter
         </SocialLink>
-        <SocialLink href="#" icon={GitHubIcon}>
+        <SocialLink href="https://github.com/arguflow" icon={GitHubIcon}>
           Follow us on GitHub
         </SocialLink>
-        <SocialLink href="#" icon={DiscordIcon}>
+        <SocialLink href="https://discord.gg/CuJVfgZf54" icon={DiscordIcon}>
           Join our Discord server
+        </SocialLink>
+        <SocialLink
+          href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg"
+          icon={MatrixIcon}
+        >
+          Join our Matrix channel
+        </SocialLink>
+        <SocialLink href="https://t.me/+vUOq6omKOn5lY2Zh" icon={TelegramIcon}>
+          Join our Telegram group
         </SocialLink>
       </div>
     </div>
