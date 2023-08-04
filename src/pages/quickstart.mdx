@@ -12,7 +12,7 @@ This guide will get you all set up and ready to use the Arguflow API. We'll cove
 
 ## Create an account
 
-1. Go to the Vault client at [https://vault.arguflow.com](https://vault.arguflow.com) and click the register button.
+1. Go to the Vault client at [https://vault.arguflow.ai](https://vault.arguflow.ai) and click the register button.
 2. Fill out the form and click the register button.
 3. Check your email for a confirmation link and click it.
 4. Set your password and click the confirm button.
@@ -27,7 +27,7 @@ You now have an account that you can use to authenticate with the Vault API.
 import fetch from "node-fetch";
 
 export const getAuthCookie = async () => {
-  const api_endpoint = process.env.API_ENDPOINT || "https://api.arguflow.com/api";
+  const api_endpoint = process.env.API_ENDPOINT || "https://api.arguflow.ai/api";
   const email = process.env.TEST_USER_EMAIL;
   const password = process.env.TEST_USER_PASSWORD;
 
@@ -54,7 +54,7 @@ export const getAuthCookie = async () => {
 <CodeGroup>
 
 ```js {{ title: 'JavaScript' }}
-const response = await fetch(`https://api.arguflow.com/api/auth`, {
+const response = await fetch(`https://api.arguflow.ai/api/auth`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
