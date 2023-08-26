@@ -206,6 +206,7 @@ export const navigation = [
       { title: 'File', href: '/file' },
       { title: 'Notification', href: '/notification' },
       { title: 'Verification', href: '/verification' },
+      { title: 'How to join Matrix', href: '/how_to_join_matrix' },
     ],
   },
 ]

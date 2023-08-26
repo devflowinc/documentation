@@ -112,6 +112,17 @@ const resources = [
       squares: [[0, 1]],
     },
   },
+  {
+    href: '/how_to_join_matrix',
+    name: 'How to join Matrix',
+    description:
+      'Learn about how to join the Arguflow Matrix server and how to use it.',
+    icon: ChatBubbleIcon,
+    pattern: {
+      y: 60,
+      squares: [[0, 1]],
+    },
+  },
 ]
 
 function ResourceIcon({ icon: Icon }) {
