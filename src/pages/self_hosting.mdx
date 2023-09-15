@@ -14,62 +14,37 @@ This guide will demonstrate how to self host the Vault API on your own server or
 - Some knowledge of reverse proxies and DNS
 - An OpenAI API key or Your own Self hosted model (more on that later)
 
-## Step 1 - Install Docker
+## Step 1 - Configure DNS
+
+    You will need to configure your DNS to point to your server. You can do this by creating an A record for each of the subdomains you want to use.
+
+    ```
+    A	<your-server-ip>	self-chat.arguflow.ai
+    A	<your-server-ip>	self-api.arguflow.ai
+    A	<your-server-ip>	self-search.arguflow.ai
+    ```
+## Step 2 - Install Docker on machine
 
 Follow the guide here to install docker on your server: https://docs.docker.com/engine/install/ubuntu/
 
-## Step 2 - Clone the repository
+## Step 3 - Clone the repository
 
 
 ```sh {{ title: 'Shell' }}
 git clone https://github.com/arguflow/arguflow
 ```
 
-## Step 3 - Setup docker compose
 
-```sh {{ title: 'Shell' }}
-cd arguflow
-cp .env.example .env
-docker compose up -d
-```
-
-## Step 4 - Configure Caddyfile
-Install caddy using the instructions here: https://caddyserver.com/docs/install
-
-We have an example Caddyfile in the root of the repository. You can use this as a starting point for your own configuration.
-
-```/etc/caddy/Caddyfile {{ title: 'Shell' }}
-# Global options
-{
-    email developer@arguflow.gg
-}
-
-# Define a site block for chat.arguflow.ai
-self-chat.arguflow.ai {
-    reverse_proxy localhost:3000
-}
-
-# Define a site block for api.arguflow.ai
-self-api.arguflow.ai {
-    reverse_proxy localhost:8090
-}
-
-# Define a site block for search.arguflow.ai
-self-search.arguflow.ai {
-    reverse_proxy localhost:3001
-}
-```
-
-Once you have this you can run the caddy daemon using systemctl
-```
-sudo systemctl start caddy.service
-```
-
-## Step 5 - Configure the Environment Variables for the API
+## Step 4 - Configure the Environment Variables for the API
 
 There are 3 files you need to modify
-.env
+We have an example .env file in the root of the repository.
+You can use this as a starting point for your own configuration.
+``
+cp .env.example .env
 ```
+
+```{{ title: '.env' }}
 REDIS_URL=redis://redis:6379
 QDRANT_URL=http://qdrant-database:6334
 DATABASE_URL=postgres://postgres:password@db:5432/vault
@@ -117,16 +92,45 @@ PUBLIC_HOST=https://self-search.arguflow.ai
 PUBLIC_API_HOST=https://self-api.arguflow.ai/api
 ```
 
+## Step 5 - Setup docker compose
 
-## Step 6 - Configure DNS
-
-You will need to configure your DNS to point to your server. You can do this by creating an A record for each of the subdomains you want to use.
-
+```sh {{ title: 'Shell' }}
+cd arguflow
+docker compose up -d
 ```
-	A	<your-server-ip>	self-chat.arguflow.ai
-	A	<your-server-ip>	self-api.arguflow.ai
-	A	<your-server-ip>	self-search.arguflow.ai
+
+## Step 6 - Configure Caddyfile
+Install caddy using the instructions here: https://caddyserver.com/docs/install
+
+We have an example Caddyfile in the root of the repository. You can use this as a starting point for your own configuration.
+
+```/etc/caddy/Caddyfile {{ title: 'Shell' }}
+# Global options
+{
+    email developer@arguflow.gg
+}
+
+# Define a site block for chat.arguflow.ai
+self-chat.arguflow.ai {
+    reverse_proxy localhost:3000
+}
+
+# Define a site block for api.arguflow.ai
+self-api.arguflow.ai {
+    reverse_proxy localhost:8090
+}
+
+# Define a site block for search.arguflow.ai
+self-search.arguflow.ai {
+    reverse_proxy localhost:3001
+}
 ```
+
+Once you have this you can run the caddy daemon using systemctl
+```
+sudo systemctl start caddy.service
+```
+
 
 ## Step 7 - Profit 🦀🦀🦀
 
