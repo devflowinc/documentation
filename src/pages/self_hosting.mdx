@@ -40,11 +40,12 @@ cd arguflow
 There are 3 files you need to modify
 We have an example .env file in the root of the repository.
 You can use this as a starting point for your own configuration.
-``
+
+```sh
 cp .env.dist .env
 ```
 
-```{{ title: '.env' }}
+```sh {{ title: '.env' }}
 REDIS_URL=redis://redis:6379
 QDRANT_URL=http://qdrant-database:6334
 DATABASE_URL=postgres://postgres:password@db:5432/vault
@@ -81,12 +82,11 @@ MINIO_ROOT_USER=rootuser
 MINIO_ROOT_PASSWORD=rootpassword
 ```
 
-.env.chat
-``` {{ title: '.env.chat' }}
+```sh {{ title: '.env.chat' }}
 VITE_API_HOST=https://self-api.arguflow.ai/api
 ```
 
-``` {{ title: '.env.search' }}
+```sh {{ title: '.env.search' }}
 API_HOST=https://self-api.arguflow.ai/api
 PUBLIC_HOST=https://self-search.arguflow.ai
 PUBLIC_API_HOST=https://self-api.arguflow.ai/api
