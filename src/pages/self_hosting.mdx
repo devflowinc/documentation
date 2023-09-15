@@ -32,8 +32,8 @@ Follow the guide here to install docker on your server: https://docs.docker.com/
 
 ```sh {{ title: 'Shell' }}
 git clone https://github.com/arguflow/arguflow
+cd arguflow
 ```
-
 
 ## Step 4 - Configure the Environment Variables for the API
 
@@ -95,7 +95,6 @@ PUBLIC_API_HOST=https://self-api.arguflow.ai/api
 ## Step 5 - Setup docker compose
 
 ```sh {{ title: 'Shell' }}
-cd arguflow
 docker compose up -d
 ```
 
@@ -103,6 +102,10 @@ docker compose up -d
 Install caddy using the instructions here: https://caddyserver.com/docs/install
 
 We have an example Caddyfile in the root of the repository. You can use this as a starting point for your own configuration.
+
+```
+sudo cp Caddyfile /etc/caddy/Caddyfile
+```
 
 ```/etc/caddy/Caddyfile {{ title: 'Shell' }}
 # Global options
@@ -128,7 +131,8 @@ self-search.arguflow.ai {
 
 Once you have this you can run the caddy daemon using systemctl
 ```
-sudo systemctl start caddy.service
+sudo systemctl enable caddy.service
+sudo systemctl restart caddy.service
 ```
 
 
