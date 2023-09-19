@@ -1,0 +1,211 @@
+export const description =
+  'This guide will demonstrate how to create a custom ingestion pipeline for the Arguflow API.'
+
+# Custom Embedding Server
+
+This guide will demonstrate how to build a custom embedding server for the Arguflow API. This will allow you to use your own models for generating embeddings and not use OpenAI.
+
+## Prerequisites
+
+- A server with a GPU is required to run the custom embedding server. If you do not have access to a GPU, you can use a cloud service such as [Google Colab](https://colab.research.google.com/).
+- Python 3.9
+- [PyTorch](https://pytorch.org/get-started/locally/)
+- [HuggingFace Transformers](https://huggingface.co/transformers/installation.html)
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/installation/)
+
+## Step 1: Create a new Python file
+
+Create a new Python file called `embedding_server.py` and import the following packages:
+
+```python
+from flask import Flask, request, jsonify
+from transformers import AutoTokenizer, AutoModel
+import torch
+```
+
+## Step 2: Load the model
+
+Load the model and tokenizer. For this example, we will use the `bert-base-uncased` model.
+
+```python
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+model = AutoModel.from_pretrained("bert-base-uncased")
+```
+
+## Step 3: Create the Flask app
+
+Create the Flask app and add a route for the `/embed` endpoint. This endpoint will be used to generate embeddings for the Arguflow API.
+
+```python
+app = Flask(__name__)
+
+@app.route("/embed", methods=["POST"])
+def embed():
+    return jsonify({"embeddings": []})
+```
+
+## Step 4: Generate embeddings
+
+Now we can generate embeddings for the Arguflow API. The Arguflow API will send a POST request to the `/embed` endpoint with the following JSON body:
+
+```json
+{
+  "sentences": ["This is the first sentence.", "This is the second sentence."]
+}
+```
+
+We can use the `sentences` field to generate embeddings for each sentence. We will use the `bert-base-uncased` model to generate the embeddings.
+
+```python
+@app.route("/embed", methods=["POST"])
+def embed():
+    sentences = request.json["sentences"]
+    inputs = tokenizer(sentences, padding=True, truncation=True, return_tensors="pt")
+    outputs = model(**inputs)
+    embeddings = outputs.last_hidden_state.detach().numpy().tolist()
+    return jsonify({"embeddings": embeddings})
+```
+
+## Step 5: Run the server
+
+Now we can run the server and test it out. Run the following command to start the server:
+
+```bash
+python embedding_server.py
+```
+
+You should see the following output:
+
+```bash
+* Serving Flask app 'embedding_server' (lazy loading)
+* Environment: production
+* Debug mode: off
+* Running on http://
+```
+
+Now we can test the server by sending a POST request to the `/embed` endpoint. You can use the following command to test the server:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"sentences": ["This is the first sentence.", "This is the second sentence."]}'
+```
+
+You should see the following output:
+
+```json
+{
+  "embeddings": [
+    [
+        [
+            -0.3405719699859619,...
+        ],
+    ]
+  ]
+}
+```
+
+## Step 6: Call the API from the Arguflow API
+
+Now that we have a custom embedding server, we can use it to generate embeddings for the Arguflow API. To do this, we need to update the `.env` file to use the custom embedding server. Open the `.env` file and update the `embedding_server` field to use the custom embedding server:
+
+```python
+EMBEDDING_SERVER_CALL = <Link to embedding server>
+```
+
+# Custom Card Segmenter
+
+This guide will demonstrate how to build a custom card segmenter for the Arguflow API. This will allow you to use your own models for segmenting cards and not use OpenAI.
+
+## Prerequisites
+
+- A server
+- Python 3.9
+
+## Step 1: Create a new Python file
+
+Create a new Python file called `card_parser.py` and import the following packages:
+
+```python
+from bs4 import BeautifulSoup
+import json
+import re
+```
+
+## Step 2: Create the card parser
+
+Create a class called `CardParser` and add a method called `parse`. This method will take in a string of HTML and return a list of cards.
+
+```python
+class CardParser:
+    def parse(self, html):
+        return []
+```
+
+## Step 3: Create the card parser
+
+Now we can parse the HTML and extract the cards. We will use the BeautifulSoup library to parse the HTML and extract the cards.
+
+```python
+
+class CardParser:
+    def parse(self, html):
+        soup = BeautifulSoup(html, "html.parser")
+        cards = []
+        return cards
+```
+
+## Step 4: Extract the cards
+
+Now we can build a custom segmenting algorithm to extract the cards. For this example, we will use the following algorithm:
+
+1. Find all the `<h2>` tags in the HTML.
+2. For each `<h2>` tag, find the next `<h2>` tag.
+3. Extract the text between the two `<h2>` tags.
+4. Repeat steps 2 and 3 until there are no more `<h2>` tags.
+
+```python
+#!/usr/bin/env python3
+
+class CardParser:
+    def parse(self, html):
+        soup = BeautifulSoup(html, "html.parser")
+        cards = []
+        for h2 in soup.find_all("h2"):
+            card = {}
+            card["title"] = h2.text
+            card["content"] = ""
+            next_h2 = h2.find_next("h2")
+            while next_h2:
+                card["content"] += next_h2.text
+                next_h2 = next_h2.find_next("h2")
+            cards.append(card)
+        return cards
+```
+
+## Step 5: Run the card parser
+
+The way the Arguflow API works with the card parser is by using CLI args to pass in the path to the html file and reading the stdout from the script.
+
+Add the following code to the bottom of the file to run the card parser:
+
+```python
+
+if __name__ == "__main__":
+    parser = CardParser()
+    input_file = sys.argv[1]
+
+    with codecs.open(input_file, "r", encoding="utf-8") as file:
+        html_string = file.read()
+
+    cards = parser.parse(html_string)
+    json_output = json.dumps(cards, default=lambda x: x.__dict__)
+
+    sys.stdout.write(json_output)
+```
+
+## Step 6: Make Arguflow API work with custom card parser
+
+Now that we have a custom card parser, we can use it to parse the cards for the Arguflow API. To do this, we need to update the `.env` file to use the custom card parser. Open the `.env` file and update the `card_parser` field to use the custom card parser:
+
+```python
+PARSER_COMMAND = <Path to card parser>
+```

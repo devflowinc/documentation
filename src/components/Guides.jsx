@@ -14,6 +14,12 @@ const guides = [
     description:
       'Learn how to self-host Arguflow on your own infrastructure.',
   },
+  {
+    href: '/custom_ingestion',
+    name: 'Custom Ingestion',
+    description:
+      'Learn how to design custom ingestion pipelines for Arguflow.',
+  },
 ]
 
 export function Guides() {
