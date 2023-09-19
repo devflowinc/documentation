@@ -11,14 +11,17 @@ const guides = [
   {
     href: '/self_hosting',
     name: 'Self Hosting',
-    description:
-      'Learn how to self-host Arguflow on your own infrastructure.',
+    description: 'Learn how to self-host Arguflow on your own infrastructure.',
   },
   {
-    href: '/custom_ingestion',
-    name: 'Custom Ingestion',
-    description:
-      'Learn how to design custom ingestion pipelines for Arguflow.',
+    href: '/custom_embed_server',
+    name: 'Custom Embedding Models',
+    description: 'Learn how to use custom embedding models with Arguflow.',
+  },
+  {
+    href: '/custom_card_segment',
+    name: 'Custom Card Segmentation',
+    description: 'Learn how to design custom card segementers for Arguflow.',
   },
 ]
 
