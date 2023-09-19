@@ -188,12 +188,13 @@ export const navigation = [
     title: 'Guides',
     links: [
       { title: 'Introduction', href: '/' },
-      { title: 'Feature List', href: '/feature_list'},
+      { title: 'Feature List', href: '/feature_list' },
       { title: 'Quickstart/Authentication', href: '/quickstart' },
       { title: 'Card Creation', href: '/card_creation' },
       { title: 'Errors', href: '/errors' },
       { title: 'Self Hosting', href: '/self_hosting' },
-      { title: 'Custom Ingestion', href: '/custom_ingestion' },
+      { title: 'Custom Embedding Models', href: '/custom_embed_server' },
+      { title: 'Custom Card Segmentation', href: '/custom_card_segment' },
     ],
   },
   {
