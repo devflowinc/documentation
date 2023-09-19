@@ -193,6 +193,7 @@ export const navigation = [
       { title: 'Card Creation', href: '/card_creation' },
       { title: 'Errors', href: '/errors' },
       { title: 'Self Hosting', href: '/self_hosting' },
+      { title: 'Custom Ingestion', href: '/custom_ingestion' },
     ],
   },
   {
