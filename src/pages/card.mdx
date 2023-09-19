@@ -45,8 +45,8 @@ The attachment model contains all the information about a card, including the au
   <Property name="updated_at" type="timestamp">
     The date and time the card was last updated.
   </Property>
-  <Property name="oc_file_path" type="null | string">
-    The path to the file in opencaselist.
+  <Property name="tag_set" type="null | string">
+    Tags associated with the card.
   </Property>
   <Property name="file_id" type="null | string">
     The id of the file the card was uploaded from.
@@ -88,10 +88,10 @@ The attachment model contains all the information about a card, including the au
     ### Optional attributes
 
     <Properties>
-      <Property name="oc_file_path" type="boolean">
-        The path to the file in opencaselist.
+      <Property name="tag_set" type="array">
+        The tags you wish to associate with the card.
       </Property>
-      <Property name="file_uuid" type="boolean">
+      <Property name="file_uuid" type="string">
         The id of the file the card was uploaded from.
       </Property>
     </Properties>
@@ -315,10 +315,10 @@ The attachment model contains all the information about a card, including the au
     ### Optional attributes
 
     <Properties>
-      <Property name="filter_oc_file_path" type="string">
-        Which OC Files to include in the result.
+      <Property name="tag_set" type="array">
+        Tags to filter the search by.
       </Property>
-      <Property name="filter_link_url" type="string">
+      <Property name="link" type="array">
         Which links to include in the result.
       </Property>
     </Properties>
@@ -414,10 +414,10 @@ The attachment model contains all the information about a card, including the au
     ### Optional attributes
 
     <Properties>
-      <Property name="filter_oc_file_path" type="string">
-        Which OC Files to include in the result.
+      <Property name="tag_set" type="array">
+        What tags to filters by.
       </Property>
-      <Property name="filter_link_url" type="string">
+      <Property name="link" type="array">
         Which links to include in the result.
       </Property>
     </Properties>
