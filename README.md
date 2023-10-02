@@ -7,13 +7,13 @@ Protocol is a [Tailwind UI](https://tailwindui.com) site template built using [T
 To get started with this template, first install the npm dependencies:
 
 ```bash
-npm install
+yarn
 ```
 
 Next, run the development server:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
