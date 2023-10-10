@@ -23,6 +23,12 @@ const guides = [
     name: 'Custom Card Segmentation',
     description: 'Learn how to design custom card segementers for Arguflow.',
   },
+  {
+    href: '/environment_vars',
+    name: 'Environment Variables',
+    description:
+      'Learn about the different environment variables used by Arguflow.',
+  }
 ]
 
 export function Guides() {

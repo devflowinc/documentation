@@ -195,6 +195,7 @@ export const navigation = [
       { title: 'Self Hosting', href: '/self_hosting' },
       { title: 'Custom Embedding Models', href: '/custom_embed_server' },
       { title: 'Custom Card Segmentation', href: '/custom_card_segment' },
+      { title: 'Environment Variables', href: '/environment_vars' },
     ],
   },
   {

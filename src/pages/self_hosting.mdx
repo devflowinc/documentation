@@ -42,61 +42,45 @@ We have an example .env file in the root of the repository.
 You can use this as a starting point for your own configuration.
 
 ```sh
-cp .env.dist .env
+cat .env.server .env.chat .env.search .env.docker-compose > .env
 ```
 
-```sh {{ title: '.env' }}
-REDIS_URL=redis://redis:6379
-QDRANT_URL=http://qdrant-database:6334
-DATABASE_URL=postgres://postgres:password@db:5432/vault
-S3_ENDPOINT=http://s3:9000
-QDRANT_COLLECTION="vault"
-# Update with your own api keys
-SENDGRID_API_KEY=SG.******************************************************************
-OPENAI_API_KEY=sk-************************************************
-# You might want better passwords
-SECRET_KEY=01234012340123401234012340123401234012340123401234012340123401234012340123401234
-SALT="goodsaltisveryyummy"
-S3_USER="s3user"
-S3_PASSWORD="s3password"
-LIBREOFFICE_PATH=libreoffice
-S3_ACCESS_KEY=ZaaZZaaZZaaZZaaZZaaZ
-S3_SECRET_KEY=ssssssssssssssssssssTTTTTTTTTTTTTTTTTTTT
-S3_BUCKET=vault
-VERIFICATION_SERVER_URL=http://127.0.0.1:8091/get_url_content
-QDRANT_API_KEY=qdrant_pass
-COOKIE_SECURE=true
-ALERT_EMAIL="developer@arguflow.gg"
-USE_EMBED_SERVER=0
-PARSER_COMMAND="./vault-nodejs/scripts/card_parser.js"
-EMBEDDING_SERVER_CALL="http://localhost:5000/encode"
-EMBEDDING_SIZE=1536
+The main ENV variables you will need to update are:
+```sh
+# FOR SERVER
+DATABASE_URL
+QDRANT_URL
+QDRANT_API_KEY
+OPENAI_API_KEY
 
-# Only lines that need to get changed for now are the ones below
-PUBLIC_CHAT_URL=https://self-chat.arguflow.ai
-PUBLIC_SEARCH_URL=https://self-search.arguflow.ai
-API_HOST=https://self-api.arguflow.ai/api
-
-# You might want better passwords
-MINIO_ROOT_USER=rootuser
-MINIO_ROOT_PASSWORD=rootpassword
-```
-
-```sh {{ title: '.env.chat' }}
+# For CHAT
 VITE_API_HOST=https://self-api.arguflow.ai/api
-```
-
-```sh {{ title: '.env.search' }}
-API_HOST=https://self-api.arguflow.ai/api
-PUBLIC_HOST=https://self-search.arguflow.ai
+VITE_SEARCH_URL=https://self-api.arguflow.ai/api
+# For SEARCH
 PUBLIC_API_HOST=https://self-api.arguflow.ai/api
 ```
+
+Everything else can be left as default but there are some passwords that may want to be hardened if this
+is for production.
+
+To see a full list of ENV variables and what they do please see the [env file](/envs.mdx)
 
 ## Step 5 - Setup docker compose
 
 ```sh {{ title: 'Shell' }}
 docker compose up -d
 ```
+
+This docker compose file will setup the following services:
+- postgres
+- Qdrant
+- server
+- chat
+- search
+
+We DO NOT reccomend to run Qdrant or Postgres on the same machine as the API.
+You can use a managed database service such as AWS RDS or Neon (our prefernce) to host postgres.
+and we reccomend using a differnt machine for Qdrant (Mainly just to prevent the chance of data loss).
 
 ## Step 6 - Configure Caddyfile
 Install caddy using the instructions here: https://caddyserver.com/docs/install
