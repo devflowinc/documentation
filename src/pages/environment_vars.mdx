@@ -35,7 +35,7 @@ export const description =
 | ADMIN_USER_PASSWORD| Default account password to be created |
 | DUPLICATE_DISTANCE_THRESHOLD| OPTIONAL, number between `0` and `1`. This defaults to `0.95` if not set. We don't recommend setting it to be higher than `0.99` |
 | PARSER_COMMAND| Command to run for the parser script, expects a relative path from the root. May need to extend Dockerfile if script is not nodejs |
-| USE_EMBED_SERVER| 0 or 1, If 0 then the server will use the embedding server as described in `EMBEDDING_SERVER_CALL` |
+| USE_CUSTOM_EMBEDDINGS| 0 or 1, If 0 then the server will use the embedding server as described in `EMBEDDING_SERVER_CALL` |
 | EMBEDDING_SERVER_CALL| Route to call the server, with our embedding server this is http://localhost:7070/encode |
 | EMBEDDING_SIZE| Size of the embeddings |
 | OPENAI_BASE_URL| BASE url for LLM inference, for local AI it is "http://localhost:8080/v1" |
@@ -53,7 +53,6 @@ export const description =
 |-----|-------------|
 | PUBLIC_API_HOST|The URL for the API (ex: https://api.arguflow.ai/api), must include `/api`|
 | PLAUSIBLE_HOST|OPTIONAL, if you are using plausible tracking then this would be the host name of your plausible domain|
-| PUBLIC_FILTER_ITEMS|OPTIONAL, this is hard to set if you don't know what the metadata of a doc chunk looks like. Here is an example though `'[{"name":"Tag Set","comboboxItems":[{"name":"email"}]},{"name":"email_cc","comboboxItems":[]},{"name":"email_from","comboboxItems":[]},{"name":"email_to","comboboxItems":[]}]'`|
 | PUBLIC_CREATE_EVIDENCE_FEATURE|can be `"on"` or `"off"`, we recommend setting this to `"off"`|
 | PUBLIC_DOCUMENT_UPLOAD_FEATURE|can be `"on"` or `"off"`, we recommend setting this to `"off"`|
 | PUBLIC_SEARCH_QUERIES|array of strings like `["hello world"]` use for typewriter and delete effect in search bar, we recommend setting this to `[]`|
@@ -68,6 +67,8 @@ export const description =
 | PUBLIC_IMAGE_RANGE_START_KEY|If you have a BATES range for a given document chunk, this is the key of the JSON metadata for where that range starts, i.e. `"doc_beg"` . The value of the key can be anything that contains a number like `MATCH00033`.|
 | PUBLIC_IMAGE_RANGE_END_KEY|If you have a BATES range for a given document chunk, this is the key of the JSON metadata for where that range ends, i.e. `"doc_end"` . The value of the key can be anything that contains a number like `MATCH00036`.|
 | PUBLIC_DATE_RANGE_VALUE|If your document chunks, have dates, this is the key of the JSON metadata for where that date is contained, i.e. `send_date`. The value of the key must have a value like MM/DD/YY for it to be picked up.|
+| PUBLIC_FILTER_ITEMS|OPTIONAL, this is hard to set if you don't know what the metadata of a doc chunk looks like. Here is an example though `'[{"name":"Tag Set","comboboxItems":[{"name":"email"}]},{"name":"email_cc","comboboxItems":[]},{"name":"email_from","comboboxItems":[]},{"name":"email_to","comboboxItems":[]}]'`|
+| SUGGESTED_QUERIES| OPTIONAL, this can be a comma separated list of suggested searches to put on the index page. |
 
 ## CHAT
 
