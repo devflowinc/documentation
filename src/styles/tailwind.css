@@ -14,6 +14,24 @@
   [inert] ::-webkit-scrollbar {
     display: none;
   }
+
+  ::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: #e5e5e5 !important;
+  }
+  .dark ::-webkit-scrollbar {
+    background: #262626 !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #a3a3a3 !important;
+    border-radius: .375rem;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #525252 !important;
+  }
 }
 
 @tailwind base;
