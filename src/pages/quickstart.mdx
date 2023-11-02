@@ -6,8 +6,8 @@ export const description =
 This guide will get you all set up and ready to use the Arguflow API. We'll cover how to get an authentication token and make your first API request with javascript. We'll also look at where to go next to find all the information you need to take full advantage of our powerful REST API. Here's a link to our <a href="https://www.postman.com/interstellar-escape-79389/workspace/arguflow-api-reference/collection/28637863-c7833c30-5c19-427f-9cab-e8a4f961511e?action=share&creator=28637873">Postman collection</a>.{{ className: 'lead' }}
 
 <Note>
-  Before you can make requests to the Vault API, you will need to grab your
-  authentication cookie.
+  Before you can make requests to the Vault API, you will need to grab your api
+  token.
 </Note>
 
 ## Create an account
@@ -19,32 +19,34 @@ This guide will get you all set up and ready to use the Arguflow API. We'll cove
 
 You now have an account that you can use to authenticate with the Vault API.
 
+## Get your authentication token from the Vault UI
+
+1. Login into the UI by clicking the Login button in the top right corner
+2. Click the profile icon and go to the setting page
+3. Click Generate on the API Key section to generate a new API key
+4. Copy the API key and save it somewhere safe
+5. Include the API key in your future API requests as a header
+
 ## Get your authentication token from the Vault API
 
 <CodeGroup>
 
 ```js {{ title: 'JavaScript' }}
-import fetch from "node-fetch";
+import fetch from 'node-fetch'
 
-export const getAuthCookie = async () => {
-  const api_endpoint = process.env.API_ENDPOINT || "https://api.arguflow.ai/api";
-  const email = process.env.TEST_USER_EMAIL;
-  const password = process.env.TEST_USER_PASSWORD;
+export const getAPIToken = async () => {
+  const api_endpoint = process.env.API_ENDPOINT || 'https://api.arguflow.ai/api'
 
-  const response = await fetch(`${api_endpoint}/auth`, {
-    method: "POST",
+  const api_key = await fetch(`${api_endpoint}/user/set_api_key`, {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
-    credentials: "include",
-    body: JSON.stringify({ email, password }),
-  });
+    credentials: 'include',
+  })
 
-  const cookies = response.headers.raw()["set-cookie"];
-  const authCookie = cookies.map((cookie) => cookie.split(";")[0]).join(";");
-
-  console.log(authCookie);
-};
+  console.log(api_key)
+}
 ```
 
 </CodeGroup>
@@ -54,15 +56,15 @@ export const getAuthCookie = async () => {
 <CodeGroup>
 
 ```js {{ title: 'JavaScript' }}
-const response = await fetch(`https://api.arguflow.ai/api/auth`, {
-  method: "GET",
+const response = await fetch(`https://api.arguflow.ai/api/upload`, {
+  method: 'GET',
   headers: {
-    "Content-Type": "application/json",
-    Cookie: "cookie_from_previous_script",
+    'Content-Type': 'application/json',
+    Authorization: 'API_TOKEN',
   },
-});
+})
 
-console.log(response);
+console.log(response)
 ```
 
 </CodeGroup>
