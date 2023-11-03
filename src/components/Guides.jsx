@@ -3,10 +3,9 @@ import { Heading } from '@/components/Heading'
 
 const guides = [
   {
-    href: '/errors',
-    name: 'Errors',
-    description:
-      'Read about the different types of errors returned by the API.',
+    href: '/quickstart',
+    name: 'Quickstart',
+    description: 'Learn how to quickly get started with Arguflow.',
   },
   {
     href: '/self_hosting',
@@ -14,21 +13,16 @@ const guides = [
     description: 'Learn how to self-host Arguflow on your own infrastructure.',
   },
   {
-    href: '/custom_embed_server',
-    name: 'Custom Embedding Models',
-    description: 'Learn how to use custom embedding models with Arguflow.',
-  },
-  {
-    href: '/custom_card_segment',
-    name: 'Custom Card Segmentation',
-    description: 'Learn how to design custom card segementers for Arguflow.',
-  },
-  {
     href: '/environment_vars',
     name: 'Environment Variables',
     description:
       'Learn about the different environment variables used by Arguflow.',
-  }
+  },
+  {
+    href: '/custom_embed_server',
+    name: 'Custom Embedding Models',
+    description: 'Learn how to use custom embedding models with Arguflow.',
+  },
 ]
 
 export function Guides() {

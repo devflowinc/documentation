@@ -3,73 +3,56 @@ export const description =
 
 # Quickstart/Authentication
 
-This guide will get you all set up and ready to use the Arguflow API. We'll cover how to get an authentication token and make your first API request with javascript. We'll also look at where to go next to find all the information you need to take full advantage of our powerful REST API. Here's a link to our <a href="https://www.postman.com/interstellar-escape-79389/workspace/arguflow-api-reference/collection/28637863-c7833c30-5c19-427f-9cab-e8a4f961511e?action=share&creator=28637873">Postman collection</a>.{{ className: 'lead' }}
+This guide will get you all set up and ready to use the Arguflow API. {{ className: 'lead' }}
 
 <Note>
-  Before you can make requests to the Vault API, you will need to grab your
-  authentication cookie.
+  This guide assumes you already have Arguflow running locally or have an
+  Arguflow instance deployed. If you don't, check out the README{' '}
+  <a href="https://github.com/arguflow/arguflow">README</a> or{' '}
+  <a href="/self-hosting-guide">self-hosting guide</a> to get started.
 </Note>
 
-## Create an account
+## 1. Navigate to the search UI for your Arguflow instance and make an account or log in as the admin user
 
-1. Go to the Vault client at [https://vault.arguflow.ai](https://vault.arguflow.ai) and click the register button.
-2. Fill out the form and click the register button.
-3. Check your email for a confirmation link and click it.
-4. Set your password and click the confirm button.
+If you're running Arguflow locally, you can navigate to `http://localhost:3000` to access the search UI. If you're using a deployed instance, you can navigate to the URL you deployed to.
 
-You now have an account that you can use to authenticate with the Vault API.
+## 2. Once you're logged in, navigate to the settings page
 
-## Get your authentication token from the Vault API
+[![Settings page](/search-settings-button.png)
 
-<CodeGroup>
+## 3. Create a new API key
 
-```js {{ title: 'JavaScript' }}
-import fetch from "node-fetch";
+Any given account is only allowed to have one API key. If you already have an API key and generate a new one, your old API key will be invalidated.
 
-export const getAuthCookie = async () => {
-  const api_endpoint = process.env.API_ENDPOINT || "https://api.arguflow.ai/api";
-  const email = process.env.TEST_USER_EMAIL;
-  const password = process.env.TEST_USER_PASSWORD;
+![Create API key](/search-create-api-key.png)
 
-  const response = await fetch(`${api_endpoint}/auth`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({ email, password }),
-  });
+## 4. Upload your first document chunk
 
-  const cookies = response.headers.raw()["set-cookie"];
-  const authCookie = cookies.map((cookie) => cookie.split(";")[0]).join(";");
-
-  console.log(authCookie);
-};
-```
-
-</CodeGroup>
-
-## Include your authentication token in your future API requests as a cookie
+<Note>
+  We call document chunks `cards` in the API.
+</Note>
 
 <CodeGroup>
 
 ```js {{ title: 'JavaScript' }}
-const response = await fetch(`https://api.arguflow.ai/api/auth`, {
-  method: "GET",
+fetch(url, {
+  method: 'POST',
   headers: {
-    "Content-Type": "application/json",
-    Cookie: "cookie_from_previous_script",
+    'Authorization': `${apiKey}`,
+    'Content-Type': 'application/json'
   },
-});
-
-console.log(response);
+  body: JSON.stringify({
+    card_html: "My first card!"
+  })
+})
 ```
 
 </CodeGroup>
 
 ## What's next?
 
-Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further into the Vault API:
+Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further:
 
-- [Check out the Card resource](/card)
-- [Learn about the structure of error messages in the Vault API](/errors)
+- [Endpoint for creating a RAG completion based on some cards](https://redoc.arguflow.ai/redoc#tag/card/operation/generate_off_cards)
+- [Endpoint for getting recommendations of cards similar to some other arbitrary cards](https://redoc.arguflow.ai/redoc#tag/card/operation/get_recommended_cards)
+- [Example JS client code for reading a completion stream](https://github.com/arguflow/arguflow/blob/main/search/src/components/ChatPopup.tsx#L45-L137)
