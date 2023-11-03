@@ -1,0 +1,63 @@
+export const description =
+  'In this document, we will explain why we believe that search should be done before generation, and why fully-managed RAG is not the way to go.'
+
+# Why search before generate?
+
+The team at Arguflow has been working with text embedding models and LLM's since they day they came out. Literally for the longest time possible. Leveraging that experience, we have come to the conclusion that search should be done before generation. {{ className: 'lead' }}
+
+In this document, we will explain why we believe that search should be done before generation, and why fully-managed RAG is usually not the way to go.
+
+## What is Retrieval-Augmented-Generation (RAG) on a high level?
+
+RAG can be broken down into a generic 5 step process as follows. There are many slight variations of this process, but they all follow the same general idea.
+
+1. **Write a prompt** to the model asking it to generate some output text
+2. **Embed the prompt** into a vector representation
+3. **Search a connected vector space** for the most similar vectors to the prompt's vector representation
+4. **Inject the search results** into the prompt
+5. **Generate the output text** using the prompt with the search results injected
+
+## How fully-managed RAG robs the user of autonomy and control over the search process
+
+In a fully-managed RAG system, the user is not given any control over the search process. The user is only given the ability to write a prompt, and the system will handle the rest.
+
+Frequently, the prompt you would want to use for generation is not the same prompt you would want to use for search. Take our [enron demo](https://enron-search.arguflow.ai) as an example.
+
+**A common LLM prompt is "Write a 1-3 sentence summary of how Kenneth Lay reacted to the Enron stock price collapse." This prompt is great for generation, but it is not great for search. If you were to use this prompt for search, you would likely not get results that are not relevant to the question you are trying to answer.**
+
+**A better prompt for search would be "Kenneth Lay's reaction to the Enron stock price collapse." This prompt is much more likely to return relevant results.**
+
+In a fully-managed RAG system, you would not be able to use the second prompt for search. You would be forced to use the first prompt for both search and generation. This is because the system does not allow you to control the search process.
+Our default managed RAG system is a bit better than this as we generate an intermediary search prompt with an LLM using the `RAG_PROMPT` environment variable that defaults to `"Write a 1-2 sentence semantic search query along the lines of a hypothetical response to: \n\n"`. However, this is still not as good as being able to control the search process yourself.
+
+## Still, sometimes when your users are not experts or lazy, fully managed RAG can be a good option
+
+It is for this option that we ship our default [chat UI](https://github.com/arguflow/arguflow/tree/main/chat) with the fully-managed RAG system. This is because we believe that for the below average user, fully-managed RAG is the best option. It is the easiest to use and requires the least amount of effort.
+
+If you host Arguflow, you will get the fully-managed RAG system along with the chat UI for free. You can use it if you want, or you can use the unmanaged RAG system. It is up to you and your users.
+
+Headlessly, you can use the fully-managed RAG system by creating a retrieval-augmented topic with the [create topic route](https://redoc.arguflow.ai/redoc#tag/topic/operation/create_topic) and [message endpoint](https://redoc.arguflow.ai/redoc#tag/message/operation/create_message_completion_handler).
+
+To do search before RAG headlessly, you will want to use the [generate off cards route](https://redoc.arguflow.ai/redoc#tag/card/operation/generate_off_cards) in combination with the [search route](https://redoc.arguflow.ai/redoc#tag/card/operation/search_card).
+
+## How search before generate gives the user autonomy and control over the search process in practice
+
+Say we go to the [enron demo and search for "Kenneth Lay's reaction to the Enron stock price collapse."](https://enron-search.arguflow.ai/search?q=Kenneth%20Lay%27s%20reaction%20to%20the%20Enron%20stock%20price%20collapse.)
+
+![enron search](/enron-example-search.png)
+
+From the results, I found a particular relevant document chunk (card), but I have some questions:
+
+Who are the "self-annointed protege' Jeff" and "Joe Sutton", I don't recall them being indicted in the Enron scandal. By having the ability to search before generate, I can easily find out who they are.
+
+![enron-search-after-rag](/enron-search-after-rag.png)
+
+God damn LLM's are insanely cool! With the gen-output we can learn that Joe Sutton suffered no consequences, it's a shame he didn't get indicted in the Enron scandal. After a bit of googling, you can confirm that he currently works as a [CEO of CAMS](https://camstex.com/leadership/joe-sutton/) and still [speaks at Houston's Harvard club](https://hchouston.clubs.harvard.edu/article.html?aid=324). Another good reason to not go to Harvard lol.
+
+If you were using a fully-managed RAG system, you would not be able to do this. You would be forced to use the same prompt for search and generation and the context window would be far too polluted with extraneous information for it to generate a good, focused answer.
+
+## Conclusion
+
+No other RAG system gives you the ability to search before generate. This is because it is a very difficult problem to solve. We have spent a lot of time and effort to make this possible. We believe that this is the future of RAG and that it will become the standard in the future.
+
+Use Arguflow!!
