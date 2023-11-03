@@ -78,7 +78,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
             <TopLevelNavItem href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg">
               Community
             </TopLevelNavItem>
-            <TopLevelNavItem href="https://github.com/arguflow/vault-server">
+            <TopLevelNavItem href="https://github.com/arguflow/arguflow">
               Github
             </TopLevelNavItem>
           </ul>
