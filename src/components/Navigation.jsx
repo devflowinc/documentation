@@ -191,22 +191,56 @@ export const navigation = [
       { title: 'Self Hosting', href: '/self_hosting' },
       { title: 'Quickstart/Authentication', href: '/quickstart' },
       { title: 'Duplicate Detection+Handling', href: '/duplicate_detection' },
-      { title: 'Why Search Before Generate', href: '/why_search_before_generate' },
+      {
+        title: 'Why Search Before Generate',
+        href: '/why_search_before_generate',
+      },
       { title: 'Environment Variables', href: '/environment_vars' },
-      { title: 'Use Custom LLM or Embedding Model', href: '/custom_llm_embed_server' },
+      {
+        title: 'Use Custom LLM or Embedding Model',
+        href: '/custom_llm_embed_server',
+      },
     ],
   },
   {
     title: 'Resources',
     links: [
-      { title: 'Auth', href: '/auth' },
-      { title: 'Card', href: '/card' },
-      { title: 'Collection', href: '/card_collection' },
-      { title: 'User', href: '/user' },
-      { title: 'Vote', href: '/vote' },
-      { title: 'File', href: '/file' },
-      { title: 'Notification', href: '/notification' },
-      { title: 'How to join Matrix', href: '/how_to_join_matrix' },
+      {
+        title: 'Invitation',
+        href: 'https://redoc.arguflow.ai/redoc#tag/invitation',
+      },
+      {
+        title: 'Register',
+        href: 'https://redoc.arguflow.ai/redoc#tag/register',
+      },
+      { title: 'Auth', href: 'https://redoc.arguflow.ai/redoc#tag/auth' },
+      {
+        title: 'Password',
+        href: 'https://redoc.arguflow.ai/redoc#tag/password',
+      },
+      { title: 'Topic', href: 'https://redoc.arguflow.ai/redoc#tag/topic' },
+      { title: 'Message', href: 'https://redoc.arguflow.ai/redoc#tag/message' },
+      { title: 'Vote', href: 'https://redoc.arguflow.ai/redoc#tag/vote' },
+      { title: 'Card', href: 'https://redoc.arguflow.ai/redoc#tag/card' },
+      {
+        title: 'Top Users',
+        href: 'https://redoc.arguflow.ai/redoc#tag/top_users',
+      },
+      {
+        title: 'Top Cards',
+        href: 'https://redoc.arguflow.ai/redoc#tag/top_cards',
+      },
+      { title: 'User', href: 'https://redoc.arguflow.ai/redoc#tag/user' },
+      {
+        title: 'Collection',
+        href: 'https://redoc.arguflow.ai/redoc#tag/card_collection',
+      },
+      { title: 'File', href: 'https://redoc.arguflow.ai/redoc#tag/file' },
+      {
+        title: 'Notification',
+        href: 'https://redoc.arguflow.ai/redoc#tag/notifications',
+      },
+      { title: 'Health', href: 'https://redoc.arguflow.ai/redoc#tag/health' },
     ],
   },
 ]

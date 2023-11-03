@@ -16,10 +16,10 @@ import { SquaresPlusIcon } from './icons/SquaresPlusIcon'
 
 const resources = [
   {
-    href: '/auth',
+    href: 'https://redoc.arguflow.ai/redoc#tag/auth',
     name: 'Auth',
     description:
-      'Learn about how to authenticate with the Arguflow API and how to use the access cookie to make requests.',
+      'Learn about how to authenticate with the Arguflow API and how to use the access cookie and API key to make requests.',
     icon: UserIcon,
     pattern: {
       y: 16,
@@ -30,7 +30,7 @@ const resources = [
     },
   },
   {
-    href: '/card',
+    href: 'https://redoc.arguflow.ai/redoc#tag/card',
     name: 'Card',
     description:
       'Learn about the card model and how to create, retrieve, update, delete, and query cards.',
@@ -44,7 +44,7 @@ const resources = [
     },
   },
   {
-    href: '/card_collection',
+    href: 'https://redoc.arguflow.ai/redoc#tag/card_collection',
     name: 'Collections',
     description:
       'Learn about the collection model and how to create, retrieve, update, delete, and list collections.',
@@ -58,7 +58,7 @@ const resources = [
     },
   },
   {
-    href: '/user',
+    href: 'https://redoc.arguflow.ai/redoc#tag/user',
     name: 'User',
     description:
       'Learn about the user model and how to create, retrieve, update, and delete users and their associated info.',
@@ -69,46 +69,13 @@ const resources = [
     },
   },
   {
-    href: '/vote',
-    name: 'Votes',
-    description:
-      'Learn about the vote model and how to upvote, downvote, and unvote cards.',
-    icon: SquaresPlusIcon,
-    pattern: {
-      y: 45,
-      squares: [[0, 1]],
-    },
-  },
-  {
-    href: '/file',
+    href: 'https://redoc.arguflow.ai/redoc#tag/file',
     name: 'File',
     description:
-      'Learn about the file model and how to create, retrieve, update, delete, and list files.',
+      'Learn about the file model and how to upload, retrieve, update, delete, and list files.',
     icon: PaperClipIcon,
     pattern: {
       y: -18,
-      squares: [[0, 1]],
-    },
-  },
-  {
-    href: '/notification',
-    name: 'Notifications',
-    description:
-      'Learn about the notification model and how to retrieve, delete, and mark notifications as read.',
-    icon: BellIcon,
-    pattern: {
-      y: 2,
-      squares: [[0, 1]],
-    },
-  },
-  {
-    href: '/how_to_join_matrix',
-    name: 'How to join Matrix',
-    description:
-      'Learn about how to join the Arguflow Matrix server and how to use it.',
-    icon: ChatBubbleIcon,
-    pattern: {
-      y: 60,
       squares: [[0, 1]],
     },
   },
