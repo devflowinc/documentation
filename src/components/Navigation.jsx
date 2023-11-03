@@ -188,11 +188,12 @@ export const navigation = [
     title: 'Guides',
     links: [
       { title: 'Introduction', href: '/' },
+      { title: 'Self Hosting', href: '/self_hosting' },
       { title: 'Quickstart/Authentication', href: '/quickstart' },
       { title: 'Duplicate Detection+Handling', href: '/duplicate_detection' },
+      { title: 'Why Search Before Generate', href: '/why_search_before_generate' },
       { title: 'Environment Variables', href: '/environment_vars' },
-      { title: 'Self Hosting', href: '/self_hosting' },
-      { title: 'Custom Embedding Models', href: '/custom_embed_server' },
+      { title: 'Use Custom Embedding Model or LLM', href: '/custom_embed_server' },
     ],
   },
   {
