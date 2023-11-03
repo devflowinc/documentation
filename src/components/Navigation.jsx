@@ -218,6 +218,9 @@ export function Navigation(props) {
   return (
     <nav {...props}>
       <ul role="list">
+        <TopLevelNavItem href="https://redoc.arguflow.ai/redoc">
+          REST OpenAPI Docs
+        </TopLevelNavItem>
         <TopLevelNavItem href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg">
           Support
         </TopLevelNavItem>
