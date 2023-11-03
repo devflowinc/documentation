@@ -102,17 +102,6 @@ const resources = [
     },
   },
   {
-    href: '/verification',
-    name: 'Verifications',
-    description:
-      'Learn about the verification model and how to create verifications.',
-    icon: CheckIcon,
-    pattern: {
-      y: 60,
-      squares: [[0, 1]],
-    },
-  },
-  {
     href: '/how_to_join_matrix',
     name: 'How to join Matrix',
     description:
