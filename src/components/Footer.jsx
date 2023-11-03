@@ -232,9 +232,6 @@ function SmallPrint() {
         >
           Join our Matrix channel
         </SocialLink>
-        <SocialLink href="https://t.me/+vUOq6omKOn5lY2Zh" icon={TelegramIcon}>
-          Join our Telegram group
-        </SocialLink>
       </div>
     </div>
   )
