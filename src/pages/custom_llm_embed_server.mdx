@@ -1,7 +1,9 @@
 export const description =
   'This guide will demonstrate how to create a custom embedding model for the Arguflow API.'
 
-# Custom Embedding Server
+# How to use a Custom Embedding Model or LLM with Arguflow
+
+The LLM is the easiest thing to replace, all you have to do is set the `OPENAI_BASE_URL` to an OpenAI compliant API endpoint for text completions using a `gpt-3.5-turbo` model. The easiest way to do this is by self-hosting [LocalAI](https://github.com/mudler/LocalAI).
 
 This guide will demonstrate how to build a custom embedding server for the Arguflow API. This will allow you to use your own models for generating embeddings and not use OpenAI.
 

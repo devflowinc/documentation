@@ -193,7 +193,7 @@ export const navigation = [
       { title: 'Duplicate Detection+Handling', href: '/duplicate_detection' },
       { title: 'Why Search Before Generate', href: '/why_search_before_generate' },
       { title: 'Environment Variables', href: '/environment_vars' },
-      { title: 'Use Custom Embedding Model or LLM', href: '/custom_embed_server' },
+      { title: 'Use Custom LLM or Embedding Model', href: '/custom_llm_embed_server' },
     ],
   },
   {
