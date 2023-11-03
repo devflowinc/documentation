@@ -19,9 +19,9 @@ const guides = [
       'Learn about the different environment variables used by Arguflow.',
   },
   {
-    href: '/custom_embed_server',
-    name: 'Custom Embedding Models',
-    description: 'Learn how to use custom embedding models with Arguflow.',
+    href: '/custom_llm_embed_server',
+    name: 'Use Custom LLM or Embedding Model',
+    description: 'Learn how to use custom embedding models and LLMs with Arguflow.',
   },
 ]
 
