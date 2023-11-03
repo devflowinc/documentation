@@ -189,10 +189,10 @@ export const navigation = [
     links: [
       { title: 'Introduction', href: '/' },
       { title: 'Quickstart/Authentication', href: '/quickstart' },
-      { title: 'Card Creation', href: '/card_creation' },
+      { title: 'Duplicate Detection+Handling', href: '/duplicate_detection' },
+      { title: 'Environment Variables', href: '/environment_vars' },
       { title: 'Self Hosting', href: '/self_hosting' },
       { title: 'Custom Embedding Models', href: '/custom_embed_server' },
-      { title: 'Environment Variables', href: '/environment_vars' },
     ],
   },
   {

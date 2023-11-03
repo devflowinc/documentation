@@ -1,0 +1,74 @@
+export const description =
+  'In this guide, we’ll look at how Arguflow handles duplicates to achieve maximal-marginal-relevance (MMR).'
+
+# Card duplicates
+
+One of the stand-out features of Arguflow is how we detect and handle duplicates. In this guide, we’ll look at how Arguflow handles duplicates to achieve maximal-marginal-relevance (MMR). {{ className: 'lead' }}
+
+Our primary competitors like Vectara and Pinecone are flat out missing this feature with no intent to implement it. This is a huge advantage for Arguflow, as it allows us to provide a much better user experience.
+
+## What is MMR?
+
+Maximal-marginal-relevance (MMR) is a technique used in information retrieval to select a diverse set of results. It is used to prevent redundancy in search results, and is used in Arguflow to prevent duplicate cards from being returned in search results on a top-level.
+
+## Why do we call duplicates "collisions" in Arguflow?
+
+When you vector'ize data with an embedding model, you are converting it into a vector that exists in some `n` dimensional space.
+
+The distance between two vectors is then the the "similarity" between the two pieces of data. Vectors can be close enough that you can imagine them actually colliding in the `n` dimensional space as a "semantic collision".
+
+In Arguflow, you can set an environment variable called `DUPLICATE_DISTANCE_THRESHOLD` to determine how similar two vectors have to be to be considered a duplicate. The default value is `0.95`, which means that if two vectors have a cosine similarity of 0.95 or above, they are considered duplicates.
+
+## How Arguflow's business logic for handling duplicates works
+
+### 1. The CardCollisions model
+
+We create the `card_collisions` SQL table in [this migration](https://github.com/arguflow/arguflow/blob/main/server/migrations/2023-06-15-202339_create-card-collision-table/up.sql). There are a couple of sub-sequent migrations to edit the table, but the core of the table is created in that migration.
+
+The CardCollisions model is then defined in [this file](https://github.com/arguflow/arguflow/blob/main/server/src/data/models.rs#L354C1-L374) as shown below:
+
+```rs
+#[derive(Debug, Serialize, Deserialize, Queryable, Selectable, Insertable, Clone)]
+#[diesel(table_name = card_collisions)]
+pub struct CardCollisions {
+    pub id: uuid::Uuid,
+    pub card_id: uuid::Uuid,
+    pub collision_qdrant_id: Option<uuid::Uuid>,
+    pub created_at: chrono::NaiveDateTime,
+    pub updated_at: chrono::NaiveDateTime,
+}
+```
+
+Each `CardCollisions` row will relate to a `CardMetadata` row in the `card_metadata` table via the `card_id` column. The `collision_qdrant_id` column is used to relate the `CardCollisions` row to a `Qdrant` point in the `qdrant` db.
+
+### 2. When a card is created, we check for collisions
+
+When a card is created, we find the nearest point using a function called `first_semantic_result` as follows:
+
+```rs
+let first_semantic_result = global_unfiltered_top_match_query(embedding_vector.clone())
+  .await
+  .map_err(|err| {
+      ServiceError::BadRequest(format!(
+          "Could not get semantic similarity for collision check: {}",
+          err.message
+      ))
+  })?;
+```
+
+### 3. If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we create a `CardCollisions` row and not a `Qdrant` point
+
+If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we then only create a `CardCollisions` row and not a `Qdrant` point. This is because we don't want to create a `Qdrant` point for a duplicate card. It will worsen search time performance and prevent MMR from working.
+
+The implementation of this logic can be found in [card_handler.rs here](https://github.com/arguflow/arguflow/blob/main/server/src/handlers/card_handler.rs#L211-L323).
+
+## The result in our default search UI
+
+If you search for ["Enron’s liquidity is very solid and there is no need for any panic or alarm"](https://enron-search.arguflow.ai/search?q=Enron%E2%80%99s%20liquidity%20is%20very%20solid%20and%20there%20is%20no%20need%20for%20any%20panic%20or%20alarm) on our Enron demo then you will see arrows on the sides of resulting cards as shown below:
+
+![Arrows on the sides of resulting cards](/search-duplicate-cards.png)
+
+These arrows allow you to navigate between cards that are duplicates of each other.
+
+Thanks for reading! If you have any questions, please reach out to us on Twitter, Matrix, or Discord.
+
