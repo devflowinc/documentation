@@ -1,7 +1,7 @@
 export const description =
   'In this guide, we’ll look at how Trieve handles duplicates to achieve maximal-marginal-relevance (MMR).'
 
-# Card duplicates
+# Chunk duplicates
 
 One of the stand-out features of Trieve is how we detect and handle duplicates. In this guide, we’ll look at how Trieve handles duplicates to achieve maximal-marginal-relevance (MMR). {{ className: 'lead' }}
 
@@ -9,7 +9,7 @@ Our primary competitors like Vectara and Pinecone are flat out missing this feat
 
 ## What is MMR?
 
-Maximal-marginal-relevance (MMR) is a technique used in information retrieval to select a diverse set of results. It is used to prevent redundancy in search results, and is used in Trieve to prevent duplicate cards from being returned in search results on a top-level.
+Maximal-marginal-relevance (MMR) is a technique used in information retrieval to select a diverse set of results. It is used to prevent redundancy in search results, and is used in Trieve to prevent duplicate chunks from being returned in search results on a top-level.
 
 ## Why do we call duplicates "collisions" in Trieve?
 
@@ -21,29 +21,29 @@ In Trieve, you can set an environment variable called `DUPLICATE_DISTANCE_THRESH
 
 ## How Trieve's business logic for handling duplicates works
 
-### 1. The CardCollisions model
+### 1. The ChunkCollisions model
 
-We create the `card_collisions` SQL table in [this migration](https://github.com/devflowinc/trieve/blob/main/server/migrations/2023-06-15-202339_create-card-collision-table/up.sql). There are a couple of sub-sequent migrations to edit the table, but the core of the table is created in that migration.
+We create the `chunk_collisions` SQL table in [this migration](https://github.com/devflowinc/trieve/blob/main/server/migrations/2023-06-15-202339_create-chunk-collision-table/up.sql). There are a couple of sub-sequent migrations to edit the table, but the core of the table is created in that migration.
 
-The CardCollisions model is then defined in [this file](https://github.com/devflowinc/trieve/blob/main/server/src/data/models.rs#L354C1-L374) as shown below:
+The ChunkCollisions model is then defined in [this file](https://github.com/devflowinc/trieve/blob/main/server/src/data/models.rs#L354C1-L374) as shown below:
 
 ```rs
 #[derive(Debug, Serialize, Deserialize, Queryable, Selectable, Insertable, Clone)]
-#[diesel(table_name = card_collisions)]
-pub struct CardCollisions {
+#[diesel(table_name = chunk_collisions)]
+pub struct ChunkCollisions {
     pub id: uuid::Uuid,
-    pub card_id: uuid::Uuid,
+    pub chunk_id: uuid::Uuid,
     pub collision_qdrant_id: Option<uuid::Uuid>,
     pub created_at: chrono::NaiveDateTime,
     pub updated_at: chrono::NaiveDateTime,
 }
 ```
 
-Each `CardCollisions` row will relate to a `CardMetadata` row in the `card_metadata` table via the `card_id` column. The `collision_qdrant_id` column is used to relate the `CardCollisions` row to a `Qdrant` point in the `qdrant` db.
+Each `ChunkCollisions` row will relate to a `ChunkMetadata` row in the `chunk_metadata` table via the `chunk_id` column. The `collision_qdrant_id` column is used to relate the `ChunkCollisions` row to a `Qdrant` point in the `qdrant` db.
 
-### 2. When a card is created, we check for collisions
+### 2. When a chunk is created, we check for collisions
 
-When a card is created, we find the nearest point using a function called `first_semantic_result` as follows:
+When a chunk is created, we find the nearest point using a function called `first_semantic_result` as follows:
 
 ```rs
 let first_semantic_result = global_unfiltered_top_match_query(embedding_vector.clone())
@@ -56,19 +56,19 @@ let first_semantic_result = global_unfiltered_top_match_query(embedding_vector.c
   })?;
 ```
 
-### 3. If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we create a `CardCollisions` row and not a `Qdrant` point
+### 3. If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we create a `ChunkCollisions` row and not a `Qdrant` point
 
-If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we then only create a `CardCollisions` row and not a `Qdrant` point. This is because we don't want to create a `Qdrant` point for a duplicate card. It will worsen search time performance and prevent MMR from working.
+If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we then only create a `ChunkCollisions` row and not a `Qdrant` point. This is because we don't want to create a `Qdrant` point for a duplicate chunk. It will worsen search time performance and prevent MMR from working.
 
-The implementation of this logic can be found in [card_handler.rs here](https://github.com/devflowinc/trieve/blob/main/server/src/handlers/card_handler.rs#L211-L323).
+The implementation of this logic can be found in [chunk_handler.rs here](https://github.com/devflowinc/trieve/blob/main/server/src/handlers/chunk_handler.rs#L211-L323).
 
 ## The result in our default search UI
 
-If you search for ["Enron’s liquidity is very solid and there is no need for any panic or alarm"](https://enron-search.arguflow.ai/search?q=Enron%E2%80%99s%20liquidity%20is%20very%20solid%20and%20there%20is%20no%20need%20for%20any%20panic%20or%20alarm) on our Enron demo then you will see arrows on the sides of resulting cards as shown below:
+If you search for ["Enron’s liquidity is very solid and there is no need for any panic or alarm"](https://enron-search.arguflow.ai/search?q=Enron%E2%80%99s%20liquidity%20is%20very%20solid%20and%20there%20is%20no%20need%20for%20any%20panic%20or%20alarm) on our Enron demo then you will see arrows on the sides of resulting chunks as shown below:
 
-![Arrows on the sides of resulting cards](/search-duplicate-cards.png)
+![Arrows on the sides of resulting chunks](/search-duplicate-chunks.png)
 
-These arrows allow you to navigate between cards that are duplicates of each other.
+These arrows allow you to navigate between chunks that are duplicates of each other.
 
 Thanks for reading! If you have any questions, please reach out to us on Twitter, Matrix, or Discord.
 

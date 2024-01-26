@@ -3,7 +3,7 @@ export const description =
 
 # Users
 
-Users are the authors of cards and owners of collections. On this page, we’ll dive into the different verification routes you can use to manage Users programmatically. We'll look at how to create verifications. {{ className: 'lead' }}
+Users are the authors of chunks and owners of collections. On this page, we’ll dive into the different verification routes you can use to manage Users programmatically. We'll look at how to create verifications. {{ className: 'lead' }}
 
 ## The user model
 
@@ -93,16 +93,16 @@ The user model contains all the information about each user, including their ema
 
 ---
 
-## Get the cards and votes for a user {{ tag: 'GET', label: '/user/:user_id/:page' }}
+## Get the chunks and votes for a user {{ tag: 'GET', label: '/user/:user_id/:page' }}
 
 <Row>
   <Col>
 
-    This route allows you to get the cards and votes for a user, as well as other metadata about the user.
+    This route allows you to get the chunks and votes for a user, as well as other metadata about the user.
 
     ### Response
 
-    If the response is successful it will return a 200 status code with an array of cards and metadata about the user.
+    If the response is successful it will return a 200 status code with an array of chunks and metadata about the user.
 
     <Properties>
       <Property name="id" type="string">
@@ -123,11 +123,11 @@ The user model contains all the information about each user, including their ema
       <Property name="created_at" type="timestamp">
         When the user was created.
       </Property>
-      <Property name="total_cards_created" type="integer">
-        The number of cards a user has created
+      <Property name="total_chunks_created" type="integer">
+        The number of chunks a user has created
       </Property>
-      <Property name="cards" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
-        An array of user-created cards.
+      <Property name="chunks" type={<text>[<a href="chunk#the-chunk-model">Chunk</a>]</text>}>
+        An array of user-created chunks.
       </Property>
     </Properties>
 
@@ -153,13 +153,13 @@ The user model contains all the information about each user, including their ema
       "website": null,
       "visible_email": true,
       "created_at": "2023-07-20T11:54:39.303730",
-      "total_cards_created": 2396,
-      "cards": [
+      "total_chunks_created": 2396,
+      "chunks": [
         {
         "id": "9f6a2f8a-1dd6-4e40-8d03-4da8d79c09e7",
         "author": null,
         "content": "In more recent times, a concern about ‘new terrorism’, by which within the white imagination, ...",
-        "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font face=\"Garamond..",
+        "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font face=\"Garamond..",
         "link": "https://ojs.library.queensu.ca/index.php/surveillance-and-society/article/view/stigma/4570",
         "qdrant_point_id": "ae7a2dcc-4069-492d-8380-6bd024c2b971",
         "total_upvotes": 0,

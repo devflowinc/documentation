@@ -38,7 +38,7 @@ If you host Trieve, you will get the fully-managed RAG system along with the cha
 
 Headlessly, you can use the fully-managed RAG system by creating a retrieval-augmented topic with the [create topic route](https://api.trieve.ai/redoc#tag/topic/operation/create_topic) and [message endpoint](https://api.trieve.ai/redoc#tag/message/operation/create_message_completion_handler).
 
-To do search before RAG headlessly, you will want to use the [generate off cards route](https://api.trieve.ai/redoc#tag/card/operation/generate_off_cards) in combination with the [search route](https://api.trieve.ai/redoc#tag/card/operation/search_card).
+To do search before RAG headlessly, you will want to use the [generate off chunks route](https://api.trieve.ai/redoc#tag/chunk/operation/generate_off_chunks) in combination with the [search route](https://api.trieve.ai/redoc#tag/chunk/operation/search_chunk).
 
 ## How search before generate gives the user autonomy and control over the search process in practice
 
@@ -46,7 +46,7 @@ Say we go to the [enron demo and search for "Kenneth Lay's reaction to the Enron
 
 ![enron search](/enron-example-search.png)
 
-From the results, I found a particular relevant document chunk (card), but I have some questions:
+From the results, I found a particular relevant document chunk (chunk), but I have some questions:
 
 Who are the "self-annointed protege' Jeff" and "Joe Sutton", I don't recall them being indicted in the Enron scandal. By having the ability to search before generate, I can easily find out who they are.
 

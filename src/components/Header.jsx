@@ -62,7 +62,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
         <MobileNavigation />
         <Link href="/" aria-label="Home">
           <Image
-            src="/logo_transparent.png"
+            src="https://cdn.trieve.ai/trieve-logo.png"
             alt="logo"
             width={40}
             height={40}

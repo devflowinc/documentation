@@ -1,132 +1,132 @@
 export const description =
   'On this page, we’ll dive into the different attachment routes you can use to manage attachments programmatically.'
 
-# Cards
+# Chunks
 
-Cards are the fundamental unit of information in Vault. They represent a single piece of information, such as an article, with an author, file, and formatted card content. On this page, we will dive into the different card routes you can use to manage and search through cards programmatically. {{ className: 'lead' }}
+Chunks are the fundamental unit of information in Vault. They represent a single piece of information, such as an article, with an author, file, and formatted chunk content. On this page, we will dive into the different chunk routes you can use to manage and search through chunks programmatically. {{ className: 'lead' }}
 
-## The card model
+## The chunk model
 
-The attachment model contains all the information about a card, including the author, file, date created, and formatted card content.
+The attachment model contains all the information about a chunk, including the author, file, date created, and formatted chunk content.
 
 ### Properties
 
 <Properties>
   <Property name="id" type="string">
-    Unique identifier for the card.
+    Unique identifier for the chunk.
   </Property>
   <Property name="author" type={<a href="user#the-user-model">User</a>}>
     User object containing the author's id and email.
   </Property>
   <Property name="content" type="string">
-    Card content in plain text without html formatting.
+    Chunk content in plain text without html formatting.
   </Property>
-  <Property name="card_html" type="string">
-    Card content with HTML formatting.
+  <Property name="chunk_html" type="string">
+    Chunk content with HTML formatting.
   </Property>
   <Property name="link" type="string">
-    The link to the article the card is from.
+    The link to the article the chunk is from.
   </Property>
   <Property name="qdrant_point_id" type="string">
-    The id of the card in Qdrant.
+    The id of the chunk in Qdrant.
   </Property>
   <Property name="total_upvotes" type="number">
-    The total number of upvotes the card has.
+    The total number of upvotes the chunk has.
   </Property>
   <Property name="total_downvotes" type="number">
-    The total number of downvotes the card has.
+    The total number of downvotes the chunk has.
   </Property>
   <Property name="vote_by_current_user" type="null | boolean">
-    The total number of downvotes the card has.
+    The total number of downvotes the chunk has.
   </Property>
   <Property name="created_at" type="timestamp">
-    The date and time the card was created.
+    The date and time the chunk was created.
   </Property>
   <Property name="updated_at" type="timestamp">
-    The date and time the card was last updated.
+    The date and time the chunk was last updated.
   </Property>
   <Property name="tag_set" type="null | string">
-    Tags associated with the card.
+    Tags associated with the chunk.
   </Property>
   <Property name="file_id" type="null | string">
-    The id of the file the card was uploaded from.
+    The id of the file the chunk was uploaded from.
   </Property>
   <Property name="file_name" type="null | string">
-    The name of the file the card was uploaded from.
+    The name of the file the chunk was uploaded from.
   </Property>
   <Property name="private" type="boolean">
-    Whether the card is visible to other users.
+    Whether the chunk is visible to other users.
   </Property>
   <Property name="verification_score" type="null | number">
-    The similarity score of the card to the webpage it is linked to.
+    The similarity score of the chunk to the webpage it is linked to.
   </Property>
 </Properties>
 
 ---
 
-## Create a Card {{ tag: 'POST', label: '/card' }}
+## Create a Chunk {{ tag: 'POST', label: '/chunk' }}
 
 <Row>
   <Col>
 
-    This route allows you to create a new card. You must be authenticated to use it successfully.
+    This route allows you to create a new chunk. You must be authenticated to use it successfully.
 
     ### Request body
 
     The request body should be a JSON object with the following fields, all of which are optional.
 
     <Properties>
-      <Property name="card_html" type="string">
-        The card content with html formatting. If provided it must contain more than 70 words.
+      <Property name="chunk_html" type="string">
+        The chunk content with html formatting. If provided it must contain more than 70 words.
       </Property>
       <Property name="link" type="string">
-        The link to the article the card is from.
+        The link to the article the chunk is from.
       </Property>
       <Property name="tag_set" type="array">
-        The tags you wish to associate with the card.
+        The tags you wish to associate with the chunk.
       </Property>
       <Property name="private" type="boolean">
-        Whether the card is visible to other users.
+        Whether the chunk is visible to other users.
       </Property>
       <Property name="file_uuid" type="string">
-        The id of the file the card was uploaded from.
+        The id of the file the chunk was uploaded from.
       </Property>
       <Property name="metadata" type="object">
-        Additional attributes to add to the card.
+        Additional attributes to add to the chunk.
       </Property>
     </Properties>
 
     ### Response
 
-    If the response is successful it will return a 200 status code with the created card and whether it is a duplicate or not.
+    If the response is successful it will return a 200 status code with the created chunk and whether it is a duplicate or not.
 
     <Properties>
-      <Property name="card_metadata" type={<a href="#the-card-model">Card</a>}>
-        The card object that was created.
+      <Property name="chunk_metadata" type={<a href="#the-chunk-model">Chunk</a>}>
+        The chunk object that was created.
       </Property>
       <Property name="duplicate" type="boolean">
-        Whether the card is a duplicate of another card.
+        Whether the chunk is a duplicate of another chunk.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/api/card">
+    <CodeGroup title="Request" tag="POST" label="/api/chunk">
 
     ```bash {{ title: 'cURL' }}
-    curl --location 'https://api.trieve.ai/api/card' \
+    curl --location 'https://api.trieve.ai/api/chunk' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
-            "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\"
+            "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\"
                           style=\"font-size: 12pt\">Flight\ntesting</font></b></u><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\"><font size=\"3\"...",
             "link": "https://google.com",
             "tag_set": ["Flight", "Performance"],
             "private": true,
             "file_uuid": "c472d848-985a-4a0f-b166-4ab0e5c8f019",
             "metadata": {
-              "email": "createcard@example.com",
+              "email": "createchunk@example.com",
               "oc_file_path": "2017OpenEv/Radical Convivial Ed Aff - UTNIF 2017.html",
             }
           }'
@@ -136,19 +136,19 @@ The attachment model contains all the information about a card, including the au
 
     ```json {{ title: 'Response' }}
     {
-        "card_metadata": {
+        "chunk_metadata": {
             "id": "19ddebb4-fc9f-4a8c-8a37-020b9b8b536d",
             "content": "Flight testing provides data for M&S and demonstrates the end-to-end performance functions of the operational system ...",
             "link": "https://google.com",
             "author_id": "f5e17d3d-0f77-49af-ad21-0d42f9b2ed5e",
             "qdrant_point_id": "f5e17d3d-0f77-49af-ad21-0d42f9b2ed5e",
-            "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font><...",
+            "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font><...",
             "tag_set": ["Flight", "Performance"],
             "private": true,
-            "email": "createcard@example.com",
+            "email": "createchunk@example.com",
             "oc_file_path": "2017OpenEv/Radical Convivial Ed Aff - UTNIF 2017.html",
             "metadata": {
-              "email": "createcard@example.com",
+              "email": "createchunk@example.com",
               "oc_file_path": "2017OpenEv/Radical Convivial Ed Aff - UTNIF 2017.html",
             },
             "created_at": "2023-07-20T00:00:59.743438016",
@@ -163,30 +163,30 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Get a Card {{ tag: 'GET', label: '/api/card/:card_id' }}
+## Get a Chunk {{ tag: 'GET', label: '/api/chunk/:chunk_id' }}
 
 <Row>
   <Col>
 
-    This route allows you to retrieve a card from the database using its id. (Must be authenticated and must be your card if private) Refer to [the list](#the-card-model) at the top of this page to see which properties are included with card objects.
+    This route allows you to retrieve a chunk from the database using its id. (Must be authenticated and must be your chunk if private) Refer to [the list](#the-chunk-model) at the top of this page to see which properties are included with chunk objects.
 
     ### Response
 
-    If the response is successful it will return a 200 status code with the card.
+    If the response is successful it will return a 200 status code with the chunk.
 
     <Properties>
-      <Property name="card_metadata" type={<a href="#the-card-model">Card</a>}>
-        The card object that was created.
+      <Property name="chunk_metadata" type={<a href="#the-chunk-model">Chunk</a>}>
+        The chunk object that was created.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d">
+    <CodeGroup title="Request" tag="GET" label="/api/chunk/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d">
 
     ```bash {{ title: 'cURL' }}
-        curl -G https://api.arguflwo.com/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d \
+        curl -G https://api.arguflwo.com/api/chunk/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d \
             --header 'Cookie: ai-editor=your_cookie_value_here'
     ```
 
@@ -205,7 +205,7 @@ The attachment model contains all the information about a card, including the au
             "created_at": "2023-06-02T19:55:45.932469"
         },
         "content": "Flight testing provides data for M&S and demonstrates the end-to-end performance functions of the operational system ...",
-        "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font><...",
+        "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font><...",
         "link": "https://google.com",
         "qdrant_point_id": "00000000-0000-0000-0000-000000000000",
         "total_upvotes": 0,
@@ -227,12 +227,12 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Delete a card {{ tag: 'DELETE', label: '/api/card/:card_id' }}
+## Delete a chunk {{ tag: 'DELETE', label: '/api/chunk/:chunk_id' }}
 
 <Row>
   <Col>
 
-    This route allows you to delete a card from the database using its id. (Must be authenticated and must be your card)
+    This route allows you to delete a chunk from the database using its id. (Must be authenticated and must be your chunk)
 
       ### Response
 
@@ -241,10 +241,10 @@ The attachment model contains all the information about a card, including the au
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="DELETE" label="/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d">
+    <CodeGroup title="Request" tag="DELETE" label="/api/chunk/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d">
 
     ```bash {{ title: 'cURL' }}
-    curl https://api.trieve.ai/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d \
+    curl https://api.trieve.ai/api/chunk/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d \
        --header 'Cookie: ai-editor=your_cookie_value_here'
     ```
     </CodeGroup>
@@ -254,17 +254,17 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Update a card {{ tag: 'PUT', label: '/card/update' }}
+## Update a chunk {{ tag: 'PUT', label: '/chunk/update' }}
 
 <Row>
   <Col>
 
-    This route allows you to update a card from the database using its id.
+    This route allows you to update a chunk from the database using its id.
 
     ### Required attributes
     <Properties>
-      <Property name="card_uuid" type="string">
-        The card id of the card you wish to update.
+      <Property name="chunk_uuid" type="string">
+        The chunk id of the chunk you wish to update.
       </Property>
     </Properties>
 
@@ -272,10 +272,10 @@ The attachment model contains all the information about a card, including the au
 
     <Properties>
       <Property name="link" type="string">
-        The new link for the card.
+        The new link for the chunk.
       </Property>
-      <Property name="card_html" type="string">
-        The new card_html for the card.
+      <Property name="chunk_html" type="string">
+        The new chunk_html for the chunk.
       </Property>
       <Property name="private" type="boolean">
         The new link for the attachment.
@@ -292,11 +292,11 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="PUT" label="/v1/update">
 
     ```bash {{ title: 'cURL' }}
-      curl --location --request PUT 'https://api.trieve.ai/api/card/update' \
+      curl --location --request PUT 'https://api.trieve.ai/api/chunk/update' \
           --header 'Content-Type: application/json' \
           --header 'Cookie: ai-editor=your_cookie_value_here' \
           --data '{
-              "card_uuid": "0b029764-6083-44ec-a741-7a278e7b1459",
+              "chunk_uuid": "0b029764-6083-44ec-a741-7a278e7b1459",
               "private": false
           }'
     ```
@@ -308,12 +308,12 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Semantically search for a card {{ tag: 'POST', label: '/api/card/search/:page' }}
+## Semantically search for a chunk {{ tag: 'POST', label: '/api/chunk/search/:page' }}
 
 <Row>
   <Col>
 
-    This route allows you to search the database by converting your query into a vector and searching for the most similar vectors in the database, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
+    This route allows you to search the database by converting your query into a vector and searching for the most similar vectors in the database, returning the top 25 chunks. You go through all the pages of chunks by incrementing the page number in the request URL.
 
     ### Required attributes
     <Properties>
@@ -335,24 +335,24 @@ The attachment model contains all the information about a card, including the au
 
     ### Response
 
-    If the response is successful it will return a 200 status code with an 2D array of card objects and the collisions and the total pages of cards.
+    If the response is successful it will return a 200 status code with an 2D array of chunk objects and the collisions and the total pages of chunks.
 
     <Properties>
-      <Property name="score_cards" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
-          A 2D array of card objects and their collisions.
+      <Property name="score_chunks" type={<text>[<a href="chunk#the-chunk-model">Chunk</a>]</text>}>
+          A 2D array of chunk objects and their collisions.
       </Property>
       <Property name="total_pages" type="integer">
-          The total number of pages of cards.
+          The total number of pages of chunks.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/api/card/search/1">
+    <CodeGroup title="Request" tag="POST" label="/api/chunk/search/1">
 
     ```bash {{ title: 'cURL' }}
-      curl --G 'https://api.trieve.ai/api/card/search/1' \
+      curl --G 'https://api.trieve.ai/api/chunk/search/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -365,7 +365,7 @@ The attachment model contains all the information about a card, including the au
     </CodeGroup>
     ```json {{ title: 'Response' }}
     {
-      "score_cards": [
+      "score_chunks": [
         {
           "metadata": [
             {
@@ -379,7 +379,7 @@ The attachment model contains all the information about a card, including the au
                 "created_at": "2023-06-02T19:55:45.932469"
               },
               "content": "Flight testing provides data for M&S and demonstrates the end-to-end performance functions of the operational system...",
-              "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font></b></u><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\"><font size=\"3\" style=\"font-size: 12pt\">\n</font></span></u></font><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\">provides\n</span></u></font><u><b class=\"western\">data</b></u><font size=\"2\" style=\"font-size: 11pt\"><u>...",
+              "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font></b></u><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\"><font size=\"3\" style=\"font-size: 12pt\">\n</font></span></u></font><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\">provides\n</span></u></font><u><b class=\"western\">data</b></u><font size=\"2\" style=\"font-size: 11pt\"><u>...",
               "link": "https://armedservices.house.gov/_cache/files/7/b/7bd5a9f3-9f36-4f32-8faa-1060352a25f6/7D4903AC8BC9BBE7FE075FD28F459508.hhrg-116-as29-wstate-greavess-20190508.pdf",
               "qdrant_point_id": "8e5a6e59-1975-48d0-91ac-a1e14c4d87ca",
               "total_upvotes": 0,
@@ -396,7 +396,7 @@ The attachment model contains all the information about a card, including the au
             //... other collisions
           ]
         },
-        //... other cards
+        //... other chunks
       ]
     }
     ```
@@ -406,12 +406,12 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Search for a card using full-text {{ tag: 'POST', label: '/api/card/fulltextsearch/:page' }}
+## Search for a chunk using full-text {{ tag: 'POST', label: '/api/chunk/fulltextsearch/:page' }}
 
 <Row>
   <Col>
 
-    This route allows you to search the database using trigrams, returning the top 25 cards. You go through all the pages of cards by incrementing the page number in the request URL.
+    This route allows you to search the database using trigrams, returning the top 25 chunks. You go through all the pages of chunks by incrementing the page number in the request URL.
 
     ### Required attributes
 
@@ -434,24 +434,24 @@ The attachment model contains all the information about a card, including the au
 
       ### Response
 
-    If the response is successful it will return a 200 status code with an 2D array of card objects and the collisions and the total pages of cards.
+    If the response is successful it will return a 200 status code with an 2D array of chunk objects and the collisions and the total pages of chunks.
 
     <Properties>
-      <Property name="score_cards" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
-          A 2D array of card objects and their collisions.
+      <Property name="score_chunks" type={<text>[<a href="chunk#the-chunk-model">Chunk</a>]</text>}>
+          A 2D array of chunk objects and their collisions.
       </Property>
       <Property name="total_pages" type="integer">
-          The total number of pages of cards.
+          The total number of pages of chunks.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/api/card/fulltextsearch/1">
+    <CodeGroup title="Request" tag="POST" label="/api/chunk/fulltextsearch/1">
 
     ```bash {{ title: 'cURL' }}
-      curl --G 'https://api.trieve.ai/api/card/fulltextsearch/1' \
+      curl --G 'https://api.trieve.ai/api/chunk/fulltextsearch/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -462,7 +462,7 @@ The attachment model contains all the information about a card, including the au
     </CodeGroup>
     ```json {{ title: 'Response' }}
     {
-      "score_cards": [
+      "score_chunks": [
         {
           "metadata": [
             {
@@ -476,7 +476,7 @@ The attachment model contains all the information about a card, including the au
                 "created_at": "2023-06-02T19:55:45.932469"
               },
               "content": "Flight testing provides data for M&S and demonstrates the end-to-end performance functions of the operational system...",
-              "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font></b></u><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\"><font size=\"3\" style=\"font-size: 12pt\">\n</font></span></u></font><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\">provides\n</span></u></font><u><b class=\"western\">data</b></u><font size=\"2\" style=\"font-size: 11pt\"><u>...",
+              "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><u><b class=\"western\"><font size=\"3\" style=\"font-size: 12pt\">Flight\ntesting</font></b></u><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\"><font size=\"3\" style=\"font-size: 12pt\">\n</font></span></u></font><font size=\"2\" style=\"font-size: 11pt\"><u><span style=\"font-weight: normal\">provides\n</span></u></font><u><b class=\"western\">data</b></u><font size=\"2\" style=\"font-size: 11pt\"><u>...",
               "link": "https://armedservices.house.gov/_cache/files/7/b/7bd5a9f3-9f36-4f32-8faa-1060352a25f6/7D4903AC8BC9BBE7FE075FD28F459508.hhrg-116-as29-wstate-greavess-20190508.pdf",
               "qdrant_point_id": "8e5a6e59-1975-48d0-91ac-a1e14c4d87ca",
               "total_upvotes": 0,
@@ -493,9 +493,9 @@ The attachment model contains all the information about a card, including the au
             //... other collisions
           ]
         },
-        //... other cards
+        //... other chunks
       ],
-      "total_card_pages": 85
+      "total_chunk_pages": 85
     }
     ```
 
@@ -504,30 +504,30 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Get count of cards currently in the db {{ tag: 'GET', label: '/api/card/count' }}
+## Get count of chunks currently in the db {{ tag: 'GET', label: '/api/chunk/count' }}
 
 <Row>
   <Col>
 
-    This route allows you to get the total number of cards currently in the database, including collisions. It takes no attributes.
+    This route allows you to get the total number of chunks currently in the database, including collisions. It takes no attributes.
 
     ### Response
 
-    If the response is successful, it will return a 200 status code with the card_count.
+    If the response is successful, it will return a 200 status code with the chunk_count.
 
     <Properties>
       <Property name="total_count" type="number">
-        The total number of cards currently in the db.
+        The total number of chunks currently in the db.
       </Property>
     </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/api/card/count">
+    <CodeGroup title="Request" tag="GET" label="/api/chunk/count">
 
     ```bash {{ title: 'cURL' }}
-      curl --G 'https://api.trieve.ai/api/card/count' \
+      curl --G 'https://api.trieve.ai/api/chunk/count' \
         --header 'Content-Type: application/json'
     ```
 

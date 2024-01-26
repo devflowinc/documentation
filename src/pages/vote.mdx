@@ -3,11 +3,11 @@ export const description =
 
 # Votes
 
-A vote is how the community can provide feedback on the quality and relevance of a card. On this page, we will dive into the different vote routes you can use to manage votes programmatically. {{ className: 'lead' }}
+A vote is how the community can provide feedback on the quality and relevance of a chunk. On this page, we will dive into the different vote routes you can use to manage votes programmatically. {{ className: 'lead' }}
 
 ## The vote model
 
-The attachment model contains all the information about a card, including the author, file, date created, and formatted card content.
+The attachment model contains all the information about a chunk, including the author, file, date created, and formatted chunk content.
 
 ### Properties
 <Properties>
@@ -17,8 +17,8 @@ The attachment model contains all the information about a card, including the au
   <Property name="voted_user_id" type="string">
     The user who created the vote.
   </Property>
-  <Property name="card_metadata_id" type="string">
-    The card that the vote is on.
+  <Property name="chunk_metadata_id" type="string">
+    The chunk that the vote is on.
   </Property>
   <Property name="vote" type="boolean">
     Whether the vote is an upvote or downvote.
@@ -36,17 +36,17 @@ The attachment model contains all the information about a card, including the au
 
 ---
 
-## Vote on a card {{ tag: 'POST', label: '/api/vote' }}
+## Vote on a chunk {{ tag: 'POST', label: '/api/vote' }}
 
 <Row>
   <Col>
 
-    This route allows you to add an upvote or downvote to a card. (Must be authenticated to use)
+    This route allows you to add an upvote or downvote to a chunk. (Must be authenticated to use)
 
     ### Required attributes
     <Properties>
-      <Property name="card_metadata_id" type="string">
-        The card you want to vote on.
+      <Property name="chunk_metadata_id" type="string">
+        The chunk you want to vote on.
       </Property>
       <Property name="vote" type="string">
         True to upvote, false to downvote.
@@ -72,7 +72,7 @@ The attachment model contains all the information about a card, including the au
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
-            "card_metadata_id": "115672bd-02e9-4f7d-986f-f462c95dcdbc",
+            "chunk_metadata_id": "115672bd-02e9-4f7d-986f-f462c95dcdbc",
             "vote": true
         }'
     ```
@@ -83,7 +83,7 @@ The attachment model contains all the information about a card, including the au
 {
   "id": "e3cb3761-0812-4125-baa1-6527d84f39be",
   "voted_user_id": "f5e17d3d-0f77-49af-ad21-0d42f9b2ed5e",
-  "card_metadata_id": "115672bd-02e9-4f7d-986f-f462c95dcdbc",
+  "chunk_metadata_id": "115672bd-02e9-4f7d-986f-f462c95dcdbc",
   "vote": true,
   "created_at": "2023-07-20T00:48:16.318202",
   "updated_at": "2023-07-20T00:48:16.318252",
@@ -95,12 +95,12 @@ The attachment model contains all the information about a card, including the au
 </Row>
 ---
 
-## Delete a Vote on a card {{ tag: 'DELETE', label: '/vote/:id' }}
+## Delete a Vote on a chunk {{ tag: 'DELETE', label: '/vote/:id' }}
 
 <Row>
   <Col>
 
-    This route allows you to delete the upvote or downvote on a card that you made. (Must be authenticated to use)
+    This route allows you to delete the upvote or downvote on a chunk that you made. (Must be authenticated to use)
 
       ### Response
 

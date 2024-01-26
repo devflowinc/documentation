@@ -29,7 +29,7 @@ Any given account is only allowed to have one API key. If you already have an AP
 ## 4. Upload your first document chunk
 
 <Note>
-  We call document chunks `cards` in the API.
+  We call document chunks `chunks` in the API.
 </Note>
 
 <CodeGroup>
@@ -42,7 +42,7 @@ fetch(url, {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    card_html: "My first card!"
+    chunk_html: "My first chunk!"
   })
 })
 ```
@@ -53,6 +53,6 @@ fetch(url, {
 
 Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further:
 
-- [Endpoint for creating a RAG completion based on some cards](https://api.trieve.ai/redoc#tag/card/operation/generate_off_cards)
-- [Endpoint for getting recommendations of cards similar to some other arbitrary cards](https://api.trieve.ai/redoc#tag/card/operation/get_recommended_cards)
+- [Endpoint for creating a RAG completion based on some chunks](https://api.trieve.ai/redoc#tag/chunk/operation/generate_off_chunks)
+- [Endpoint for getting recommendations of chunks similar to some other arbitrary chunks](https://api.trieve.ai/redoc#tag/chunk/operation/get_recommended_chunks)
 - [Example JS client code for reading a completion stream](https://github.com/devflowinc/trieve/blob/main/search/src/components/ChatPopup.tsx#L45-L137)

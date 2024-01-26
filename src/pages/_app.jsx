@@ -26,6 +26,23 @@ export default function App({ Component, pageProps }) {
           <title>Trieve API Reference</title>
         )}
         <meta name="description" content={pageProps.description} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="https://cdn.trieve.ai/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="https://cdn.trieve.ai/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="https://cdn.trieve.ai/favicon-16x16.png"
+        />
       </Head>
       <MDXProvider components={mdxComponents}>
         <Layout {...Component.layoutProps} {...pageProps}>

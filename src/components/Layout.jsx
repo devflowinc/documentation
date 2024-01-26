@@ -18,7 +18,7 @@ export function Layout({ children, sections = [], showFeedbackForm = true }) {
             <div className="hidden align-middle lg:flex">
               <Link href="/" aria-label="Home">
                 <Image
-                  src="/logo_transparent.png"
+                  src="https://cdn.trieve.ai/trieve-logo.png"
                   alt="logo"
                   width={35}
                   height={35}

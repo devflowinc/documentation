@@ -1,13 +1,13 @@
 export const description =
   'On this page, we’ll dive into the different collection routes you can use to manage collections programmatically.'
 
-# Card Collections
+# Chunk Collections
 
-Collections are groups of cards that are either user-created or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
+Collections are groups of chunks that are either user-created or automatically created from files that are uploaded. On this page, we'll dive into how to manage collections programmatically. {{ className: 'lead' }}
 
 ## The collection model
 
-The collection model contains all the information about your collections, including what cards are in the collection and the collection's name, description, and author.
+The collection model contains all the information about your collections, including what chunks are in the collection and the collection's name, description, and author.
 
 ### Properties
 
@@ -105,7 +105,7 @@ The collection model contains all the information about your collections, includ
 
 ---
 
-## Create a collection {{ tag: 'POST', label: '/api/card_collection' }}
+## Create a collection {{ tag: 'POST', label: '/api/chunk_collection' }}
 
 <Row>
   <Col>
@@ -138,15 +138,15 @@ The collection model contains all the information about your collections, includ
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/api/card_collection">
+    <CodeGroup title="Request" tag="POST" label="/api/chunk_collection">
 
     ```bash {{ title: 'cURL' }}
-      curl -L -g 'https://api.trieve.ai/api/card_collection' \
+      curl -L -g 'https://api.trieve.ai/api/chunk_collection' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         -d '{
             "name": "Debating for these guys",
             "is_public": false,
-            "description": "More data about this collection of card"
+            "description": "More data about this collection of chunk"
         }'
     ```
 
@@ -157,12 +157,12 @@ The collection model contains all the information about your collections, includ
 
 ---
 
-## Delete a collection {{ tag: 'DELETE', label: '/api/card_collection' }}
+## Delete a collection {{ tag: 'DELETE', label: '/api/chunk_collection' }}
 
 <Row>
   <Col>
 
-    This route allows you to delete collections. Note: This will delete the collection, but not the card inside of it.
+    This route allows you to delete collections. Note: This will delete the collection, but not the chunk inside of it.
 
     ### Required attributes
 
@@ -178,10 +178,10 @@ The collection model contains all the information about your collections, includ
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="DELETE" label="/api/card_collection">
+    <CodeGroup title="Request" tag="DELETE" label="/api/chunk_collection">
 
     ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.trieve.ai/api/card_collection \
+    curl -X DELETE https://api.trieve.ai/api/chunk_collection \
       --header 'Cookie: ai-editor=your_cookie_value_here'\
       -d '{
           "collection_id": "1890301f-0e2f-4298-836c-19d74a9a778b"
@@ -194,7 +194,7 @@ The collection model contains all the information about your collections, includ
 </Row>
 ---
 
-## Update a collection {{ tag: 'PUT', label: '/api/card_collections' }}
+## Update a collection {{ tag: 'PUT', label: '/api/chunk_collections' }}
 
 <Row>
   <Col>
@@ -229,10 +229,10 @@ The collection model contains all the information about your collections, includ
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="PUT" label="/api/card_collection">
+    <CodeGroup title="Request" tag="PUT" label="/api/chunk_collection">
 
     ```bash {{ title: 'cURL' }}
-      curl -L -X PUT 'https://api.trieve.ai/api/card_collection' \
+      curl -L -X PUT 'https://api.trieve.ai/api/chunk_collection' \
         -H 'Content-Type: application/json' \
         -H 'Cookie: ai-editor=your_cookie_value_here' \
         -d '{
@@ -247,30 +247,30 @@ The collection model contains all the information about your collections, includ
 
 ---
 
-## Retrieve the card from a collection {{ tag: 'GET', label: '/api/card_collection/:collection_id/:page' }}
+## Retrieve the chunk from a collection {{ tag: 'GET', label: '/api/chunk_collection/:collection_id/:page' }}
 
 <Row>
   <Col>
 
-    This route allows you to retrieve the card from a collection by providing the collection id. (Must be authenticated if the collection is private)
+    This route allows you to retrieve the chunk from a collection by providing the collection id. (Must be authenticated if the collection is private)
 
     ### Response
 
-    If the response is successful it will return a 200 status code with an array of card objects. 
+    If the response is successful it will return a 200 status code with an array of chunk objects. 
 
     <Properties>
-      <Property name="bookmarks" type={<a href="card#the-card-model">Card</a>}>
-          An array of card objects which are contained in the collection.
+      <Property name="bookmarks" type={<a href="chunk#the-chunk-model">Chunk</a>}>
+          An array of chunk objects which are contained in the collection.
       </Property>
     </Properties>
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/api/card_collection/:collection_id/:page">
+    <CodeGroup title="Request" tag="GET" label="/api/chunk_collection/:collection_id/:page">
 
     ```bash {{ title: 'cURL' }}
 
-    curl -L 'https://api.trieve.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2/1' \
+    curl -L 'https://api.trieve.ai/api/chunk_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2/1' \
       -H 'Cookie: ai-editor=your_cookie_value_here'
     ```
     </CodeGroup>
@@ -291,7 +291,7 @@ The collection model contains all the information about your collections, includ
                         "created_at": "2023-07-20T11:54:39.303730"
                     },
                     "content": "Though by itself, the Canadian Indian free passage right issue is interesting as yet another chapter...",
-                    "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font face=\"Calibri, serif\">Though\nby itself, the Canadian Indian free...",
+                    "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font face=\"Calibri, serif\">Though\nby itself, the Canadian Indian free...",
                     "link": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1267977",
                     "qdrant_point_id": "ce80424d-6202-4612-bdaa-1c7e7001b088",
                     "total_upvotes": 0,
@@ -316,18 +316,18 @@ The collection model contains all the information about your collections, includ
 </Row>
 ---
 
-## Add a card to a collection {{ tag: 'POST', label: '/api/card_collection/:collection_id' }}
+## Add a chunk to a collection {{ tag: 'POST', label: '/api/chunk_collection/:collection_id' }}
 
 <Row>
   <Col>
 
-    This route allows you to add a card to a collection. (Must be authenticated and your collection)
+    This route allows you to add a chunk to a collection. (Must be authenticated and your collection)
 
     ### Required attributes
 
     <Properties>
-      <Property name="card_metadata_id" type="string">
-        The id of the card you wish to add to the collection.
+      <Property name="chunk_metadata_id" type="string">
+        The id of the chunk you wish to add to the collection.
       </Property>
 
     </Properties>
@@ -339,14 +339,14 @@ The collection model contains all the information about your collections, includ
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="POST" label="/api/card_collection/:collection_id">
+    <CodeGroup title="Request" tag="POST" label="/api/chunk_collection/:collection_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -L 'https::api.trieve.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
+    curl -L 'https::api.trieve.ai/api/chunk_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
       -H 'Content-Type: application/json' \
       -H 'Cookie: ai-editor=your_cookie_value_here' \
       -d '{
-          "card_metadata_id": "2cbcebbd-81c6-478b-bb29-e84bd3bd7cea"
+          "chunk_metadata_id": "2cbcebbd-81c6-478b-bb29-e84bd3bd7cea"
       }'
     ```
 
@@ -356,18 +356,18 @@ The collection model contains all the information about your collections, includ
 </Row>
 ---
 
-## Remove a card from a collection {{ tag: 'DELETE', label: '/api/card_collection/:id' }}
+## Remove a chunk from a collection {{ tag: 'DELETE', label: '/api/chunk_collection/:id' }}
 
 <Row>
   <Col>
 
-    This route allows you to remove a card from a collection. (Must be authenticated and your collection)
+    This route allows you to remove a chunk from a collection. (Must be authenticated and your collection)
 
     ### Required attributes
 
     <Properties>
-      <Property name="card_metadata_id" type="string">
-        The id of the card you wish to remove from the collection.
+      <Property name="chunk_metadata_id" type="string">
+        The id of the chunk you wish to remove from the collection.
       </Property>
     </Properties>
 
@@ -380,11 +380,11 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="DELETE" label="/api/ard_collection/:collection_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -X DELETE 'https::api.trieve.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
+    curl -X DELETE 'https::api.trieve.ai/api/chunk_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
       -H 'Content-Type: application/json' \
       -H 'Cookie: ai-editor=your_cookie_value_here' \
       -d '{
-          "card_metadata_id": "2cbcebbd-81c6-478b-bb29-e84bd3bd7cea"
+          "chunk_metadata_id": "2cbcebbd-81c6-478b-bb29-e84bd3bd7cea"
       }'
     ```
     </CodeGroup>
@@ -393,40 +393,40 @@ The collection model contains all the information about your collections, includ
 </Row>
 ---
 
-## Retrieve the collections a card is in {{ tag: 'POST', label: '/api/card_collections/bookmark' }}
+## Retrieve the collections a chunk is in {{ tag: 'POST', label: '/api/chunk_collections/bookmark' }}
 
 <Row>
   <Col>
 
-    This route allows you to retrieve the collections a card is in. (Must be authenticated)
+    This route allows you to retrieve the collections a chunk is in. (Must be authenticated)
 
     ### Required attributes
 
     <Properties>
       <Property name="collection_ids" type="string">
-        A comma separated list of card ids you want to retrieve the collections for.
+        A comma separated list of chunk ids you want to retrieve the collections for.
       </Property>
     </Properties>
 
     ### Response
 
-    If the response is successful it will return a 200 status code and an array of objects with card_ids and their associated collection_ids.
+    If the response is successful it will return a 200 status code and an array of objects with chunk_ids and their associated collection_ids.
 
     <Properties>
-      <Property name="card_uuid" type="string">
-        The id of the card.
+      <Property name="chunk_uuid" type="string">
+        The id of the chunk.
       </Property>
       <Property name="collection_ids" type="array">
-        An array of collection ids that the card is in.
+        An array of collection ids that the chunk is in.
       </Property>
     </Properties>
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/api/card_collection/bookmark">
+    <CodeGroup title="Request" tag="GET" label="/api/chunk_collection/bookmark">
 
     ```bash {{ title: 'cURL' }}
-      curl -L 'https::api.trieve.ai/api/card_collection/bookmark' \
+      curl -L 'https::api.trieve.ai/api/chunk_collection/bookmark' \
             -H 'Content-Type: application/json' \
             -H 'Cookie: ai-editor=your_cookie_value_here' \
             -d '{
@@ -438,11 +438,11 @@ The collection model contains all the information about your collections, includ
 ```json {{ title: 'Response' }}
 [
   {
-    "card_uuid": "94923ec3-ead5-418f-8d27-3319e56a8297",
+    "chunk_uuid": "94923ec3-ead5-418f-8d27-3319e56a8297",
     "collection_ids": ["566f5cde-4f4c-4efe-9abc-90519c1ee110"]
   },
   {
-    "card_uuid": "2cbcebbd-81c6-478b-bb29-e84bd3bd7cea",
+    "chunk_uuid": "2cbcebbd-81c6-478b-bb29-e84bd3bd7cea",
     "collection_ids": ["65c6dcce-2c4b-4466-874b-d194bcf91ae2"]
   }
 ]
@@ -452,12 +452,12 @@ The collection model contains all the information about your collections, includ
 </Row>
 ---
 
-## Search semantically within a collection {{ tag: 'POST', label: '/api/card_collection/search/:page' }}
+## Search semantically within a collection {{ tag: 'POST', label: '/api/chunk_collection/search/:page' }}
 
 <Row>
   <Col>
 
-    This route allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 card. You go through all the pages of card by incrementing the page number in the request URL.
+    This route allows you to search the collection by converting your query into a vector and searching for the most similar vectors in the collection, returning the top 25 chunk. You go through all the pages of chunk by incrementing the page number in the request URL.
 
     ### Required attributes
 
@@ -484,27 +484,27 @@ The collection model contains all the information about your collections, includ
         ### Response
 
 
-        If the response is successful it will return a 200 status code with  2D array of card objects and its collisions, the collection, and the total pages of cards.
+        If the response is successful it will return a 200 status code with  2D array of chunk objects and its collisions, the collection, and the total pages of chunks.
 
         <Properties>
-          <Property name="bookmarks" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
-          A 2D array of card objects and their collisions.
+          <Property name="bookmarks" type={<text>[<a href="chunk#the-chunk-model">Chunk</a>]</text>}>
+          A 2D array of chunk objects and their collisions.
           </Property>
           <Property name="collection" type={<a href="#the-collection-model">Collection</a>}>
-              The collection that the cards are from.
+              The collection that the chunks are from.
           </Property>
           <Property name="total_pages" type="integer">
-              The total number of pages of cards in the search result.
+              The total number of pages of chunks in the search result.
           </Property>
         </Properties>
 
   </Col>
   <Col sticky>
 
-    <CodeGroup title="Request" tag="GET" label="/api/card_collection/search/:page">
+    <CodeGroup title="Request" tag="GET" label="/api/chunk_collection/search/:page">
 
     ```bash {{ title: 'cURL' }}
-      curl -L 'https://api.trieve.ai/api/card_collection/search/1' \
+      curl -L 'https://api.trieve.ai/api/chunk_collection/search/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -532,7 +532,7 @@ The collection model contains all the information about your collections, includ
                 "created_at": "2023-07-20T11:54:39.303730"
               },
               "content": "(CNN) The first polling reactions to last week's summit between President Donald Trump and Russian President Vladimir Putin in Helsinki, Finland, ...",
-              "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font size=\"1\" style=\"font-size: 8pt\">(CNN)\n</font><font size=\"2\" ...",
+              "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font size=\"1\" style=\"font-size: 8pt\">(CNN)\n</font><font size=\"2\" ...",
               "link": "https://www.cnn.com/2018/07/24/politics/voters-democrats-republicans-economy-culture-divide-president-trump/index.html",
               "qdrant_point_id": "d7955192-c194-4c97-b957-ff93f49d8575",
               "total_upvotes": 0,
@@ -568,7 +568,7 @@ The collection model contains all the information about your collections, includ
 </Row>
 ---
 
-## Search a collection using full-text {{ tag: 'POST', label: '/api/card_collection/fulltextsearch/:page' }}
+## Search a collection using full-text {{ tag: 'POST', label: '/api/chunk_collection/fulltextsearch/:page' }}
 
 <Row>
   <Col>
@@ -600,17 +600,17 @@ The collection model contains all the information about your collections, includ
         ### Response
 
 
-        If the response is successful it will return a 200 status code with  2D array of card objects and its collisions, the collection, and the total pages of cards.
+        If the response is successful it will return a 200 status code with  2D array of chunk objects and its collisions, the collection, and the total pages of chunks.
 
         <Properties>
-          <Property name="bookmarks" type={<text>[<a href="card#the-card-model">Card</a>]</text>}>
-          A 2D array of card objects and their collisions.
+          <Property name="bookmarks" type={<text>[<a href="chunk#the-chunk-model">Chunk</a>]</text>}>
+          A 2D array of chunk objects and their collisions.
           </Property>
           <Property name="collection" type={<a href="#the-collection-model">Collection</a>}>
-              The collection that the cards are from.
+              The collection that the chunks are from.
           </Property>
           <Property name="total_pages" type="integer">
-              The total number of pages of cards in the search result.
+              The total number of pages of chunks in the search result.
           </Property>
         </Properties>
   </Col>
@@ -619,7 +619,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="GET" label="/v1/collections/L7cGNIBKZiNJ6wqF">
 
     ```bash {{ title: 'cURL' }}
-      curl -L 'https://api.trieve.ai/api/card_collection/fulltextsearch/1' \
+      curl -L 'https://api.trieve.ai/api/chunk_collection/fulltextsearch/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -646,7 +646,7 @@ The collection model contains all the information about your collections, includ
                 "created_at": "2023-07-20T11:54:39.303730"
               },
               "content": "(CNN) The first polling reactions to last week's summit between President Donald Trump and Russian President Vladimir Putin in Helsinki, Finland, ...",
-              "card_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font size=\"1\" style=\"font-size: 8pt\">(CNN)\n</font><font size=\"2\" ...",
+              "chunk_html": "\n<p class=\"western\" style=\"line-height: 108%; margin-bottom: 0.11in\"><font size=\"1\" style=\"font-size: 8pt\">(CNN)\n</font><font size=\"2\" ...",
               "link": "https://www.cnn.com/2018/07/24/politics/voters-democrats-republicans-economy-culture-divide-president-trump/index.html",
               "qdrant_point_id": "d7955192-c194-4c97-b957-ff93f49d8575",
               "total_upvotes": 0,

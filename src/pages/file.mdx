@@ -3,11 +3,11 @@ export const description =
 
 # Files
 
-Files are where most of the cards on Vault come from. These are stored on the server in an s3 bucket. On this page, we’ll dive into the different conversation routes you can use to manage files programmatically. We'll look at how to create, update, and delete files. {{ className: 'lead' }}
+Files are where most of the chunks on Vault come from. These are stored on the server in an s3 bucket. On this page, we’ll dive into the different conversation routes you can use to manage files programmatically. We'll look at how to create, update, and delete files. {{ className: 'lead' }}
 
 ## The file model
 
-The conversation model contains all the information about the files you upload. They can be linked to a specific collection and you can access the file itself from each card in it. 
+The conversation model contains all the information about the files you upload. They can be linked to a specific collection and you can access the file itself from each chunk in it. 
 
 ### Properties
 
@@ -118,7 +118,7 @@ The conversation model contains all the information about the files you upload. 
 
     <Properties>
       <Property name="tag_set" type="string">
-        The tags you want assocaiated with the cards in the file.
+        The tags you want assocaiated with the chunks in the file.
       </Property>
     </Properties>
 

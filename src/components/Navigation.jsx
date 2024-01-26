@@ -96,7 +96,7 @@ function ActivePageMarker({ group, pathname }) {
   return (
     <motion.div
       layout
-      className="absolute left-2 h-6 w-px bg-emerald-500"
+      className="absolute left-2 h-6 w-px bg-fuchsia-500"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2 } }}
       exit={{ opacity: 0 }}
@@ -221,19 +221,15 @@ export const navigation = [
       { title: 'Topic', href: 'https://api.trieve.ai/redoc#tag/topic' },
       { title: 'Message', href: 'https://api.trieve.ai/redoc#tag/message' },
       { title: 'Vote', href: 'https://api.trieve.ai/redoc#tag/vote' },
-      { title: 'Card', href: 'https://api.trieve.ai/redoc#tag/card' },
+      { title: 'Chunk', href: 'https://api.trieve.ai/redoc#tag/chunk' },
       {
         title: 'Top Users',
         href: 'https://api.trieve.ai/redoc#tag/top_users',
       },
-      {
-        title: 'Top Cards',
-        href: 'https://api.trieve.ai/redoc#tag/top_cards',
-      },
       { title: 'User', href: 'https://api.trieve.ai/redoc#tag/user' },
       {
         title: 'Collection',
-        href: 'https://api.trieve.ai/redoc#tag/card_collection',
+        href: 'https://api.trieve.ai/redoc#tag/chunk_collection',
       },
       { title: 'File', href: 'https://api.trieve.ai/redoc#tag/file' },
       {
