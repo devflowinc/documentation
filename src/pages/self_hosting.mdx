@@ -19,9 +19,9 @@ This guide will demonstrate how to self host the Vault API on your own server or
     You will need to configure your DNS to point to your server. You can do this by creating an A record for each of the subdomains you want to use.
 
     ```
-    A	<your-server-ip>	self-chat.arguflow.ai
-    A	<your-server-ip>	self-api.arguflow.ai
-    A	<your-server-ip>	self-search.arguflow.ai
+    A	<your-server-ip>	self-chat.trieve.ai
+    A	<your-server-ip>	self-api.trieve.ai
+    A	<your-server-ip>	self-search.trieve.ai
     ```
 ## Step 2 - Install Docker on machine
 
@@ -31,8 +31,8 @@ Follow the guide here to install docker on your server: https://docs.docker.com/
 
 
 ```sh {{ title: 'Shell' }}
-git clone https://github.com/arguflow/arguflow
-cd arguflow
+git clone https://github.com/devflowinc/trieve
+cd trieve
 ```
 
 ## Step 4 - Configure the Environment Variables for the API
@@ -54,10 +54,10 @@ QDRANT_API_KEY
 OPENAI_API_KEY
 
 # For CHAT
-VITE_API_HOST=https://self-api.arguflow.ai/api
-VITE_SEARCH_URL=https://self-api.arguflow.ai/api
+VITE_API_HOST=https://self-api.trieve.ai/api
+VITE_SEARCH_URL=https://self-api.trieve.ai/api
 # For SEARCH
-PUBLIC_API_HOST=https://self-api.arguflow.ai/api
+PUBLIC_API_HOST=https://self-api.trieve.ai/api
 ```
 
 Everything else can be left as default but there are some passwords that may want to be hardened if this
@@ -94,21 +94,21 @@ sudo cp Caddyfile /etc/caddy/Caddyfile
 ```{{ title: '/etc/caddy/Caddyfile' }}
 # Global options
 {
-    email developer@arguflow.gg
+    email developer@trieve.ai
 }
 
-# Define a site block for chat.arguflow.ai
-self-chat.arguflow.ai {
+# Define a site block for chat.trieve.ai
+self-chat.trieve.ai {
     reverse_proxy localhost:3000
 }
 
-# Define a site block for api.arguflow.ai
-self-api.arguflow.ai {
+# Define a site block for api.trieve.ai
+self-api.trieve.ai {
     reverse_proxy localhost:8090
 }
 
-# Define a site block for search.arguflow.ai
-self-search.arguflow.ai {
+# Define a site block for search.trieve.ai
+self-search.trieve.ai {
     reverse_proxy localhost:3001
 }
 ```
@@ -122,4 +122,4 @@ sudo systemctl restart caddy.service
 
 ## Step 7 - Profit 🦀🦀🦀
 
-Congratulations you have now self hosted the Arguflow API. You can now use the API by navigating to your domain name in your browser on either chat or search.
+Congratulations you have now self hosted the Trieve API. You can now use the API by navigating to your domain name in your browser on either chat or search.

@@ -115,7 +115,7 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="POST" label="/api/card">
 
     ```bash {{ title: 'cURL' }}
-    curl --location 'https://api.arguflow.ai/api/card' \
+    curl --location 'https://api.trieve.ai/api/card' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -244,7 +244,7 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="DELETE" label="/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d">
 
     ```bash {{ title: 'cURL' }}
-    curl https://api.arguflow.ai/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d \
+    curl https://api.trieve.ai/api/card/19ddebb4-fc9f-4a8c-8a37-020b9b8b536d \
        --header 'Cookie: ai-editor=your_cookie_value_here'
     ```
     </CodeGroup>
@@ -292,7 +292,7 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="PUT" label="/v1/update">
 
     ```bash {{ title: 'cURL' }}
-      curl --location --request PUT 'https://api.arguflow.ai/api/card/update' \
+      curl --location --request PUT 'https://api.trieve.ai/api/card/update' \
           --header 'Content-Type: application/json' \
           --header 'Cookie: ai-editor=your_cookie_value_here' \
           --data '{
@@ -352,7 +352,7 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="POST" label="/api/card/search/1">
 
     ```bash {{ title: 'cURL' }}
-      curl --G 'https://api.arguflow.ai/api/card/search/1' \
+      curl --G 'https://api.trieve.ai/api/card/search/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -451,7 +451,7 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="POST" label="/api/card/fulltextsearch/1">
 
     ```bash {{ title: 'cURL' }}
-      curl --G 'https://api.arguflow.ai/api/card/fulltextsearch/1' \
+      curl --G 'https://api.trieve.ai/api/card/fulltextsearch/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -527,7 +527,7 @@ The attachment model contains all the information about a card, including the au
     <CodeGroup title="Request" tag="GET" label="/api/card/count">
 
     ```bash {{ title: 'cURL' }}
-      curl --G 'https://api.arguflow.ai/api/card/count' \
+      curl --G 'https://api.trieve.ai/api/card/count' \
         --header 'Content-Type: application/json'
     ```
 

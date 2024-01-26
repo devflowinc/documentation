@@ -1,31 +1,31 @@
 export const description =
-  'In this guide, we’ll look at how Arguflow handles duplicates to achieve maximal-marginal-relevance (MMR).'
+  'In this guide, we’ll look at how Trieve handles duplicates to achieve maximal-marginal-relevance (MMR).'
 
 # Card duplicates
 
-One of the stand-out features of Arguflow is how we detect and handle duplicates. In this guide, we’ll look at how Arguflow handles duplicates to achieve maximal-marginal-relevance (MMR). {{ className: 'lead' }}
+One of the stand-out features of Trieve is how we detect and handle duplicates. In this guide, we’ll look at how Trieve handles duplicates to achieve maximal-marginal-relevance (MMR). {{ className: 'lead' }}
 
-Our primary competitors like Vectara and Pinecone are flat out missing this feature with no intent to implement it. This is a huge advantage for Arguflow, as it allows us to provide a much better user experience.
+Our primary competitors like Vectara and Pinecone are flat out missing this feature with no intent to implement it. This is a huge advantage for Trieve, as it allows us to provide a much better user experience.
 
 ## What is MMR?
 
-Maximal-marginal-relevance (MMR) is a technique used in information retrieval to select a diverse set of results. It is used to prevent redundancy in search results, and is used in Arguflow to prevent duplicate cards from being returned in search results on a top-level.
+Maximal-marginal-relevance (MMR) is a technique used in information retrieval to select a diverse set of results. It is used to prevent redundancy in search results, and is used in Trieve to prevent duplicate cards from being returned in search results on a top-level.
 
-## Why do we call duplicates "collisions" in Arguflow?
+## Why do we call duplicates "collisions" in Trieve?
 
 When you vector'ize data with an embedding model, you are converting it into a vector that exists in some `n` dimensional space.
 
 The distance between two vectors is then the the "similarity" between the two pieces of data. Vectors can be close enough that you can imagine them actually colliding in the `n` dimensional space as a "semantic collision".
 
-In Arguflow, you can set an environment variable called `DUPLICATE_DISTANCE_THRESHOLD` to determine how similar two vectors have to be to be considered a duplicate. The default value is `0.95`, which means that if two vectors have a cosine similarity of 0.95 or above, they are considered duplicates.
+In Trieve, you can set an environment variable called `DUPLICATE_DISTANCE_THRESHOLD` to determine how similar two vectors have to be to be considered a duplicate. The default value is `0.95`, which means that if two vectors have a cosine similarity of 0.95 or above, they are considered duplicates.
 
-## How Arguflow's business logic for handling duplicates works
+## How Trieve's business logic for handling duplicates works
 
 ### 1. The CardCollisions model
 
-We create the `card_collisions` SQL table in [this migration](https://github.com/arguflow/arguflow/blob/main/server/migrations/2023-06-15-202339_create-card-collision-table/up.sql). There are a couple of sub-sequent migrations to edit the table, but the core of the table is created in that migration.
+We create the `card_collisions` SQL table in [this migration](https://github.com/devflowinc/trieve/blob/main/server/migrations/2023-06-15-202339_create-card-collision-table/up.sql). There are a couple of sub-sequent migrations to edit the table, but the core of the table is created in that migration.
 
-The CardCollisions model is then defined in [this file](https://github.com/arguflow/arguflow/blob/main/server/src/data/models.rs#L354C1-L374) as shown below:
+The CardCollisions model is then defined in [this file](https://github.com/devflowinc/trieve/blob/main/server/src/data/models.rs#L354C1-L374) as shown below:
 
 ```rs
 #[derive(Debug, Serialize, Deserialize, Queryable, Selectable, Insertable, Clone)]
@@ -60,7 +60,7 @@ let first_semantic_result = global_unfiltered_top_match_query(embedding_vector.c
 
 If the `first_semantic_result` is within the `DUPLICATE_DISTANCE_THRESHOLD` of `0.95`, we then only create a `CardCollisions` row and not a `Qdrant` point. This is because we don't want to create a `Qdrant` point for a duplicate card. It will worsen search time performance and prevent MMR from working.
 
-The implementation of this logic can be found in [card_handler.rs here](https://github.com/arguflow/arguflow/blob/main/server/src/handlers/card_handler.rs#L211-L323).
+The implementation of this logic can be found in [card_handler.rs here](https://github.com/devflowinc/trieve/blob/main/server/src/handlers/card_handler.rs#L211-L323).
 
 ## The result in our default search UI
 

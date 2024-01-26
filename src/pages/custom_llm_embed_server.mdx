@@ -1,11 +1,11 @@
 export const description =
-  'This guide will demonstrate how to create a custom embedding model for the Arguflow API.'
+  'This guide will demonstrate how to create a custom embedding model for the Trieve API.'
 
-# How to use a Custom Embedding Model or LLM with Arguflow
+# How to use a Custom Embedding Model or LLM with Trieve
 
 The LLM is the easiest thing to replace, all you have to do is set the `OPENAI_BASE_URL` to an OpenAI compliant API endpoint for text completions using a `gpt-3.5-turbo` model. The easiest way to do this is by self-hosting [LocalAI](https://github.com/mudler/LocalAI).
 
-This guide will demonstrate how to build a custom embedding server for the Arguflow API. This will allow you to use your own models for generating embeddings and not use OpenAI.
+This guide will demonstrate how to build a custom embedding server for the Trieve API. This will allow you to use your own models for generating embeddings and not use OpenAI.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ model = AutoModel.from_pretrained("bert-base-uncased")
 
 ## Step 3: Create the Flask app
 
-Create the Flask app and add a route for the `/embed` endpoint. This endpoint will be used to generate embeddings for the Arguflow API.
+Create the Flask app and add a route for the `/embed` endpoint. This endpoint will be used to generate embeddings for the Trieve API.
 
 ```python
 app = Flask(__name__)
@@ -48,7 +48,7 @@ def embed():
 
 ## Step 4: Generate embeddings
 
-Now we can generate embeddings for the Arguflow API. The Arguflow API will send a POST request to the `/embed` endpoint with the following JSON body:
+Now we can generate embeddings for the Trieve API. The Trieve API will send a POST request to the `/embed` endpoint with the following JSON body:
 
 ```json
 {
@@ -105,9 +105,9 @@ You should see the following output:
 }
 ```
 
-## Step 6: Call the API from the Arguflow API
+## Step 6: Call the API from the Trieve API
 
-Now that we have a custom embedding server, we can use it to generate embeddings for the Arguflow API. To do this, we need to update the `.env` file to use the custom embedding server. Open the `.env` file and update the `embedding_server` field to use the custom embedding server:
+Now that we have a custom embedding server, we can use it to generate embeddings for the Trieve API. To do this, we need to update the `.env` file to use the custom embedding server. Open the `.env` file and update the `embedding_server` field to use the custom embedding server:
 
 ```python
 EMBEDDING_SERVER_CALL = <Link to embedding server>

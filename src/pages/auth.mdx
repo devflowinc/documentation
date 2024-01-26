@@ -12,7 +12,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 <Row>
   <Col>
 
-    This route allows you to invite a user to register for Arguflow vault. The user will receive an email with a link to set their password.
+    This route allows you to invite a user to register for Trieve vault. The user will receive an email with a link to set their password.
 
     ### Required request body attributes
 
@@ -36,7 +36,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
     curl -X POST \
-      https://api.arguflow.ai/invitation \
+      https://api.trieve.ai/invitation \
       -H 'Content-Type: application/json' \
       -H 'Cookie: ai-editor=your_cookie_value_here' \
       -d '{
@@ -98,7 +98,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
     curl -X POST \
-      https://api.arguflow.ai/register/{invitation_id} \
+      https://api.trieve.ai/register/{invitation_id} \
       -H 'Content-Type: application/json' \
       -H 'Cookie: ai-editor=your_cookie_value_here' \
       -d '{
@@ -154,7 +154,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
       curl --request POST \
-        --url https://api.arguflow.ai/api/auth \
+        --url https://api.trieve.ai/api/auth \
         --header 'Content-Type: application/json' \
         --data '{
           "email": "foobar@bar.com",
@@ -187,7 +187,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
       curl --request DELETE \
-        --url https://api.arguflow.ai/api/auth \
+        --url https://api.trieve.ai/api/auth \
         --header 'Content-Type: application/json' 
     ```
     </CodeGroup>
@@ -233,7 +233,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
     curl --request GET \
-      --url https://api.arguflow.ai/api/auth \
+      --url https://api.trieve.ai/api/auth \
       --cookie 'ai-editor=your_cookie_value_here'
     ```
 
@@ -269,7 +269,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
     curl --request GET \
-      --url https://api.arguflow.ai/api/password/foobar@bar.com \
+      --url https://api.trieve.ai/api/password/foobar@bar.com \
       --cookie 'ai-editor=your_cookie_value_here'
     ```
     </CodeGroup>
@@ -296,7 +296,7 @@ Auth routes are used to invite, register, manage, and authenticate users.
 
     ```bash {{ title: 'cURL' }}
       curl --request POST \
-        --url https://api.arguflow.ai/api/password \
+        --url https://api.trieve.ai/api/password \
         --header 'Content-Type: application/json' \
         --data '{
           "email": "foobar@bar.com",

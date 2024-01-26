@@ -7,10 +7,10 @@ export default function NotFound() {
   return (
     <>
       <Head>
-        <title>Page not found - Arguflow API Reference</title>
+        <title>Page not found - Trieve API Reference</title>
         <script
           defer
-          data-domain="docs.arguflow.ai"
+          data-domain="docs.trieve.ai"
           src="https://perhaps.arguflow.com/js/script.js"
         ></script>
       </Head>

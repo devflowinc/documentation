@@ -72,13 +72,13 @@ export const Header = forwardRef(function Header({ className }, ref) {
       <div className="flex items-center gap-5">
         <nav className="hidden md:block">
           <ul role="list" className="flex items-center gap-8">
-            <TopLevelNavItem href="https://redoc.arguflow.ai/redoc">
+            <TopLevelNavItem href="https://api.trieve.ai/redoc">
               REST OpenAPI Docs
             </TopLevelNavItem>
-            <TopLevelNavItem href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg">
+            <TopLevelNavItem href="https://matrix.to/#/#trieve-general:matrix.zerodao.gg">
               Community
             </TopLevelNavItem>
-            <TopLevelNavItem href="https://github.com/arguflow/arguflow">
+            <TopLevelNavItem href="https://github.com/devflowinc/trieve">
               Github
             </TopLevelNavItem>
           </ul>

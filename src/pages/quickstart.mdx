@@ -1,20 +1,20 @@
 export const description =
-  'This guide will get you all set up and ready to use the Arguflow API. We’ll cover how to get an authentication token and make API requests with javascript.'
+  'This guide will get you all set up and ready to use the Trieve API. We’ll cover how to get an authentication token and make API requests with javascript.'
 
 # Quickstart/Authentication
 
-This guide will get you all set up and ready to use the Arguflow API. {{ className: 'lead' }}
+This guide will get you all set up and ready to use the Trieve API. {{ className: 'lead' }}
 
 <Note>
-  This guide assumes you already have Arguflow running locally or have an
-  Arguflow instance deployed. If you don't, check out the README{' '}
-  <a href="https://github.com/arguflow/arguflow">README</a> or{' '}
+  This guide assumes you already have Trieve running locally or have an
+  Trieve instance deployed. If you don't, check out the README{' '}
+  <a href="https://github.com/devflowinc/trieve">README</a> or{' '}
   <a href="/self-hosting-guide">self-hosting guide</a> to get started.
 </Note>
 
-## 1. Navigate to the search UI for your Arguflow instance and make an account or log in as the admin user
+## 1. Navigate to the search UI for your Trieve instance and make an account or log in as the admin user
 
-If you're running Arguflow locally, you can navigate to `http://localhost:3000` to access the search UI. If you're using a deployed instance, you can navigate to the URL you deployed to.
+If you're running Trieve locally, you can navigate to `http://localhost:3000` to access the search UI. If you're using a deployed instance, you can navigate to the URL you deployed to.
 
 ## 2. Once you're logged in, navigate to the settings page
 
@@ -53,6 +53,6 @@ fetch(url, {
 
 Great, you're now set up with an API client and have made your first request to the API. Here are a few links that might be handy as you venture further:
 
-- [Endpoint for creating a RAG completion based on some cards](https://redoc.arguflow.ai/redoc#tag/card/operation/generate_off_cards)
-- [Endpoint for getting recommendations of cards similar to some other arbitrary cards](https://redoc.arguflow.ai/redoc#tag/card/operation/get_recommended_cards)
-- [Example JS client code for reading a completion stream](https://github.com/arguflow/arguflow/blob/main/search/src/components/ChatPopup.tsx#L45-L137)
+- [Endpoint for creating a RAG completion based on some cards](https://api.trieve.ai/redoc#tag/card/operation/generate_off_cards)
+- [Endpoint for getting recommendations of cards similar to some other arbitrary cards](https://api.trieve.ai/redoc#tag/card/operation/get_recommended_cards)
+- [Example JS client code for reading a completion stream](https://github.com/devflowinc/trieve/blob/main/search/src/components/ChatPopup.tsx#L45-L137)

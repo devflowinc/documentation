@@ -3,7 +3,7 @@ export const description =
 
 # Why search before generate?
 
-The team at Arguflow has been working with text embedding models and LLM's since they day they came out. Literally for the longest time possible. Leveraging that experience, we have come to the conclusion that search should be done before generation. {{ className: 'lead' }}
+The team at Trieve has been working with text embedding models and LLM's since they day they came out. Literally for the longest time possible. Leveraging that experience, we have come to the conclusion that search should be done before generation. {{ className: 'lead' }}
 
 In this document, we will explain why we believe that search should be done before generation, and why fully-managed RAG is usually not the way to go.
 
@@ -32,13 +32,13 @@ Our default managed RAG system is a bit better than this as we generate an inter
 
 ## Still, sometimes when your users are not experts or lazy, fully managed RAG can be a good option
 
-It is for this option that we ship our default [chat UI](https://github.com/arguflow/arguflow/tree/main/chat) with the fully-managed RAG system. This is because we believe that for the below average user, fully-managed RAG is the best option. It is the easiest to use and requires the least amount of effort.
+It is for this option that we ship our default [chat UI](https://github.com/devflowinc/trieve/tree/main/chat) with the fully-managed RAG system. This is because we believe that for the below average user, fully-managed RAG is the best option. It is the easiest to use and requires the least amount of effort.
 
-If you host Arguflow, you will get the fully-managed RAG system along with the chat UI for free. You can use it if you want, or you can use the unmanaged RAG system. It is up to you and your users.
+If you host Trieve, you will get the fully-managed RAG system along with the chat UI for free. You can use it if you want, or you can use the unmanaged RAG system. It is up to you and your users.
 
-Headlessly, you can use the fully-managed RAG system by creating a retrieval-augmented topic with the [create topic route](https://redoc.arguflow.ai/redoc#tag/topic/operation/create_topic) and [message endpoint](https://redoc.arguflow.ai/redoc#tag/message/operation/create_message_completion_handler).
+Headlessly, you can use the fully-managed RAG system by creating a retrieval-augmented topic with the [create topic route](https://api.trieve.ai/redoc#tag/topic/operation/create_topic) and [message endpoint](https://api.trieve.ai/redoc#tag/message/operation/create_message_completion_handler).
 
-To do search before RAG headlessly, you will want to use the [generate off cards route](https://redoc.arguflow.ai/redoc#tag/card/operation/generate_off_cards) in combination with the [search route](https://redoc.arguflow.ai/redoc#tag/card/operation/search_card).
+To do search before RAG headlessly, you will want to use the [generate off cards route](https://api.trieve.ai/redoc#tag/card/operation/generate_off_cards) in combination with the [search route](https://api.trieve.ai/redoc#tag/card/operation/search_card).
 
 ## How search before generate gives the user autonomy and control over the search process in practice
 
@@ -60,4 +60,4 @@ If you were using a fully-managed RAG system, you would not be able to do this. 
 
 No other RAG system gives you the ability to search before generate. This is because it is a very difficult problem to solve. We have spent a lot of time and effort to make this possible. We believe that this is the future of RAG and that it will become the standard in the future.
 
-Use Arguflow!!
+Use Trieve!!

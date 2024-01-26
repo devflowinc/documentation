@@ -42,7 +42,7 @@ export default function Document() {
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
         <script
           defer
-          data-domain="docs.arguflow.ai"
+          data-domain="docs.trieve.ai"
           src="https://perhaps.arguflow.com/js/script.js"
         ></script>
       </Head>

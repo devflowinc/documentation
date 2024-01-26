@@ -79,7 +79,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="GET" label="/api/user/collections/:collection_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -G 'https://api.arguflow.ai/api/user/collections/c9379ab0-389d-4204-8602-5ba1bf99d441'
+    curl -G 'https://api.trieve.ai/api/user/collections/c9379ab0-389d-4204-8602-5ba1bf99d441'
     ```
 
     </CodeGroup>
@@ -141,7 +141,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="POST" label="/api/card_collection">
 
     ```bash {{ title: 'cURL' }}
-      curl -L -g 'https://api.arguflow.ai/api/card_collection' \
+      curl -L -g 'https://api.trieve.ai/api/card_collection' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         -d '{
             "name": "Debating for these guys",
@@ -181,7 +181,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="DELETE" label="/api/card_collection">
 
     ```bash {{ title: 'cURL' }}
-    curl -X DELETE https://api.arguflow.ai/api/card_collection \
+    curl -X DELETE https://api.trieve.ai/api/card_collection \
       --header 'Cookie: ai-editor=your_cookie_value_here'\
       -d '{
           "collection_id": "1890301f-0e2f-4298-836c-19d74a9a778b"
@@ -232,7 +232,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="PUT" label="/api/card_collection">
 
     ```bash {{ title: 'cURL' }}
-      curl -L -X PUT 'https://api.arguflow.ai/api/card_collection' \
+      curl -L -X PUT 'https://api.trieve.ai/api/card_collection' \
         -H 'Content-Type: application/json' \
         -H 'Cookie: ai-editor=your_cookie_value_here' \
         -d '{
@@ -270,7 +270,7 @@ The collection model contains all the information about your collections, includ
 
     ```bash {{ title: 'cURL' }}
 
-    curl -L 'https://api.arguflow.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2/1' \
+    curl -L 'https://api.trieve.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2/1' \
       -H 'Cookie: ai-editor=your_cookie_value_here'
     ```
     </CodeGroup>
@@ -342,7 +342,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="POST" label="/api/card_collection/:collection_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -L 'https::api.arguflow.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
+    curl -L 'https::api.trieve.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
       -H 'Content-Type: application/json' \
       -H 'Cookie: ai-editor=your_cookie_value_here' \
       -d '{
@@ -380,7 +380,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="DELETE" label="/api/ard_collection/:collection_id">
 
     ```bash {{ title: 'cURL' }}
-    curl -X DELETE 'https::api.arguflow.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
+    curl -X DELETE 'https::api.trieve.ai/api/card_collection/65c6dcce-2c4b-4466-874b-d194bcf91ae2' \
       -H 'Content-Type: application/json' \
       -H 'Cookie: ai-editor=your_cookie_value_here' \
       -d '{
@@ -426,7 +426,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="GET" label="/api/card_collection/bookmark">
 
     ```bash {{ title: 'cURL' }}
-      curl -L 'https::api.arguflow.ai/api/card_collection/bookmark' \
+      curl -L 'https::api.trieve.ai/api/card_collection/bookmark' \
             -H 'Content-Type: application/json' \
             -H 'Cookie: ai-editor=your_cookie_value_here' \
             -d '{
@@ -504,7 +504,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="GET" label="/api/card_collection/search/:page">
 
     ```bash {{ title: 'cURL' }}
-      curl -L 'https://api.arguflow.ai/api/card_collection/search/1' \
+      curl -L 'https://api.trieve.ai/api/card_collection/search/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{
@@ -619,7 +619,7 @@ The collection model contains all the information about your collections, includ
     <CodeGroup title="Request" tag="GET" label="/v1/collections/L7cGNIBKZiNJ6wqF">
 
     ```bash {{ title: 'cURL' }}
-      curl -L 'https://api.arguflow.ai/api/card_collection/fulltextsearch/1' \
+      curl -L 'https://api.trieve.ai/api/card_collection/fulltextsearch/1' \
         --header 'Content-Type: application/json' \
         --header 'Cookie: ai-editor=your_cookie_value_here' \
         --data '{

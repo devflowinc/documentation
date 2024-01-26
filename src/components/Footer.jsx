@@ -217,17 +217,17 @@ function SmallPrint() {
         &copy; Copyright {new Date().getFullYear()}. All rights reserved.
       </p>
       <div className="flex space-x-4">
-        <SocialLink href="https://twitter.com/arguflow" icon={TwitterIcon}>
+        <SocialLink href="https://twitter.com/trieveai" icon={TwitterIcon}>
           Follow us on Twitter
         </SocialLink>
-        <SocialLink href="https://github.com/arguflow" icon={GitHubIcon}>
+        <SocialLink href="https://github.com/devflowinc/trieve" icon={GitHubIcon}>
           Follow us on GitHub
         </SocialLink>
         <SocialLink href="https://discord.gg/CuJVfgZf54" icon={DiscordIcon}>
           Join our Discord server
         </SocialLink>
         <SocialLink
-          href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg"
+          href="https://matrix.to/#/#trieve-general:matrix.zerodao.gg"
           icon={MatrixIcon}
         >
           Join our Matrix channel

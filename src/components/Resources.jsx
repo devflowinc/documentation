@@ -16,10 +16,10 @@ import { SquaresPlusIcon } from './icons/SquaresPlusIcon'
 
 const resources = [
   {
-    href: 'https://redoc.arguflow.ai/redoc#tag/auth',
+    href: 'https://api.trieve.ai/redoc#tag/auth',
     name: 'Auth',
     description:
-      'Learn about how to authenticate with the Arguflow API and how to use the access cookie and API key to make requests.',
+      'Learn about how to authenticate with the Trieve API and how to use the access cookie and API key to make requests.',
     icon: UserIcon,
     pattern: {
       y: 16,
@@ -30,7 +30,7 @@ const resources = [
     },
   },
   {
-    href: 'https://redoc.arguflow.ai/redoc#tag/card',
+    href: 'https://api.trieve.ai/redoc#tag/card',
     name: 'Card',
     description:
       'Learn about the card model and how to create, retrieve, update, delete, and query cards.',
@@ -44,7 +44,7 @@ const resources = [
     },
   },
   {
-    href: 'https://redoc.arguflow.ai/redoc#tag/card_collection',
+    href: 'https://api.trieve.ai/redoc#tag/card_collection',
     name: 'Collections',
     description:
       'Learn about the collection model and how to create, retrieve, update, delete, and list collections.',
@@ -58,7 +58,7 @@ const resources = [
     },
   },
   {
-    href: 'https://redoc.arguflow.ai/redoc#tag/user',
+    href: 'https://api.trieve.ai/redoc#tag/user',
     name: 'User',
     description:
       'Learn about the user model and how to create, retrieve, update, and delete users and their associated info.',
@@ -69,7 +69,7 @@ const resources = [
     },
   },
   {
-    href: 'https://redoc.arguflow.ai/redoc#tag/file',
+    href: 'https://api.trieve.ai/redoc#tag/file',
     name: 'File',
     description:
       'Learn about the file model and how to upload, retrieve, update, delete, and list files.',

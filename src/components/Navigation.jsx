@@ -207,40 +207,40 @@ export const navigation = [
     links: [
       {
         title: 'Invitation',
-        href: 'https://redoc.arguflow.ai/redoc#tag/invitation',
+        href: 'https://api.trieve.ai/redoc#tag/invitation',
       },
       {
         title: 'Register',
-        href: 'https://redoc.arguflow.ai/redoc#tag/register',
+        href: 'https://api.trieve.ai/redoc#tag/register',
       },
-      { title: 'Auth', href: 'https://redoc.arguflow.ai/redoc#tag/auth' },
+      { title: 'Auth', href: 'https://api.trieve.ai/redoc#tag/auth' },
       {
         title: 'Password',
-        href: 'https://redoc.arguflow.ai/redoc#tag/password',
+        href: 'https://api.trieve.ai/redoc#tag/password',
       },
-      { title: 'Topic', href: 'https://redoc.arguflow.ai/redoc#tag/topic' },
-      { title: 'Message', href: 'https://redoc.arguflow.ai/redoc#tag/message' },
-      { title: 'Vote', href: 'https://redoc.arguflow.ai/redoc#tag/vote' },
-      { title: 'Card', href: 'https://redoc.arguflow.ai/redoc#tag/card' },
+      { title: 'Topic', href: 'https://api.trieve.ai/redoc#tag/topic' },
+      { title: 'Message', href: 'https://api.trieve.ai/redoc#tag/message' },
+      { title: 'Vote', href: 'https://api.trieve.ai/redoc#tag/vote' },
+      { title: 'Card', href: 'https://api.trieve.ai/redoc#tag/card' },
       {
         title: 'Top Users',
-        href: 'https://redoc.arguflow.ai/redoc#tag/top_users',
+        href: 'https://api.trieve.ai/redoc#tag/top_users',
       },
       {
         title: 'Top Cards',
-        href: 'https://redoc.arguflow.ai/redoc#tag/top_cards',
+        href: 'https://api.trieve.ai/redoc#tag/top_cards',
       },
-      { title: 'User', href: 'https://redoc.arguflow.ai/redoc#tag/user' },
+      { title: 'User', href: 'https://api.trieve.ai/redoc#tag/user' },
       {
         title: 'Collection',
-        href: 'https://redoc.arguflow.ai/redoc#tag/card_collection',
+        href: 'https://api.trieve.ai/redoc#tag/card_collection',
       },
-      { title: 'File', href: 'https://redoc.arguflow.ai/redoc#tag/file' },
+      { title: 'File', href: 'https://api.trieve.ai/redoc#tag/file' },
       {
         title: 'Notification',
-        href: 'https://redoc.arguflow.ai/redoc#tag/notifications',
+        href: 'https://api.trieve.ai/redoc#tag/notifications',
       },
-      { title: 'Health', href: 'https://redoc.arguflow.ai/redoc#tag/health' },
+      { title: 'Health', href: 'https://api.trieve.ai/redoc#tag/health' },
     ],
   },
 ]
@@ -249,13 +249,13 @@ export function Navigation(props) {
   return (
     <nav {...props}>
       <ul role="list">
-        <TopLevelNavItem href="https://redoc.arguflow.ai/redoc">
+        <TopLevelNavItem href="https://api.trieve.ai/redoc">
           REST OpenAPI Docs
         </TopLevelNavItem>
-        <TopLevelNavItem href="https://matrix.to/#/#arguflow-general:matrix.zerodao.gg">
+        <TopLevelNavItem href="https://matrix.to/#/#trieve-general:matrix.zerodao.gg">
           Support
         </TopLevelNavItem>
-        <TopLevelNavItem href="https://github.com/arguflow/arguflow">
+        <TopLevelNavItem href="https://github.com/devflowinc/trieve">
           Github
         </TopLevelNavItem>
 
