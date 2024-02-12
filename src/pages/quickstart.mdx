@@ -49,19 +49,16 @@ pip install dotenv
 To create chunks using the python sdk refer to this code snippet. we support arbitrary metadata to be uploaded via the `metadata` field and support for external unique id's via the `tracking_id` field.	In this example we simply upload 10 chunks.
 
 ```py
-from dotenv import load_dotenv
 from trieve_client import AuthenticatedClient
 from trieve_client.api.chunk import create_chunk
 from trieve_client.models import CreateChunkData, ReturnCreatedChunk
 import os
 from trieve_client.models.error_response_body import ErrorResponseBody
 
-load_dotenv()
-
 ## Load environment variables
-api_key = os.getenv("API_KEY")
-dataset_id = os.getenv("DATASET_ID")
-organization_id = os.getenv("ORGANIZATION_ID")
+api_key = "YOUR_API_KEY"
+dataset_id = "YOUR_DATASET_ID"
+organization_id = "YOUR_ORGANIZATION_ID"
 
 # Here we create a client with the api key, dataset id, and organization id
 client = AuthenticatedClient(base_url="https://api.trieve.ai",
@@ -131,6 +128,21 @@ This is the syntax to search for a chunk. We support 3 different types of search
 from trieve_client.api.chunk import search_chunk
 from trieve_client.models import SearchChunkData, SearchChunkQueryResponseBody
 from trieve_client.models.error_response_body import ErrorResponseBody
+
+## Load environment variables
+api_key = "YOUR_API_KEY"
+dataset_id = "YOUR_DATASET_ID"
+organization_id = "YOUR_ORGANIZATION_ID"
+
+# Here we create a client with the api key, dataset id, and organization id
+client = AuthenticatedClient(base_url="https://api.trieve.ai",
+	prefix="",
+	token=api_key
+).with_headers({
+	"TR-Dataset": dataset_id,
+	"TR-Organization": organization_id,
+});
+
 
 with client as client:
 	# Conduct an example search
