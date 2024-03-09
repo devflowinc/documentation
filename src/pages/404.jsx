@@ -11,7 +11,7 @@ export default function NotFound() {
         <script
           defer
           data-domain="docs.trieve.ai"
-          src="https://perhaps.arguflow.com/js/script.js"
+          src="https://plausible.trieve.ai/js/script.js"
         ></script>
       </Head>
       <HeroPattern />

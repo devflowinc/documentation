@@ -43,7 +43,7 @@ export default function Document() {
         <script
           defer
           data-domain="docs.trieve.ai"
-          src="https://perhaps.arguflow.com/js/script.js"
+          src="https://plausible.trieve.ai/js/script.js"
         ></script>
       </Head>
       <body className="flex min-h-full bg-white antialiased dark:bg-zinc-900 [&>#\_\_next]:w-full">
