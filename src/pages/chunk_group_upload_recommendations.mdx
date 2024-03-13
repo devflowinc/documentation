@@ -1,0 +1,117 @@
+export const description =
+  'Guide on how to upload your chunks with a group and get recommendations for them.'
+
+# File Upload and Search Guide
+
+This guide will walk you through the process of creating chunk groups that contain your chunks and getting recommendations for them. 
+We have multiple patterns on how you can migrate your data to Trieve. This is a more advanced pattern that allows you to upload your chunks and create a group that contains them. This is useful when you want to upload multiple files and create a group that contains all the chunks created from the file. You can then get recommendations for the group and get all the chunks that were created from the file.
+
+## Prerequisites
+
+- You have a Trieve account and are logged in.
+- You have a Dataset created.
+- You have an API Key from the Trieve dashbaord
+
+
+## Step 1: Chunk your data
+
+The first step is to chunk your data into smaller pieces. This method allows you to specify how you want your data to be chunked and indexed within Trieve for better search results.
+You can chunk your data in multiple ways, such as by lines, by words, or by a custom delimiter. For this guide, we will chunk a text file into 10 sentence chunks.
+
+```python
+import re
+
+def chunk_text_file(file_path, chunk_size = 10):
+    with open(file_path, 'r') as file:
+        text = file.read()
+        sentences = re.split(r'(?<=[^A-Z].[.?]) +(?=[A-Z])', text) # Split the text into sentences
+        chunks = [sentences[i:i + chunk_size] for i in range(0, len(sentences), chunk_size)] # Split the sentences into chunks of 10
+        return chunks
+```
+
+## Step 2: Upload your chunks
+
+Now that you have your chunks, you can upload them to your Dataset using the Trieve API. You will need your API Key and Dataset ID to do this.
+
+```python
+import requests
+
+def upload_chunk_groups(api_key, dataset_id, chunks):
+    chunk_group_url = f'https://api.trieve.ai/api/chunk_group'
+    headers = {
+        'Authorization': api_key,
+        'TR-Dataset': dataset_id,
+        'Content-Type': 'application/json'
+    }
+    group_data = {
+        "name": "example", # The name of the group
+        "description": "example", # The description of the group
+        "tracking_id": "group1", # Any unique identifier you want to associate with the group to help you correlate it with your data
+    }
+    response = requests.post(chunk_group_url, headers=headers, json=group_data)
+    group_id = response.json()['id']
+
+    for chunk in chunks:
+        url = f'https://api.trieve.ai/api/chunk'
+        data = {
+            'chunk_html': chunk, # The text content of the chunk you want indexed
+            'link': "https://example.com", # The link to the chunk if it exists on the web
+            'tag_set': ["tag1", "tag2", "tag3"], # Tags to be associated with the chunk. You can use these tags to filter your search results
+            'timestamp': "2024-03-02T03:02:44Z", # Can be in almost any format which contains a date and time
+            'tracking_id': "chunk1", # Any unique identifier you want to associate with the chunk to help you correlate it with your data
+            'metadata': {"key": "value"} # Any additional metadata you want to associate with the chunk
+            'weight': 1 # You can use this param to give a weight to the chunk. i.e. > 1 will push it up in the results, < 1 will push it down in the results
+            'group_ids': [ group_id ] # The id of the group you want to associate the chunk with
+            'group_tracking_ids': [ "group1" ] # Or you can use the tracking id of the group you want to associate the chunk with
+        }
+        response = requests.post(url, headers=headers, json=data)
+        print(response.json())
+
+def upload_all_files():
+    files = ["path_to_your_file1.txt", "path_to_your_file2.txt"]
+    for file in files:
+        chunks = chunk_text_file(file)
+        upload_chunk_groups("your_api_key", "your_dataset_id", chunks)
+```
+
+## Step 3: Search for your groups
+
+Now that you have uploaded your groups, you can search for them using the Trieve API.
+
+```python
+def search_chunks(api_key, dataset_id, query):
+    url = f'https://api.trieve.ai/api/chunk_group/recommend'
+    headers = {
+        'Authorization': api_key,
+        'TR-Dataset': dataset_id,
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'positive_group_ids': [], # The id of the group you want to get recommendations for
+        'negative_group_ids': [], # The id of the group you want to exclude from the recommendations
+        'positive_group_tracking_ids': [], # Or you can use the tracking id of the group you want to get recommendations for
+        'negative_group_tracking_ids': [], # Or you can use the tracking id of the group you want to exclude from the recommendations
+        'limit': 10, # The number of results you want to return
+        'group_size': 2, # The number of chunks you want to return in each result
+        'filters': {
+            "must": [ # All the must filters are combined using AND and have to match for the result to be returned
+                {"field": "tag_set", "match": ["Tag you want to filter by"]} # use match for text metadata fields
+            ],
+            "must_not": [ # All the must_not filters are combined using AND and have to NOT match for the result to be returned
+                {"field": "timestamp", "range": {
+                    "gte": 1000043043044, # use range for numerical metadata fields (timestamp is stored as a unix timestamp)
+                    "lte": 1200030030000 
+                }} # use metdata
+            ],
+            "should": [ # All the should filters are combined using OR and at least one of them has to match for the result to be returned
+                {"field": "metadata.key", "match": "value"} # use metadata.field to filter based on fields within your metadata JSON object
+            ]
+        },
+    }
+    response = requests.post(url, headers=headers, json=data)
+    print(response.json())
+```
+
+## Conclusion
+
+You have successfully uploaded your first chunk groups into a Dataset and searched for them using the Trieve API. You can now use this process to upload and search for your own data.

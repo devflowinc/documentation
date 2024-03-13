@@ -1,0 +1,97 @@
+export const description =
+  'Guide on how to upload your first files into a Dataset and search for them.'
+
+# File Upload and Search Guide
+
+This guide will walk you through the process of uploading your first files into a Dataset and searching for them. 
+We have multiple patterns on how you can migrate your data to Trieve. This one allows you to upload your own files and have our default chunkers chunk your file for you.
+
+## Prerequisites
+
+- You have a Trieve account and are logged in.
+- You have a Dataset created.
+- You have an API Key from the Trieve dashbaord
+
+
+## Step 1: Upload your file
+
+You can upload your file using the Trieve dashboard or the Trieve API. Here is an example of how you can upload your file using the Trieve API.
+The API will take the file, chunk it and create a `chunk_group` that contains all the chunks created from the file.
+
+```python
+import requests
+
+
+def load_and_encode_file(file_path):
+    with open(file_path, 'rb') as file:
+        file_content = file.read()
+        base64_encoded = base64.urlsafe_b64encode(file_content)
+        # Remove the ending = if present
+        base64_encoded = base64_encoded.rstrip(b'=')
+        return base64_encoded.decode('utf-8')
+
+
+def upload_file(api_key, dataset_id, file_path):
+    url = f'https://api.trieve.ai/api/file'
+    headers = {
+        'Authorization': api_key,
+        'TR-Dataset': dataset_id
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'base64_file': load_and_encode_file("./file.pdf"), # Base64 encoded file. Convert + to -, / to _, and remove the ending = if present. This is the standard base64url encoding.
+        'file_mime_type': "application/pdf", # Mime type of the file
+        'file_name': "file.pdf", # Name of the file
+        'timestamp': "2024-03-02T03:02:44Z", # Timestamp to be given to all of the chunks that are created from this file.
+        'metadata': { # Metadata to be given to all of the chunks that are created from this file.
+            "key": "value"
+        }
+        'tag_set': ["tag1", "tag2"] # Tags to be given to all of the chunks that are created from this file.
+        'link': "https://www.example.com" # Link to be given to all of the chunks that are created from this file.
+        'description': "Description of the file" # Description to be given to the group that encapsulates all of the chunks that are created from this file.
+    }
+    response = requests.post(url, headers=headers, json=data)
+    print(response.json())
+```
+
+## Step 2: Search for your chunks
+
+Now that you have uploaded your chunks, you can search for them using the Trieve API.
+
+```python
+def search_chunks(api_key, dataset_id, query):
+    url = f'https://api.trieve.ai/api/chunk/search'
+    headers = {
+        'Authorization': api_key,
+        'TR-Dataset': dataset_id,
+        'Content-Type': 'application/json'
+    }
+    data = {
+        'query': query,
+        'search_type': "hybrid", # You can use this param to specify the search type. The options are "fulltext", "semantic", and "hybrid".
+        'limit': 10, # You can use this param to specify the number of results you want to get back
+        'page': 1, # You can use this param to specify the page number of the results
+        'date_bias': False # You can use this param to specify if you want to bias the results based on the timestamp of the chunks
+        'use_weights': True # You can use this param to specify if you want to use the weights of the chunks in the search results
+        'filters': {
+            "must": [ # All the must filters are combined using AND and have to match for the result to be returned
+                {"field": "tag_set", "match": ["Tag you want to filter by"]} # use match for text metadata fields
+            ],
+            "must_not": [ # All the must_not filters are combined using AND and have to NOT match for the result to be returned
+                {"field": "timestamp", "range": {
+                    "gte": 1000043043044, # use range for numerical metadata fields (timestamp is stored as a unix timestamp)
+                    "lte": 1200030030000 
+                }} # use metdata
+            ],
+            "should": [ # All the should filters are combined using OR and at least one of them has to match for the result to be returned
+                {"field": "metadata.key", "match": "value"} # use metadata.field to filter based on fields within your metadata JSON object
+            ]
+        }
+    }
+    response = requests.post(url, headers=headers, json=data)
+    print(response.json())
+```
+
+## Conclusion
+
+You have successfully uploaded your first file into a Dataset and searched for them using the Trieve API. You can now use this process to upload and search for your own data.

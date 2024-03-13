@@ -203,40 +203,28 @@ export const navigation = [
     ],
   },
   {
-    title: 'Resources',
+    title: 'Patterns',
     links: [
       {
-        title: 'Invitation',
-        href: 'https://api.trieve.ai/redoc#tag/invitation',
+        title: 'Chunk Upload and Search',
+        href: '/chunk_upload_search',
       },
       {
-        title: 'Register',
-        href: 'https://api.trieve.ai/redoc#tag/register',
+        title: 'File Upload and Search',
+        href: '/file_upload_search',
       },
-      { title: 'Auth', href: 'https://api.trieve.ai/redoc#tag/auth' },
       {
-        title: 'Password',
-        href: 'https://api.trieve.ai/redoc#tag/password',
+        title: 'Chunk Group upload and Search',
+        href: '/chunk_group_upload_search',
       },
-      { title: 'Topic', href: 'https://api.trieve.ai/redoc#tag/topic' },
-      { title: 'Message', href: 'https://api.trieve.ai/redoc#tag/message' },
-      { title: 'Vote', href: 'https://api.trieve.ai/redoc#tag/vote' },
-      { title: 'Chunk', href: 'https://api.trieve.ai/redoc#tag/chunk' },
       {
-        title: 'Top Users',
-        href: 'https://api.trieve.ai/redoc#tag/top_users',
+        title: 'Chunk Upload and Recommendations',
+        href: '/chunk_upload_recommendations',
       },
-      { title: 'User', href: 'https://api.trieve.ai/redoc#tag/user' },
       {
-        title: 'Collection',
-        href: 'https://api.trieve.ai/redoc#tag/chunk_collection',
+        title: 'Chunk Group upload and Group Recommendations',
+        href: '/chunk_group_upload_recommendations',
       },
-      { title: 'File', href: 'https://api.trieve.ai/redoc#tag/file' },
-      {
-        title: 'Notification',
-        href: 'https://api.trieve.ai/redoc#tag/notifications',
-      },
-      { title: 'Health', href: 'https://api.trieve.ai/redoc#tag/health' },
     ],
   },
 ]
