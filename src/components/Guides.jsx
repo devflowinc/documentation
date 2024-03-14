@@ -8,17 +8,6 @@ const guides = [
     description: 'Learn how to quickly get started with Trieve.',
   },
   {
-    href: '/self_hosting',
-    name: 'Self Hosting',
-    description: 'Learn how to self-host Trieve on your own infrastructure.',
-  },
-  {
-    href: '/environment_vars',
-    name: 'Environment Variables',
-    description:
-      'Learn about the different environment variables used by Trieve.',
-  },
-  {
     href: '/custom_llm_embed_server',
     name: 'Use Custom LLM or Embedding Model',
     description: 'Learn how to use custom embedding models and LLMs with Trieve.',

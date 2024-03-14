@@ -194,8 +194,6 @@ export const navigation = [
         title: 'Why Search Before Generate',
         href: '/why_search_before_generate',
       },
-      { title: 'Self Hosting', href: '/self_hosting' },
-      { title: 'Environment Variables', href: '/environment_vars' },
       {
         title: 'Use Custom LLM or Embedding Model',
         href: '/custom_llm_embed_server',
