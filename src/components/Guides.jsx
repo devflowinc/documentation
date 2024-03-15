@@ -7,11 +7,6 @@ const guides = [
     name: 'Quickstart',
     description: 'Learn how to quickly get started with Trieve.',
   },
-  {
-    href: '/custom_llm_embed_server',
-    name: 'Use Custom LLM or Embedding Model',
-    description: 'Learn how to use custom embedding models and LLMs with Trieve.',
-  },
 ]
 
 export function Guides() {

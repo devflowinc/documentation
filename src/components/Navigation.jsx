@@ -194,10 +194,6 @@ export const navigation = [
         title: 'Why Search Before Generate',
         href: '/why_search_before_generate',
       },
-      {
-        title: 'Use Custom LLM or Embedding Model',
-        href: '/custom_llm_embed_server',
-      },
     ],
   },
   {
