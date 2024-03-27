@@ -75,7 +75,7 @@ export const Header = forwardRef(function Header({ className }, ref) {
             <TopLevelNavItem href="https://api.trieve.ai/redoc">
               REST OpenAPI Docs
             </TopLevelNavItem>
-            <TopLevelNavItem href="https://matrix.to/#/#trieve-general:matrix.zerodao.gg">
+            <TopLevelNavItem href="https://discord.gg/7fmrXSvBfC">
               Community
             </TopLevelNavItem>
             <TopLevelNavItem href="https://github.com/devflowinc/trieve">
